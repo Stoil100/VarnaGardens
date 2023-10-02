@@ -1,13 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Arsenal:ital@1&family=Lobster&family=Montserrat+Alternates:wght@600&display=swap');
+html { box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; }
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-right: 24px;
+}
+
+@media (max-width: 768px) {
+  body{
+    padding-right:0;
+  }
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+ ::-webkit-scrollbar {
+  width: 0px;
+}
+/*::-webkit-scrollbar-track {
+  background: #03762b;
+  background-image: url("./Assets/grassBGrotated.svg");
+  background-position:42px;
+}
+::-webkit-scrollbar-thumb {
+  background-image: url('./Assets/lawnMowerScroll.svg'); 
+  background-repeat: no-repeat, no-repeat;
+  background-size: 20px;
+  background-position-y:center;
+  height:20px !important;
+   background-color: #5ce08b;
+  /*background-image: url("./Assets/Logos/lawnmower.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  border-right: 4px solid transparent;
+  background-clip: content-box;
+  box-shadow: 0 -100vh 0 100vh 03762b, 0 0 15px 5px black; 
+}
+::-webkit-scrollbar-thumb::before {
+width: 100px;
+background-color: #5ce08b; 
+}
+
+body::-webkit-scrollbar-thumb:horizontal {
+  background-color: #5ce08b;
+  box-shadow: -100vh 0 0 100vh #5ce08b, 0 0 15px 5px black;
+} */
