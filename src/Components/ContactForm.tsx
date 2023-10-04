@@ -32,8 +32,13 @@ const FormBox = styled(Box)`
   border-radius: 10px;
   z-index: 2;
 
-  @media (max-width: 800px) {
-    width: 100%;
+  @media (max-width: 570px) {
+    width:300px;
+    height:700px;
+  }
+
+  @media (max-width:320px){
+    width:200px;
   }
 };`;
 
@@ -48,6 +53,12 @@ const HoverSpan = styled.span`
     color: #fff;
     background-color: #00000090;
   }
+`;
+
+const TitleBox = styled(Box)`
+@media (max-width: 570px) {
+  flex-direction: column;
+}
 `;
 
 interface FormValues {
@@ -78,7 +89,6 @@ export const ContactForm = () => {
         }
         reset();
       };
-      console.log(process.env.REACT_APP_EMAIL_PUBLIC_KEY);
   return (
     <ThemeProvider theme={theme}>
 
@@ -88,7 +98,7 @@ export const ContactForm = () => {
       ref={formRef}
       sx={{ mt: 1 }}
     >
-      <Box
+      <TitleBox
         sx={{
           width: "100%",
           display: "flex",
@@ -116,7 +126,7 @@ export const ContactForm = () => {
         >
           Направете запитване
         </Typography>
-      </Box>
+      </TitleBox>
       <Box
         sx={{ backgroundColor: "#fff", borderRadius: "10px", padding: "10px" }}
       >

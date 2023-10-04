@@ -25,8 +25,7 @@ export const Form = () => {
     <FormBox>
       <FormBoxItem>
         <RevealDirection direction="up">
-
-        <ContactForm />
+          <ContactForm />
         </RevealDirection>
       </FormBoxItem>
     </FormBox>

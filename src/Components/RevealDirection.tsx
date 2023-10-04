@@ -17,8 +17,6 @@ export const RevealDirection = ({
 
   const mainControls = useAnimation();
 
-  console.log(direction);
-
   useEffect(() => {
     if (isInView) {
       mainControls.start("visible");

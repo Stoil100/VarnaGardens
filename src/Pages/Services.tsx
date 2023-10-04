@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { Title } from "../Components/Title";
-import mainBG from "../Assets/mainBackground.png";
+import mainBG from "../Assets/bgimg.jpg";
 import { ReactComponent as GrassServiceIcon } from "../Assets/ServicesLogos/GrassServicesIcon.svg";
 import { ReactComponent as BushServiceIcon } from "../Assets/ServicesLogos/BushServicesIcon.svg";
 import { ReactComponent as LawnMowingServiceIcon } from "../Assets/ServicesLogos/LawnMowingServicesIcon.svg";
@@ -12,7 +12,6 @@ import { ReactComponent as TreeServiceIcon } from "../Assets/ServicesLogos/TreeS
 import bushesBG from "../Assets/bushesBackground.jpg";
 
 const GridBox = styled(Box)`
-  background-image: url(${mainBG});
   min-height: 100vh;
   height: fit-content;
   display: grid;

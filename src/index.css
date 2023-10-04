@@ -12,7 +12,7 @@ body {
 
 @media (max-width: 768px) {
   body{
-    padding-right:0;
+    padding:0;
   }
 
 }

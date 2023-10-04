@@ -26,6 +26,10 @@ background-repeat: no-repeat;
 background-position-y:bottom;
 background-color:#0E5814;
 background-size: contain;
+
+@media (max-width: 768px){
+  display: none;
+}
 `;
 
 
@@ -48,8 +52,6 @@ export const ScrollBar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  console.log(scrollPercentage!.toFixed(2))
   
   return (
     <ScrollBarBody>

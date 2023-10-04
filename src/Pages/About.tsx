@@ -11,6 +11,8 @@ import { ReactComponent as LawnMowerLogo } from "../Assets/HowItWorksIcons/lawnm
 import { ReactComponent as DoneLogo } from "../Assets/HowItWorksIcons/done.svg";
 import { Title } from "../Components/Title";
 
+console.log(process.env);
+
 const GridBox = styled(Box)`
   min-height: 100vh;
   display: grid;
@@ -58,16 +60,25 @@ const TextBox = styled(Box)`
   width: 33%;
   text-align: center;
 
-  @media (max-width:768px){
+  @media (max-width:910px){
+    width: 25%;
+  }
+  @media (max-width: 768px) {
     width: 100%;
     text-align: left;
+  }
+  @media(max-width: 500px) {
+    text-align: center;
   }
 `;
 
 const LineDiv = styled.div`
   width: 155px;
   height: 0px;
-  border: 2px solid #0E5814;
+  border: 2px solid #0e5814;
+  @media (max-width:910px){
+    width: 100px;
+  }
   @media (max-width: 768px) {
     display: none;
   }
@@ -77,7 +88,7 @@ const ImageBox = styled(Box)`
   width: 144px;
   height: 144px;
   background-color: #e3f9e5;
-  border: 3px solid #0E5814;
+  border: 3px solid #0e5814;
   border-radius: 50%;
   box-sizing: border-box;
   padding: 20px;
@@ -87,6 +98,7 @@ const ImageBox = styled(Box)`
     height: 96px;
   }
 `;
+
 const ImagesContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -97,6 +109,24 @@ const ImagesContainer = styled.div`
     flex-direction: column;
     gap: 20px;
   }
+  @media (max-width: 500px) {
+    display: none;
+  }
+`;
+
+const ImagesResponsive = styled(Box)`
+  width: 96px;
+  height: 96px;
+  background-color: #e3f9e5;
+  border: 3px solid #0e5814;
+  border-radius: 50%;
+  box-sizing: border-box;
+  padding: 20px;
+  display: none;
+
+  @media (max-width: 500px) {
+    display: inline;
+  }
 `;
 
 const TextContainer = styled(Box)`
@@ -105,11 +135,18 @@ const TextContainer = styled(Box)`
   align-items: center;
   width: 900px;
   gap: 10px;
+  @media (max-width:910px){
+    width: 750px;
+  }
 
   @media (max-width: 768px) {
     width: 80%;
     flex-direction: column;
     gap: 20px;
+  }
+  @media(max-width: 500px) {
+    justify-content: center;
+    text-align: center;
   }
 `;
 const BoxesDiv = styled.div`
@@ -119,15 +156,15 @@ const BoxesDiv = styled.div`
 `;
 
 const ContentContainer = styled.div`
-display: flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
-@media (max-width: 768px) {
-  flex-direction: row;
-  gap: 20px;
-}
+  @media (max-width: 768px) {
+    flex-direction: row;
+    gap: 20px;
+  }
 `;
 const About: React.FC = () => {
   return (
@@ -197,6 +234,9 @@ const About: React.FC = () => {
           </ImageBox>
         </ImagesContainer>
         <TextContainer>
+          <ImagesResponsive>
+            <PriceLogo width="100%" height="100%" />
+          </ImagesResponsive>
           <TextBox>
             <Typography variant="h5">Направете запитване</Typography>
             <Typography>
@@ -204,13 +244,19 @@ const About: React.FC = () => {
               дадем незабавна оценка на цената.
             </Typography>
           </TextBox>
+          <ImagesResponsive>
+            <LawnMowerLogo width="100%" height="100%" />
+          </ImagesResponsive>
           <TextBox>
             <Typography variant="h5">Получаване на обслужване</Typography>
             <Typography>
-              Ще ви подберем специалист по
-              тревни площи, който ще изпълни работата.
+              Ще ви подберем специалист по тревни площи, който ще изпълни
+              работата.
             </Typography>
           </TextBox>
+          <ImagesResponsive>
+            <DoneLogo width="100%" height="100%" />
+          </ImagesResponsive>
           <TextBox>
             <Typography variant="h5">Готови сте!</Typography>
             <Typography variant="body2">

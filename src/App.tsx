@@ -14,6 +14,7 @@ import styled from "@emotion/styled";
 import { RevealSection } from "./Components/RevealSection";
 import { ScrollBar } from "./Components/ScrollBar";
 
+
 const App: React.FC = () => {
   return (
     <>
