@@ -17,7 +17,7 @@ const GridBox = styled(Box)`
   grid-template-areas:
     "title title"
     "quote image";
-  height: 100vh;
+  min-height: 100vh;
   box-sizing: border-box;
 
   @media (max-width:1000px){
@@ -26,7 +26,7 @@ const GridBox = styled(Box)`
     "quote"
     "image";
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 0.4fr 0.3fr 0.3fr;
   }
 `;
 
@@ -158,9 +158,7 @@ export const Quotes = () => {
           </MessageBox>
         </Dialog>
       </Box>
-      <Box>
-        <BackgroundImg src={quotesBG} />
-      </Box>
+      <BackgroundImg src={quotesBG} />
     </GridBox>
   );
 };

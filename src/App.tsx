@@ -13,11 +13,13 @@ import { Fab, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { RevealSection } from "./Components/RevealSection";
 import { ScrollBar } from "./Components/ScrollBar";
+import { isMobile } from "react-device-detect";
 
+console.log(isMobile);
 
 const App: React.FC = () => {
   return (
-    <>
+    <div style={{marginBottom:`${isMobile?"100px":""}`}}>
     <ScrollBar/>
       <LandingSection />
       <RevealSection>
@@ -35,7 +37,7 @@ const App: React.FC = () => {
           <Footer />
         </>
       </RevealSection>
-    </>
+    </div>
   );
 };
 

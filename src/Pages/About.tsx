@@ -46,6 +46,8 @@ const FlexContainer = styled(Box)`
   flex-direction: column;
   min-height: 100vh;
   gap: 40px;
+  box-sizing: border-box;
+  padding: 10px;
 `;
 
 const FlexBox = styled(Box)`

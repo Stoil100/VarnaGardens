@@ -27,7 +27,7 @@ export const Contact = () => {
         backgroundSize: "cover",
       }}
     >
-      <FlexBox sx={{ px: "10%", py:"10px"}}>
+      <FlexBox sx={{ px: "10p%", py:"10px"}}>
         <Typography variant="h4">
           Харесвате нашите услуги и искате да ни наемете?
         </Typography>
