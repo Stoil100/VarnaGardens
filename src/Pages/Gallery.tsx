@@ -38,11 +38,7 @@ const swiperParams = {
     modifier: 1,
     slideShadows: true,
   },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-  modules: [EffectCoverflow, Navigation, Autoplay],
+  modules: [EffectCoverflow, Autoplay],
 };
 
 const FlexBox = styled(Box)`
@@ -54,6 +50,7 @@ const FlexBox = styled(Box)`
   gap: 50px 0px;
   box-sizing: border-box;
   padding: 30px;
+  background-color:#fff;
 
   @media (max-width: 600px) {
     padding: 10px;
@@ -67,6 +64,8 @@ const StyledSwiper = styled(Swiper)`
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: none;
+  filter: none;
 `;
 
 const StyledImage = styled.img`

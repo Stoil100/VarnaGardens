@@ -9,7 +9,7 @@ interface Props {
 
 export const Title= ({ title, span }: Props) => {
   return (
-    <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+    <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column",borderBottom:"2px solid #F0B429",pb:"2px", width:"fit-content"}}>
       <img src={mainLogo} width="100px" alt="Company Logo" style={{border:"1px solid #6a994e",borderRadius:"50%",backgroundColor:"#fff"}}/>
       <Typography variant="h3" sx={{fontFamily:"Lobster",maxWidth:"500px",textAlign:"center"}}>
         {title}
