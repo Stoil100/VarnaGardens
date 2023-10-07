@@ -81,7 +81,7 @@ export const Quotes = () => {
   };
   return (
     <GridBox>
-      <Box gridArea="title" sx={{ pt: "30px" }}>
+      <Box gridArea="title" sx={{ pt: "30px" ,display:"flex",justifyContent:"center",alignItems:"start"}}>
         <Title title="Какво Мислят" span="Клиентите Ни" />
       </Box>
       <Box gridArea="quote" sx={{ px: "40px" }}>
