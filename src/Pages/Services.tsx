@@ -60,7 +60,7 @@ const swiperText = [
 ];
 
 const swiperParams = {
-  direction: "vertical",
+  direction: isMobile?"horizontal":"vertical",
   loop: true,
   modules: [Pagination],
 };
@@ -169,6 +169,7 @@ const TextSwiper = styled(Swiper)`
   text-align: center;
   @media (max-width: 768px) {
     height: 60vh;
+    width: 80vw;
   }
 `;
 const FlexSlider = styled(SwiperSlide)`
