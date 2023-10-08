@@ -3,7 +3,7 @@ import { Title } from "../Components/Title";
 import styled from "@emotion/styled";
 import { Box } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectCoverflow, Autoplay } from "swiper/modules";
+import { EffectCoverflow, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
@@ -50,7 +50,6 @@ const FlexBox = styled(Box)`
   gap: 50px 0px;
   box-sizing: border-box;
   padding: 30px;
-  background-color:#fff;
 
   @media (max-width: 600px) {
     padding: 10px;

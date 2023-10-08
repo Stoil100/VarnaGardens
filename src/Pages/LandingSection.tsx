@@ -2,9 +2,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import styled from "@emotion/styled";
-import grassImg from "../Assets/CuttingShow.jpg";
-import lawnMowersImg from "../Assets/LawnMowersShow.jpg";
-import maintainingImg from "../Assets/MaintainingShow.jpg";
 import backgroundImg from "../Assets/homeBackground.jpg";
 import { ContactButton } from "../Components/ContactButton";
 import grassBG from "../Assets/grassBG.svg";
@@ -30,12 +27,16 @@ const TextBox = styled(Box)`
 `;
 
 const GrassDiv = styled.div`
+display:none;
+@media (max-width:768px){
+  display:inline;
   position: absolute;
   bottom: 0;
   background-image: url(${grassBG});
   width: 100%;
   height: 40px;
   background-postion-x: 10px;
+}
 `;
 
 export const LandingSection: React.FC = () => {
@@ -50,7 +51,7 @@ export const LandingSection: React.FC = () => {
         </Typography>
         <ContactButton hasAnimation={true}>Запазете час</ContactButton>
       </TextBox>
-      {/* <GrassDiv /> */}
+      <GrassDiv />
     </ImageBox>
   );
 };

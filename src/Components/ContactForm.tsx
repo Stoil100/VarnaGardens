@@ -1,4 +1,4 @@
-import React,{useRef,useState} from "react";
+import React,{useRef} from "react";
 import { useForm } from "react-hook-form";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import styled from "@emotion/styled";
@@ -42,19 +42,6 @@ const FormBox = styled(Box)`
   }
 };`;
 
-const HoverSpan = styled.span`
-  color: #000;
-  background-color: #000;
-  border-radius: 10px;
-  padding: 10px;
-  transition: all 0.3s;
-
-  &:hover {
-    color: #fff;
-    background-color: #00000090;
-  }
-`;
-
 const TitleBox = styled(Box)`
 @media (max-width: 570px) {
   flex-direction: column;
@@ -69,7 +56,6 @@ interface FormValues {
 }
 
 export const ContactForm = () => {
-  const [isLoading,setIsLoading]=useState(false);
   const formRef = useRef();
   const { register, handleSubmit,reset } = useForm<FormValues>();
   const handleInfo = async(data:FormValues) => {
@@ -81,9 +67,9 @@ export const ContactForm = () => {
     };
  
       try {
-        // await emailjs.send(
-          //   'service_8j69ecg', 'template_m7wsdam',formData ,'U1Kb_46dJ4z5HTses',
-          // );
+        await emailjs.send(
+            'service_8j69ecg', 'template_m7wsdam',formData ,'U1Kb_46dJ4z5HTses',
+          );
         } catch (error) {
           console.error('Error sending email:', error);
         }

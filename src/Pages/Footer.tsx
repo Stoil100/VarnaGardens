@@ -1,6 +1,6 @@
+import React from "react";
 import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
-import React from "react";
 import { Title } from "../Components/Title";
 import facebookIcon from "../Assets/SocialMediaIcons/facebook.svg";
 import instagramIcon from "../Assets/SocialMediaIcons/instagram.svg";
