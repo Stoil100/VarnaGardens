@@ -9,7 +9,7 @@ const FlexBox = styled(Box)`
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  height: 40vh;
+  min-height: 40vh;
   width: 100%;
   text-align: center;
   background-color: #59a608c2;

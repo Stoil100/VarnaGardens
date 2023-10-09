@@ -1,20 +1,21 @@
-import React,{useRef} from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import mainLogo from "../Assets/Logos/VarnaGardensLogo.svg";
-import {ThemeProvider, createTheme } from "@mui/material/styles";
-import emailjs from 'emailjs-com';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import emailjs from "emailjs-com";
+import { isMobile } from "react-device-detect";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#f0b429',
-      contrastText: '#fff',
+      main: "#f0b429",
+      contrastText: "#fff",
     },
     secondary: {
-      main: '#000',
-      contrastText: '#fff',
+      main: "#000",
+      contrastText: "#fff",
     },
   },
 });
@@ -22,6 +23,7 @@ const theme = createTheme({
 const FormBox = styled(Box)`
   width: 550px;
   height: 600px;
+  max-height:90vh;
   padding: 10px;
   display: flex;
   justify-content: space-around;
@@ -43,8 +45,30 @@ const FormBox = styled(Box)`
 };`;
 
 const TitleBox = styled(Box)`
-@media (max-width: 570px) {
-  flex-direction: column;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const TitleImg=styled.img`
+width: 100px;
+border: 1px solid #6a994e;
+border-radius: 50%;
+background-color: #fff;
+
+@media (max-width:570px){
+  width:60px;
+}
+`;
+const ContactBox=styled(Box)`
+display: flex;
+justify-content: center;
+align-items: center;
+
+@media (max-width:570px){
+flex-direction: column;
+text-align: center;
 }
 `;
 
@@ -57,150 +81,145 @@ interface FormValues {
 
 export const ContactForm = () => {
   const formRef = useRef();
-  const { register, handleSubmit,reset } = useForm<FormValues>();
-  const handleInfo = async(data:FormValues) => {
+  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const handleInfo = async (data: FormValues) => {
     const formData = {
       name: data.name,
       email: data.email,
       telephone: data.telephone,
       message: data.message,
     };
- 
-      try {
-        await emailjs.send(
-            'service_8j69ecg', 'template_m7wsdam',formData ,'U1Kb_46dJ4z5HTses',
-          );
-        } catch (error) {
-          console.error('Error sending email:', error);
-        }
-        reset();
-      };
+
+    try {
+      await emailjs.send(
+        "service_8j69ecg",
+        "template_m7wsdam",
+        formData,
+        "U1Kb_46dJ4z5HTses"
+      );
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+    reset();
+  };
   return (
     <ThemeProvider theme={theme}>
-
-    <FormBox
-      component="form"
-      onSubmit={handleSubmit(handleInfo)}
-      ref={formRef}
-      sx={{ mt: 1 }}
-    >
-      <TitleBox
-        sx={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-        }}
+      <FormBox
+        component="form"
+        onSubmit={handleSubmit(handleInfo)}
+        ref={formRef}
+        sx={{ mt: 1 }}
       >
-        <img
-          src={mainLogo}
-          width="100px"
-          alt="Company Logo"
-          style={{
-            border: "1px solid #6a994e",
-            borderRadius: "50%",
-            backgroundColor: "#fff",
-          }}
-        />
-        <Typography
-          variant="h4"
-          sx={{
-            color: "#A7C957",
-            fontFamily: "Montserrat Alternates",
-            fontSize: 30,
-          }}
-        >
-          Направете запитване
-        </Typography>
-      </TitleBox>
-      <Box
-        sx={{ backgroundColor: "#fff", borderRadius: "10px", padding: "10px" }}
-      >
-        <TextField
-          margin="normal"
-          color="secondary"
-          required
-          fullWidth
-          id="name"
-          label="Име"
-          {...register("name", { required: "Required" })}
-          sx={{
-            backgroundColor: "#D0F1BF",
-            borderRadius: "5px",
-            "& fieldset": { border: "none" },
-          }}
-        />
-        <TextField
-          margin="normal"
-          color="secondary"
-          required
-          fullWidth
-          id="email"
-          label="Имейл"
-          autoComplete="email"
-          {...register("email", { required: "Required" })}
-          sx={{
-            backgroundColor: "#D0F1BF",
-            borderRadius: "5px",
-            "& fieldset": { border: "none" },
-          }}
-        />
-        <TextField
-          margin="normal"
-          color="secondary"
-          fullWidth
-          label="Телефон (optional)"
-          type="telephone"
-          id="telephone"
-          autoComplete="telephone"
-          {...register("telephone", { required: false })}
-          sx={{
-            backgroundColor: "#D0F1BF",
-            borderRadius: "5px",
-            "& fieldset": { border: "none" },
-          }}
-        />
-        <TextField
-          multiline
-          color="secondary"
-          rows={4}
-          margin="normal"
-          required
-          fullWidth
-          label="Съобщение"
-          type="message"
-          id="message"
-          {...register("message", { required: true })}
-          sx={{
-            backgroundColor: "#D0F1BF",
-            borderRadius: "5px",
-            "& fieldset": { border: "none" },
-          }}
-        />
+        <TitleBox>
+          <TitleImg
+            src={mainLogo}
+            alt="Company Logo"
+          />
+          <Typography
+            variant={isMobile?"h5":"h4"}
+            sx={{
+              color: "#A7C957",
+              fontFamily: "Montserrat Alternates",
+            }}
+          >
+            Направете запитване
+          </Typography>
+        </TitleBox>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: "100%",
+            backgroundColor: "#fff",
+            borderRadius: "10px",
+            padding: "10px",
           }}
         >
-          <Button
-            type="submit"
+          <TextField
+            margin="normal"
+            color="secondary"
+            required
             fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2, flex: 1 }}
+            id="name"
+            label="Име"
+            {...register("name", { required: "Required" })}
+            sx={{
+              backgroundColor: "#D0F1BF",
+              borderRadius: "5px",
+              "& fieldset": { border: "none" },
+            }}
+          />
+          <TextField
+            margin="normal"
+            color="secondary"
+            required
+            fullWidth
+            id="email"
+            label="Имейл"
+            autoComplete="email"
+            {...register("email", { required: "Required" })}
+            sx={{
+              backgroundColor: "#D0F1BF",
+              borderRadius: "5px",
+              "& fieldset": { border: "none" },
+            }}
+          />
+          <TextField
+            margin="normal"
+            color="secondary"
+            fullWidth
+            label="Телефон (optional)"
+            type="telephone"
+            id="telephone"
+            autoComplete="telephone"
+            {...register("telephone", { required: false })}
+            sx={{
+              backgroundColor: "#D0F1BF",
+              borderRadius: "5px",
+              "& fieldset": { border: "none" },
+            }}
+          />
+          <TextField
+            multiline
+            color="secondary"
+            rows={4}
+            margin="normal"
+            required
+            fullWidth
+            label="Съобщение"
+            type="message"
+            id="message"
+            {...register("message", { required: true })}
+            sx={{
+              backgroundColor: "#D0F1BF",
+              borderRadius: "5px",
+              "& fieldset": { border: "none" },
+            }}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
           >
-            Изпрати
-          </Button>
-          <Box sx={{ flex: 2, display: "flex", justifyContent: "center" }}>
-            <Typography sx={{fontFamily:"Montserrat Alternates"}}>
-              Или ни се обадете (+359)882 8828
-            </Typography>
+            <ContactBox>
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, flex: 1 }}
+            >
+              Изпрати
+            </Button>
+            <Box sx={{ flex: 2, display: "flex", justifyContent: "center" }}>
+              <Typography sx={{ fontFamily: "Montserrat Alternates" }}>
+                Или ни се обадете (+359)882 8828
+              </Typography>
+            </Box>
+            </ContactBox>
           </Box>
         </Box>
-      </Box>
-    </FormBox>
+      </FormBox>
     </ThemeProvider>
   );
 };

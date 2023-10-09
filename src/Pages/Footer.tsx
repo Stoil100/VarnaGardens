@@ -10,13 +10,12 @@ const FlexFooter = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 10px 0 0;
+  padding: 20px;
   background-color: #191a1b;
-  height: 45vh;
+  min-height: 45vh;
   color: #fff;
   font-family: Montserrat Alternates;
   box-sizing: border-box;
-  padding: 20px;
   flex-wrap: wrap;
 
   @media (max-width: 570px) {

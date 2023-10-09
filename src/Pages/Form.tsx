@@ -8,7 +8,11 @@ import { RevealDirection } from "../Components/RevealDirection";
 const FormBox = styled(Box)`
   background: url(${backgroundImg}) no-repeat fixed 50% 0px;
   background-size: cover;
-  height: 100vh;
+  height:100vh;
+  min-height:fit-content;
+  @media (max-width: 570px) {
+  min-height:100vh;
+  }
 `;
 
 const FormBoxItem = styled(Box)`

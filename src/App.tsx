@@ -16,7 +16,7 @@ console.log(isMobile);
 
 const App: React.FC = () => {
   return (
-    <div style={{marginBottom:`${isMobile?"100px":""}`}}>
+    <div>
     <ScrollBar/>
       <LandingSection />
       <RevealSection>
