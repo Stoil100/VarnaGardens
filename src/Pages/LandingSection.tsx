@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import backgroundImg from "../Assets/homeBackground.jpg";
 import { ContactButton } from "../Components/ContactButton";
 import grassBG from "../Assets/grassBG.svg";
+import { isMobile } from "react-device-detect";
 
 const ImageBox = styled(Box)`
   background: url(${backgroundImg}) no-repeat fixed 50% 0px;
@@ -27,23 +28,21 @@ const TextBox = styled(Box)`
 `;
 
 const GrassDiv = styled.div`
-display:none;
-@media (max-width:768px){
-  display:inline;
+
   position: absolute;
   bottom: 0;
   background-image: url(${grassBG});
   width: 100%;
   height: 40px;
   background-postion-x: 10px;
-}
+
 `;
 
 export const LandingSection: React.FC = () => {
   return (
     <ImageBox>
       <TextBox>
-        <Typography variant="h1" sx={{ fontFamily: "Lobster" }}>
+        <Typography variant={isMobile?"h2":"h1"} sx={{ fontFamily: "Lobster" }}>
           Varna Gardens
         </Typography>
         <Typography variant="h5" sx={{ fontFamily: "Montserrat Alternates" }}>

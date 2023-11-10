@@ -5,12 +5,14 @@ interface Props {
   children: JSX.Element;
   width?: "fit-content" | "100%";
   direction: string;
+  onAnimationEnd?:()=>void;
 }
 
 export const RevealDirection = ({
   direction,
   children,
   width = "fit-content",
+  onAnimationEnd,
 }: Props) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -37,6 +39,7 @@ export const RevealDirection = ({
         initial="hidden"
         animate={mainControls}
         transition={{ duration: 0.5, delay: 1 }}
+        onAnimationComplete={onAnimationEnd}
       >
         {children}
       </motion.div>

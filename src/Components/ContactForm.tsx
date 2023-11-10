@@ -7,6 +7,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import emailjs from "emailjs-com";
 import { isMobile } from "react-device-detect";
 
+const {REACT_APP_SERVICE_ID,REACT_APP_TEMPLATE_ID,REACT_APP_KEY_ID}=process.env;
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -51,25 +53,26 @@ const TitleBox = styled(Box)`
   align-items: center;
 `;
 
-const TitleImg=styled.img`
-width: 100px;
-border: 1px solid #6a994e;
-border-radius: 50%;
-background-color: #fff;
+const TitleImg = styled.img`
+  width: 100px;
+  border: 1px solid #6a994e;
+  border-radius: 50%;
+  background-color: #fff;
 
-@media (max-width:570px){
-  width:60px;
-}
+  @media (max-width: 570px) {
+    width: 60px;
+  }
 `;
-const ContactBox=styled(Box)`
-display: flex;
-justify-content: center;
-align-items: center;
-
-@media (max-width:570px){
-flex-direction: column;
-text-align: center;
-}
+const ContactBox = styled(Box)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  @media (max-width: 570px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 interface FormValues {
@@ -92,10 +95,10 @@ export const ContactForm = () => {
 
     try {
       await emailjs.send(
-        "service_8j69ecg",
-        "template_m7wsdam",
+        REACT_APP_SERVICE_ID!,
+        REACT_APP_TEMPLATE_ID!,
         formData,
-        "U1Kb_46dJ4z5HTses"
+        REACT_APP_KEY_ID!
       );
     } catch (error) {
       console.error("Error sending email:", error);
@@ -111,12 +114,9 @@ export const ContactForm = () => {
         sx={{ mt: 1 }}
       >
         <TitleBox>
-          <TitleImg
-            src={mainLogo}
-            alt="Company Logo"
-          />
+          <TitleImg src={mainLogo} alt="Company Logo" />
           <Typography
-            variant={isMobile?"h5":"h4"}
+            variant={isMobile ? "h5" : "h4"}
             sx={{
               color: "#A7C957",
               fontFamily: "Montserrat Alternates",
@@ -202,20 +202,19 @@ export const ContactForm = () => {
             }}
           >
             <ContactBox>
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, flex: 1 }}
-            >
-              Изпрати
-            </Button>
-            <Box sx={{ flex: 2, display: "flex", justifyContent: "center" }}>
-              <Typography sx={{ fontFamily: "Montserrat Alternates" }}>
-                Или ни се обадете (+359)882 8828
-              </Typography>
-            </Box>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, flex: 1 }}
+              >
+                Изпрати
+              </Button>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Typography sx={{ fontFamily: "Montserrat Alternates" }}>
+                  Или ни се обадете (+359)882 8828
+                </Typography>
+              </Box>
             </ContactBox>
           </Box>
         </Box>

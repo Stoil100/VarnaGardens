@@ -11,18 +11,22 @@ import { Footer } from "./Pages/Footer";
 import { RevealSection } from "./Components/RevealSection";
 import { ScrollBar } from "./Components/ScrollBar";
 import { isMobile } from "react-device-detect";
+import Ad from "./Pages/Ad";
+import Clients from "./Pages/Clients";
 
 console.log(isMobile);
 
 const App: React.FC = () => {
   return (
     <div>
-    <ScrollBar/>
+      <Ad />
+      <ScrollBar />
       <LandingSection />
       <RevealSection>
         <About />
       </RevealSection>
       <Services />
+      <Clients />
       <RevealSection>
         <Gallery />
       </RevealSection>

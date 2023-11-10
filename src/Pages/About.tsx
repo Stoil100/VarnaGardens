@@ -18,6 +18,9 @@ const FlexContainer = styled(Box)`
   gap: 40px;
   box-sizing: border-box;
   padding: 10px;
+  background-color: #fff;
+  position: relative;
+  z-index: 10;
 `;
 
 const ContentContainer = styled.div`
@@ -151,8 +154,7 @@ const About: React.FC = () => {
           <TextBox>
             <Typography variant="h5">Направете запитване</Typography>
             <Typography>
-              Уведомете ни за какви услуги се нуждаете от помощ и ние ще ви
-              дадем незабавна оценка на цената.
+            Уведомете ни от какви услуги се нуждаете и ние ще ви дадем незабавна обратна връзка и оценка на цената.
             </Typography>
           </TextBox>
           <ImagesResponsive>
@@ -161,8 +163,7 @@ const About: React.FC = () => {
           <TextBox>
             <Typography variant="h5">Получаване на обслужване</Typography>
             <Typography>
-              Ще ви подберем специалист по тревни площи, който ще изпълни
-              работата.
+            След уговорена дата и час, подбрани специално според вашата нужда градинари започват незабавна работа.
             </Typography>
           </TextBox>
           <ImagesResponsive>
@@ -171,8 +172,7 @@ const About: React.FC = () => {
           <TextBox>
             <Typography variant="h5">Готови сте!</Typography>
             <Typography variant="body2">
-              Лесно управлявайте всичко от телефона или компютъра си. Можете да
-              резервирате допълнителни услуги само с няколко кликвания.
+            Лесно управлявайте всичко от телефона си като получавате директна връзка.
             </Typography>
           </TextBox>
         </TextContainer>

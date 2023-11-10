@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import styled from "@emotion/styled";
-import grassBG from "../Assets/grassBGrotated.svg";
-import lawnmower from "../Assets/lawnmowerScrollRotated.svg";
+import grassBG from "../Assets/ScrollImages/grassBGrotated.svg";
+import lawnmower from "../Assets/ScrollImages/lawnmowerScrollRotated.svg";
 
 const ScrollBarBody = styled.div`
   position: fixed;

@@ -26,8 +26,8 @@ const images = [
   result3,
   result4,
   result5,
-  result6,
-  result7,
+  // result6,
+  // result7,
 ];
 
 const swiperParams = isMobile
@@ -47,7 +47,7 @@ const swiperParams = isMobile
       },
       effect: "coverflow",
       grabCursor: true,
-      slidesPerView: 3,
+      slidesPerView: 2,
       centeredSlides: true,
       centerInsufficientSlides: true,
       loop: true,
