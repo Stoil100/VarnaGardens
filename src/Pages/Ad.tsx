@@ -46,7 +46,7 @@ if (resp!== undefined) {
     resp.then(_ => {
         // autoplay starts!
     }).catch(error => {
-      console.log(error)
+      throw error
     });
 }
     }

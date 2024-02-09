@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Box, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import CountUp from "react-countup";
 import textBg from "../Assets/bushesBackground.jpg";
+import { useIntersectionObserver as useVisibility } from "@uidotdev/usehooks";
+
+
 const isMobile = window.innerWidth<=768;
 
 const Container = styled(Box)`
@@ -90,10 +93,17 @@ const OtherCounter = styled(CountUp)`
 `;
 
 export default function Clients() {
+  const [ref, entry] = useVisibility({
+    threshold: 0.1,
+    root: null,
+    rootMargin: "0px",
+  });
   return (
-    <Container>
+    <Container ref={ref}>
+      {entry?.isIntersecting&&
+      <>
       <MainContainer>
-        <MainCounter end={115} duration={3} />
+       <MainCounter end={115} duration={3} />
         <Typography
           variant={isMobile?"h3":"h2"}
           sx={{ color: "#fff", fontFamily: "Comfortaa" }}
@@ -122,6 +132,8 @@ export default function Clients() {
           </Typography>
         </FlexBox>
       </OthersContainer>
+      </>
+      }
     </Container>
   );
 }

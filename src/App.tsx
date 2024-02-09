@@ -14,8 +14,6 @@ import { isMobile } from "react-device-detect";
 import Ad from "./Pages/Ad";
 import Clients from "./Pages/Clients";
 
-console.log(isMobile);
-
 const App: React.FC = () => {
   return (
     <div>

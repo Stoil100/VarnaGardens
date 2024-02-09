@@ -7,8 +7,6 @@ import { ReactComponent as LawnMowerLogo } from "../Assets/HowItWorksIcons/lawnm
 import { ReactComponent as DoneLogo } from "../Assets/HowItWorksIcons/done.svg";
 import { Title } from "../Components/Title";
 
-console.log(process.env);
-
 const FlexContainer = styled(Box)`
   display: flex;
   justify-content: center;
