@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/VarnaGardens/static/css/main.bcb8df8f.css",
+    "main.js": "/VarnaGardens/static/js/main.d9671b85.js",
+    "static/media/results5.jpg": "/VarnaGardens/static/media/results5.371c29dcfa39aae87a42.jpg",
+    "static/media/results2.jpg": "/VarnaGardens/static/media/results2.8acb9d8e5801a83f0f8a.jpg",
+    "static/media/contactBG.jpg": "/VarnaGardens/static/media/contactBG.de031adb706a431d768c.jpg",
+    "static/media/results3.jpg": "/VarnaGardens/static/media/results3.e08370d6db13dcefb16a.jpg",
+    "static/media/results4.jpg": "/VarnaGardens/static/media/results4.81211745edefe39e8796.jpg",
+    "static/media/toolsBackground.jpg": "/VarnaGardens/static/media/toolsBackground.e91a23edf6eb9beefbad.jpg",
+    "static/media/homeBackground.jpg": "/VarnaGardens/static/media/homeBackground.efb6fdab9725b51536c8.jpg",
+    "static/media/bushesBackground.jpg": "/VarnaGardens/static/media/bushesBackground.3ee034224a7dcfa4d54a.jpg",
+    "static/media/quotesBG.png": "/VarnaGardens/static/media/quotesBG.ba7b1383ceefe051f6f4.png",
+    "static/media/results0.jpg": "/VarnaGardens/static/media/results0.889b44f67282c1604011.jpg",
+    "static/media/results1.jpg": "/VarnaGardens/static/media/results1.08e32902d87ded2a9070.jpg",
+    "static/media/ding.mp3": "/VarnaGardens/static/media/ding.e7ee2dcadbf4547cef03.mp3",
+    "static/media/pattern.png": "/VarnaGardens/static/media/pattern.9dd71992a1f6cae819d4.png",
+    "static/media/PlanningServicesIcon.svg": "/VarnaGardens/static/media/PlanningServicesIcon.c36b56eb0c0ef61e9ec64e4f1b0df645.svg",
+    "static/media/BushServicesIcon.svg": "/VarnaGardens/static/media/BushServicesIcon.590886def9a1bb772d562a8cb5c3593b.svg",
+    "static/media/VarnaGardensLogo.svg": "/VarnaGardens/static/media/VarnaGardensLogo.a06c36ec0020979926114358a50a0458.svg",
+    "static/media/lawnmowerScrollRotated.svg": "/VarnaGardens/static/media/lawnmowerScrollRotated.d1cefeb12a989f9ff393a8ffb8dc6f7e.svg",
+    "index.html": "/VarnaGardens/index.html",
+    "static/media/grassBGrotated.svg": "/VarnaGardens/static/media/grassBGrotated.73fd1b9f30925f1ae20bb3e433ef5e0a.svg",
+    "static/media/grassBG.svg": "/VarnaGardens/static/media/grassBG.0de1e79cc2229d433c18f536e26389f3.svg",
+    "static/media/lawnmower.svg": "/VarnaGardens/static/media/lawnmower.8d59e78654a27b8b336f4f3cda239fe5.svg",
+    "static/media/waves.svg": "/VarnaGardens/static/media/waves.396146593bcbb532f21db0d60f71e741.svg",
+    "static/media/TreeServicesIcon.svg": "/VarnaGardens/static/media/TreeServicesIcon.3111fea17efbf2f1db41106956eb2863.svg",
+    "static/media/instagram.svg": "/VarnaGardens/static/media/instagram.7393f5b1824ec9336bd7d701f04e5555.svg",
+    "static/media/GrassServicesIcon.svg": "/VarnaGardens/static/media/GrassServicesIcon.13e89cb3da6eae2361d3610de275ec7a.svg",
+    "static/media/price.svg": "/VarnaGardens/static/media/price.96acda7789210060efdd60ee89ee1c43.svg",
+    "static/media/tiktok.svg": "/VarnaGardens/static/media/tiktok.e34c63776b9147f884f8b0b384e332e1.svg",
+    "static/media/done.svg": "/VarnaGardens/static/media/done.22e51f4bf30044de488a2a404e7cb1bb.svg",
+    "static/media/facebook.svg": "/VarnaGardens/static/media/facebook.3618e269292af45bb47dc18cf2f854c0.svg",
+    "main.bcb8df8f.css.map": "/VarnaGardens/static/css/main.bcb8df8f.css.map",
+    "main.d9671b85.js.map": "/VarnaGardens/static/js/main.d9671b85.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bcb8df8f.css",
+    "static/js/main.d9671b85.js"
+  ]
+}
