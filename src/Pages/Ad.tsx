@@ -1,13 +1,9 @@
 import styled from "@emotion/styled";
 import { NotificationsActive, NotificationsNone } from "@mui/icons-material";
-import { Fab, Typography, Badge, Alert, Snackbar,Dialog } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Alert, Badge, Dialog, Fab, Snackbar } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useState } from "react";
 import { RevealDirection } from "../Components/RevealDirection";
-import { isMobile } from "react-device-detect";
-const audio = require('../Assets/sounds/ding.mp3');
-const Sound = new Audio(audio)
-
 
 const theme = createTheme({
   palette: {
@@ -32,26 +28,26 @@ justify-content: center;
 align-items: center;
 gap: 10px;
 `;
+
+const SnackAlert = styled(Alert)`
+margin-left:60px;
+max-width:300px;
+border-radius:20px;
+color:gray;
+font-family:Comfortaa;
+
+@media (max-width:600px){
+  max-width:100vw;
+  margin: 10px;
+}
+`;
+
 export default function Ad() {
   const [hasFinnishedAnimation, setHasFinnishedAnimation] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [hasOpened, setHasOpened] = useState<undefined|boolean>(undefined);
+  const [hasOpened, setHasOpened] = useState(false);
 
-  useEffect(()=>{
-    Sound.load();
-    if(hasFinnishedAnimation){
-      var resp = Sound.play();
-
-if (resp!== undefined) {
-    resp.then(_ => {
-        // autoplay starts!
-    }).catch(error => {
-      throw error
-    });
-}
-    }
-  },[hasFinnishedAnimation])
-
+  
   return (
     <ThemeProvider theme={theme}>
       {hasFinnishedAnimation ? (
@@ -61,7 +57,7 @@ if (resp!== undefined) {
               <NotificationsActive />
             </Badge>
           </Fab>
-          {!isMobile&&
+         
           <Snackbar
             open={isOpen}
             autoHideDuration={20000}
@@ -69,22 +65,17 @@ if (resp!== undefined) {
               setIsOpen(false);
             }}
           >
-            <Alert
+            <SnackAlert
               onClose={() => {
                 setIsOpen(false);
               }}
               severity="success"
-              sx={{ marginLeft:"60px",
-              maxWidth:"300px",
-              borderRadius:"20px",
-              color:"gray",
-              fontFamily:"Comfortaa"
-            }}
+             
             >
-             Поради разрастване на нашата дейност специално за Ноември ако желаете дългосрочен абонамент можете да спечелите безплатна поддръжка за до един месец 
-            </Alert>
+             Нека нашите специалисти проведат безплатен оглед и ви предоставят всички необходими информации и съвети
+              </SnackAlert>
           </Snackbar>
-}
+
         </FabContainer>
       ) : (
         <FabContainer>
@@ -101,9 +92,7 @@ if (resp!== undefined) {
           </RevealDirection>
         </FabContainer>
       )}
-      <Dialog open={hasOpened===undefined?false:hasOpened} onClose={()=>{setHasOpened(false)}}>
-
-      </Dialog>
+      <Dialog open={hasOpened===undefined?false:hasOpened} onClose={()=>{setHasOpened(false)}}/>
     </ThemeProvider>
   );
 }
