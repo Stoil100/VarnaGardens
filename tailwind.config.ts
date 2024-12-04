@@ -8,8 +8,15 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+	fontFamily: {
+		cormorant: ['var(--font-cormorant-infant)'],
+		helvetica: ['var(--font-helvetica-neue)'],
+	},
   	extend: {
   		colors: {
+			'green':{
+				DEFAULT:"#4eb152"
+			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
