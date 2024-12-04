@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Cormorant_Infant } from "next/font/google";
+import Navigation from "@/components/Navigation";
 
 const cormorant = Cormorant_Infant({
     weight: ["300", "400", "500", "600", "700"],
@@ -110,8 +111,9 @@ export default function LocaleLayout({
     return (
         <html lang="en">
             <body
-                className={`${helvetica.variable} ${cormorant.variable} antialiased`}
+                className={`${helvetica.variable} ${cormorant.variable} antialiased font-helvetica`}
             >
+                <Navigation/>
                 {children}
             </body>
         </html>
