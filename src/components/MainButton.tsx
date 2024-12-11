@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
 import { ReactNode } from "react";
+import { Button } from "./ui/button";
 
 export default function MainButton({
     children,
@@ -11,16 +11,18 @@ export default function MainButton({
     variant?: "default" | "transparent";
 } & Omit<React.ComponentProps<typeof Button>, "variant">) {
     const baseClass =
-        "h-fit rounded-full px-4 py-1 text-xl font-extralight transition-all";
+        "h-fit rounded-full px-4 py-1 border border-green text-xl font-extralight transition-all drop-shadow-lg";
     const variantClasses = {
-        default:
-            "bg-green text-white hover:bg-transparent hover:border-green hover:text-green hover:border",
+        default: "bg-green text-white hover:bg-transparent hover:text-green ",
         transparent:
-            "bg-transparent border border-green text-green hover:bg-green hover:border-none hover:text-white",
+            "bg-transparent border text-green hover:bg-green hover:text-white",
     };
 
     return (
-        <Button className={cn(baseClass, variantClasses[variant])} {...props}>
+        <Button
+            {...props}
+            className={cn(baseClass, variantClasses[variant], props.className)}
+        >
             {children}
         </Button>
     );
