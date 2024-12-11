@@ -14,6 +14,121 @@
             "toggle": "Toggle menu"
         }
     },
+    "HomePage": {
+        "heroSection": {
+            "title": "With attention to detail and true love for nature!",
+            "button": "Learn More",
+            "description": "We, the team at Varna Gardens, believe that every garden tells its own story"
+        },
+        "plansSection": {
+            "heading": "Subscription Plans for Garden Maintenance",
+            "subheading": "Our subscription plans offer personalized care for your garden throughout the year",
+            "button": "Get an Offer",
+            "popularLabel": "Most Popular",
+            "plans": {
+                "standard": {
+                    "title": "Standard",
+                    "description": "Specifically designed for family houses and residential buildings.",
+                    "features": {
+                        "0": "Flexibility and convenience",
+                        "1": "Visit every 10 days",
+                        "2": "Comprehensive garden care",
+                        "3": "Ideal for small and medium gardens"
+                    }
+                },
+                "deluxe": {
+                    "title": "Deluxe",
+                    "description": "Specifically designed for family houses and residential buildings.",
+                    "features": {
+                        "0": "Flexibility and convenience",
+                        "1": "Visit every 10 days",
+                        "2": "Comprehensive garden care",
+                        "3": "Ideal for small and medium gardens"
+                    }
+                },
+                "premium": {
+                    "title": "Premium",
+                    "description": "Specifically designed for family houses and residential buildings.",
+                    "features": {
+                        "0": "Flexibility and convenience",
+                        "1": "Visit every 10 days",
+                        "2": "Comprehensive garden care",
+                        "3": "Ideal for small and medium gardens"
+                    }
+                }
+            }
+        },
+        "servicesSection": {
+            "title": "One-Time Services for Green Spaces",
+            "services": [
+                {
+                    "title": "Investment Cleaning",
+                    "description": "Complete cleaning and restoration of terrains and properties"
+                },
+                {
+                    "title": "Vegetation Care",
+                    "description": "Specialized care for shrubs, trees, and flowers"
+                },
+                {
+                    "title": "Protection and Fertilization",
+                    "description": "Protection for your plants against diseases and pests"
+                },
+                {
+                    "title": "Garden Refreshment",
+                    "description": "Professional renewal of your garden"
+                },
+                {
+                    "title": "Irrigation Systems",
+                    "description": "Installation and maintenance of irrigation systems"
+                }
+            ]
+        },
+        "gallerySection": {
+            "title": "Inspiration from the Nature Around Us",
+            "button": "See More",
+            "description": "Each project is unique – created with care and love for nature to inspire and bring peace.",
+            "villas": [
+                { "title": "Villa Ana" },
+                { "title": "Villa Boryana" },
+                { "title": "Villa Violeta" },
+                { "title": "Villa Gergana" },
+                { "title": "Villa Danila" },
+                { "title": "Villa Elena" }
+            ],
+            "stats": [
+                { "label": "Satisfied Clients" },
+                { "label": "Completed Projects" },
+                { "label": "Maintained Gardens" },
+                { "label": "Irrigation Systems" }
+            ]
+        },
+        "stepsSection": {
+            "title": "A Few Easy Steps to Your Green Paradise",
+            "button": "Get an Offer",
+            "steps": [
+                {
+                    "title": "Your Inquiry",
+                    "description": "Contact us to tell us about your ideas, needs, and requirements."
+                },
+                {
+                    "title": "Ideas and Vision",
+                    "description": "We create a personalized plan and design for your garden."
+                },
+                {
+                    "title": "Execution and Services",
+                    "description": "We implement the plan with professionalism and attention to detail."
+                },
+                {
+                    "title": "The Realized Vision",
+                    "description": "Enjoy the beautifully designed space, tailored to your desires."
+                }
+            ]
+        },
+        "footerSection": {
+            "title": "Varna Gardens",
+            "button": "Get an Offer"
+        }
+    },
     "Footer": {
         "brand": {
             "name": "Varna Gardens",
