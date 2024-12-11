@@ -13,5 +13,29 @@
         "menu": {
             "toggle": "Toggle menu"
         }
+    },
+    "Footer": {
+        "brand": {
+            "name": "Varna Gardens",
+            "description": "Creating beautiful gardens and spaces for your home."
+        },
+        "navigation": {
+            "title": "Navigation",
+            "links": [
+                { "label": "Home" },
+                { "label": "Services" },
+                { "label": "Gallery" },
+                { "label": "Contact" }
+            ]
+        },
+        "socialMedia": {
+            "title": "Media"
+        },
+        "contact": {
+            "title": "Contact",
+            "phone": "+359 889 431 671",
+            "email": "varnagardens@gmail.com",
+            "button": "Get an Offer"
+        }
     }
 }

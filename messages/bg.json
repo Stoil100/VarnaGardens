@@ -13,5 +13,29 @@
         "menu": {
             "toggle": "Toggle menu"
         }
+    },
+    "Footer": {
+        "brand": {
+            "name": "Varna Gardens",
+            "description": "Създаваме красиви градини и пространства за вашия дом."
+        },
+        "navigation": {
+            "title": "Навигация",
+            "links": [
+                { "label": "Начало" },
+                { "label": "Услуги" },
+                { "label": "Галерия" },
+                { "label": "Контакт" }
+            ]
+        },
+        "socialMedia": {
+            "title": "Медии"
+        },
+        "contact": {
+            "title": "Контакт",
+            "phone": "+359 889 431 671",
+            "email": "varnagardens@gmail.com",
+            "button": "Получи Оферта"
+        }
     }
-}
+}    
