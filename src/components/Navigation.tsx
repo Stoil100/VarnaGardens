@@ -1,43 +1,124 @@
-import React from "react";
-import MainButton from "./MainButton";
+"use client";
+
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
+import LanguageButton from "./LanguageButton";
+import MainButton from "./MainButton";
 
 export default function Navigation() {
-    const navLinks = [
-        { label: "Начало", href: "#" },
-        { label: "Услуги", href: "#" },
-        { label: "Галерия", href: "#" },
-    ];
-    const actionButtons: { label: string; variant?: "default" | "transparent" }[] = [
-        { label: "Език", variant: "default" },
-        { label: "Контакт", variant: "transparent" },
-        { label: "Получи Оферта", variant: "default" },
-    ];
+    const t = useTranslations("Navigation");
+    const headerRef = useRef<HTMLElement>(null);
 
+    useEffect(() => {
+        if (headerRef.current) {
+            const headerHeight = headerRef.current.offsetHeight;
+            document.documentElement.style.setProperty(
+                "--nav-height",
+                `${headerHeight}px`,
+            );
+        }
+    }, []);
+    const navLinks = [{ href: "#" }, { href: "#" }, { href: "#" }].map(
+        (link, index) => ({
+            ...link,
+            label: t(`navLinks.${index}.label`),
+        }),
+    );
+
+    const actionButtons = [
+        { variant: "transparent" },
+        { variant: "default" },
+    ].map((button, index) => ({
+        ...button,
+        label: t(`actionButtons.${index}.label`),
+    }));
     return (
-        <header className="h-fit w-full bg-transparent">
-            <nav className="flex items-center justify-between bg-transparent px-4 py-3">
+        <header
+            ref={headerRef}
+            className="sticky top-0 z-50 w-full bg-white drop-shadow-md"
+        >
+            <nav className="flex items-center justify-between bg-transparent px-2 py-3 md:px-6">
                 <div className="flex items-center gap-16">
-                    <h3 className="font-cormorant text-green text-3xl">
-                        Varna Gardens
+                    <h3 className="font-cormorant text-3xl text-primary">
+                        {t("brand")}
                     </h3>
-                    <ul className="flex items-center gap-8 text-lg font-light text-gray-400">
+                    <ul className="hidden items-center gap-8 text-lg font-light text-muted-foreground lg:flex">
                         {navLinks.map((link) => (
                             <li key={link.label}>
-                                <Link href={link.href} className="hover:text-green transition">
+                                <Link
+                                    href={link.href}
+                                    className="transition hover:text-primary"
+                                >
                                     {link.label}
                                 </Link>
                             </li>
                         ))}
                     </ul>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="hidden items-center gap-4 lg:flex">
+                    <LanguageButton />
                     {actionButtons.map((button) => (
-                        <MainButton key={button.label} variant={button.variant}>
+                        <MainButton
+                            key={button.label}
+                            variant={
+                                button.variant as "default" | "transparent"
+                            }
+                        >
                             {button.label}
                         </MainButton>
                     ))}
                 </div>
+                <Sheet>
+                    <SheetTrigger asChild className="lg:hidden">
+                        <div className="p-2">
+                            <Menu className="h-6 w-6 text-green" />
+                            <span className="sr-only">{t("menu.toggle")}</span>
+                        </div>
+                    </SheetTrigger>
+                    <SheetContent
+                        side="left"
+                        className="w-[300px] sm:w-[400px]"
+                    >
+                        <SheetHeader>
+                            <SheetTitle className="font-cormorant text-2xl text-primary">
+                                {t("brand")}
+                            </SheetTitle>
+                        </SheetHeader>
+                        <div className="mt-4 flex flex-col gap-4">
+                            {navLinks.map((link) => (
+                                <Link
+                                    key={link.label}
+                                    href={link.href}
+                                    className="text-lg font-light text-muted-foreground transition hover:text-primary"
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
+                            {actionButtons.map((button) => (
+                                <MainButton
+                                    key={button.label}
+                                    variant={
+                                        button.variant as
+                                            | "default"
+                                            | "transparent"
+                                    }
+                                    className="w-full"
+                                >
+                                    {button.label}
+                                </MainButton>
+                            ))}
+                        </div>
+                    </SheetContent>
+                </Sheet>
             </nav>
         </header>
     );

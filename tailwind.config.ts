@@ -62,7 +62,10 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		  height: {
+			screen: "calc(100vh - var(--nav-height))",
+		  },
   	}
   },
   plugins: [require("tailwindcss-animate")],

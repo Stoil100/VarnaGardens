@@ -1,3 +1,17 @@
 {
-    
+    "Navigation": {
+        "brand": "Varna Gardens",
+        "navLinks": [
+            { "label": "Начало" },
+            { "label": "Услуги" },
+            { "label": "Галерия" }
+        ],
+        "actionButtons": [
+            { "label": "Контакт" },
+            { "label": "Получи Оферта" }
+        ],
+        "menu": {
+            "toggle": "Toggle menu"
+        }
+    }
 }

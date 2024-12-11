@@ -1,1 +1,17 @@
-{}
+{
+    "Navigation": {
+        "brand": "Varna Gardens",
+        "navLinks": [
+            { "label": "Home" },
+            { "label": "Services" },
+            { "label": "Gallery" }
+        ],
+        "actionButtons": [
+            { "label": "Contact" },
+            { "label": "Get an Offer" }
+        ],
+        "menu": {
+            "toggle": "Toggle menu"
+        }
+    }
+}
