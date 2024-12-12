@@ -8,15 +8,19 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-	fontFamily: {
-		cormorant: ['var(--font-cormorant-infant)'],
-		helvetica: ['var(--font-helvetica-neue)'],
-	},
+  	fontFamily: {
+  		cormorant: [
+  			'var(--font-cormorant-infant)'
+  		],
+  		helvetica: [
+  			'var(--font-helvetica-neue)'
+  		]
+  	},
   	extend: {
   		colors: {
-			'green':{
-				DEFAULT:"#4eb152"
-			},
+  			green: {
+  				DEFAULT: '#4eb152'
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -63,9 +67,31 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-		  height: {
-			screen: "calc(100vh - var(--nav-height))",
-		  },
+  		height: {
+  			screen: 'calc(100vh - var(--nav-height))'
+  		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
+  		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
