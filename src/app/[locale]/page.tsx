@@ -24,7 +24,7 @@ import { useCallback, useEffect, useState } from "react";
 import CountUp from "react-countup";
 
 const HeroSection: React.FC = () => {
-    const t = useTranslations("HomePage.heroSection");
+    const t = useTranslations("Pages.Home.heroSection");
     return (
         <section id="hero" className="h-fit w-full p-2 md:h-screen md:p-8">
             <div className="flex h-full w-full items-center justify-center rounded-2xl bg-[url('/heroBG.png')] bg-center bg-no-repeat p-8 md:rounded-3xl md:p-28">
@@ -57,7 +57,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
     features,
     popular = false,
 }) => {
-    const t = useTranslations("HomePage.plansSection");
+    const t = useTranslations("Pages.Home.plansSection");
     return (
         <div
             className={cn(
@@ -97,7 +97,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
     );
 };
 function PlansSection() {
-    const t = useTranslations("HomePage.plansSection");
+    const t = useTranslations("Pages.Home.plansSection");
 
     const plans: PlanCardProps[] = [
         {
@@ -188,7 +188,7 @@ const ServiceItem = ({
     );
 };
 function ServicesSection() {
-    const t = useTranslations("HomePage.servicesSection");
+    const t = useTranslations("Pages.Home.servicesSection");
 
     const services = [
         { image: "/service.png" }, // Static properties
@@ -220,7 +220,7 @@ function GallerySection() {
     const [activeIndex, setActiveIndex] = useState<number>();
     const [activeTabIndex, setActiveTabIndex] = useState<number>();
     const [api, setApi] = useState<CarouselApi>();
-    const t = useTranslations("HomePage.gallerySection");
+    const t = useTranslations("Pages.Home.gallerySection");
 
     useEffect(() => {
         if (!api) {
@@ -470,7 +470,7 @@ function GallerySection() {
     );
 }
 function StepsSection() {
-    const t = useTranslations("HomePage.stepsSection");
+    const t = useTranslations("Pages.Home.stepsSection");
 
     const steps = [
         {
@@ -514,7 +514,7 @@ function StepsSection() {
     );
 }
 function FooterSection() {
-    const t = useTranslations("HomePage.footerSection");
+    const t = useTranslations("Pages.Home.footerSection");
     return (
         <section className="h-[50vh] bg-[url('/footerBG.png')] bg-cover bg-center">
             <div className="flex h-full w-full flex-col items-center justify-center bg-[#228B0E]/60">

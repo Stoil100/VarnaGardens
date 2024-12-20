@@ -11,166 +11,169 @@
             "toggle": "Toggle menu"
         }
     },
-    "HomePage": {
-        "heroSection": {
-            "title": "With attention to detail and true love for nature!",
-            "button": "Learn More",
-            "description": "We, the team at Varna Gardens, believe that every garden tells its own story"
+    "Pages": {
+        "Home": {
+            "heroSection": {
+                "title": "With attention to detail and true love for nature!",
+                "button": "Learn More",
+                "description": "We, the team at Varna Gardens, believe that every garden tells its own story"
+            },
+            "plansSection": {
+                "heading": "Subscription Plans for Garden Maintenance",
+                "subheading": "Our subscription plans offer personalized care for your garden throughout the year",
+                "button": "Get an Offer",
+                "popularLabel": "Most Popular",
+                "plans": {
+                    "standard": {
+                        "title": "Standard",
+                        "description": "Specifically designed for family houses and residential buildings.",
+                        "features": {
+                            "0": "Flexibility and convenience",
+                            "1": "Visit every 10 days",
+                            "2": "Comprehensive garden care",
+                            "3": "Ideal for small and medium gardens"
+                        }
+                    },
+                    "deluxe": {
+                        "title": "Deluxe",
+                        "description": "Specifically designed for family houses and residential buildings.",
+                        "features": {
+                            "0": "Flexibility and convenience",
+                            "1": "Visit every 10 days",
+                            "2": "Comprehensive garden care",
+                            "3": "Ideal for small and medium gardens"
+                        }
+                    },
+                    "premium": {
+                        "title": "Premium",
+                        "description": "Specifically designed for family houses and residential buildings.",
+                        "features": {
+                            "0": "Flexibility and convenience",
+                            "1": "Visit every 10 days",
+                            "2": "Comprehensive garden care",
+                            "3": "Ideal for small and medium gardens"
+                        }
+                    }
+                }
+            },
+            "servicesSection": {
+                "title": "One-Time Services for Green Spaces",
+                "services": [
+                    {
+                        "title": "Investment Cleaning",
+                        "description": "Complete cleaning and restoration of terrains and properties"
+                    },
+                    {
+                        "title": "Vegetation Care",
+                        "description": "Specialized care for shrubs, trees, and flowers"
+                    },
+                    {
+                        "title": "Protection and Fertilization",
+                        "description": "Protection for your plants against diseases and pests"
+                    },
+                    {
+                        "title": "Garden Refreshment",
+                        "description": "Professional renewal of your garden"
+                    },
+                    {
+                        "title": "Irrigation Systems",
+                        "description": "Installation and maintenance of irrigation systems"
+                    }
+                ]
+            },
+            "gallerySection": {
+                "title": "Inspiration from the Nature Around Us",
+                "button": "See More",
+                "description": "Each project is unique – created with care and love for nature to inspire and bring peace.",
+                "villas": [
+                    { "title": "Villa Ana" },
+                    { "title": "Villa Boryana" },
+                    { "title": "Villa Violeta" },
+                    { "title": "Villa Gergana" },
+                    { "title": "Villa Danila" },
+                    { "title": "Villa Elena" }
+                ],
+                "stats": [
+                    { "label": "Satisfied Clients" },
+                    { "label": "Completed Projects" },
+                    { "label": "Maintained Gardens" },
+                    { "label": "Irrigation Systems" }
+                ]
+            },
+            "stepsSection": {
+                "title": "A Few Easy Steps to Your Green Paradise",
+                "button": "Get an Offer",
+                "steps": [
+                    {
+                        "title": "Your Inquiry",
+                        "description": "Contact us to tell us about your ideas, needs, and requirements."
+                    },
+                    {
+                        "title": "Ideas and Vision",
+                        "description": "We create a personalized plan and design for your garden."
+                    },
+                    {
+                        "title": "Execution and Services",
+                        "description": "We implement the plan with professionalism and attention to detail."
+                    },
+                    {
+                        "title": "The Realized Vision",
+                        "description": "Enjoy the beautifully designed space, tailored to your desires."
+                    }
+                ]
+            },
+            "footerSection": {
+                "title": "Varna Gardens",
+                "button": "Get an Offer"
+            }
         },
-        "plansSection": {
-            "heading": "Subscription Plans for Garden Maintenance",
-            "subheading": "Our subscription plans offer personalized care for your garden throughout the year",
-            "button": "Get an Offer",
-            "popularLabel": "Most Popular",
-            "plans": {
-                "standard": {
-                    "title": "Standard",
-                    "description": "Specifically designed for family houses and residential buildings.",
-                    "features": {
-                        "0": "Flexibility and convenience",
-                        "1": "Visit every 10 days",
-                        "2": "Comprehensive garden care",
-                        "3": "Ideal for small and medium gardens"
-                    }
+        "Contact": {
+            "title": "Contact our team",
+            "subtitle": "Tell us how we can help",
+            "contactMethods": {
+                "mail": {
+                    "title": "Send us an email",
+                    "description": "Write to our team"
                 },
-                "deluxe": {
-                    "title": "Deluxe",
-                    "description": "Specifically designed for family houses and residential buildings.",
-                    "features": {
-                        "0": "Flexibility and convenience",
-                        "1": "Visit every 10 days",
-                        "2": "Comprehensive garden care",
-                        "3": "Ideal for small and medium gardens"
-                    }
+                "booking": {
+                    "title": "Get a Quote",
+                    "description": "Monday - Friday from 8:00 AM to 5:30 PM",
+                    "buttonText": "Get a Quote"
                 },
-                "premium": {
-                    "title": "Premium",
-                    "description": "Specifically designed for family houses and residential buildings.",
-                    "features": {
-                        "0": "Flexibility and convenience",
-                        "1": "Visit every 10 days",
-                        "2": "Comprehensive garden care",
-                        "3": "Ideal for small and medium gardens"
-                    }
+                "phone": {
+                    "title": "Call us",
+                    "description": "Monday - Saturday from 8:00 AM to 5:30 PM"
+                }
+            },
+            "faq": {
+                "title": "Frequently Asked Questions",
+                "faq1": {
+                    "question": "Is your consultation free?",
+                    "answer": "Yes, the initial consultation is completely free."
+                },
+                "faq2": {
+                    "question": "Do you offer seasonal maintenance?",
+                    "answer": "Yes, we offer various seasonal maintenance packages tailored to your needs."
+                },
+                "faq3": {
+                    "question": "Can you install irrigation systems?",
+                    "answer": "Yes, we offer professional services for installing irrigation systems."
+                },
+                "faq4": {
+                    "question": "How can I schedule a quick inspection?",
+                    "answer": "You can schedule a quick inspection through our online form or by calling the listed phone number."
+                },
+                "faq5": {
+                    "question": "Can I see your previous projects?",
+                    "answer": "Yes, we have a rich portfolio of previous projects that we can share with you."
+                },
+                "faq6": {
+                    "question": "Do you work with corporate clients?",
+                    "answer": "Yes, we have extensive experience working with corporate clients and offer specialized solutions."
                 }
             }
         },
-        "servicesSection": {
-            "title": "One-Time Services for Green Spaces",
-            "services": [
-                {
-                    "title": "Investment Cleaning",
-                    "description": "Complete cleaning and restoration of terrains and properties"
-                },
-                {
-                    "title": "Vegetation Care",
-                    "description": "Specialized care for shrubs, trees, and flowers"
-                },
-                {
-                    "title": "Protection and Fertilization",
-                    "description": "Protection for your plants against diseases and pests"
-                },
-                {
-                    "title": "Garden Refreshment",
-                    "description": "Professional renewal of your garden"
-                },
-                {
-                    "title": "Irrigation Systems",
-                    "description": "Installation and maintenance of irrigation systems"
-                }
-            ]
-        },
-        "gallerySection": {
-            "title": "Inspiration from the Nature Around Us",
-            "button": "See More",
-            "description": "Each project is unique – created with care and love for nature to inspire and bring peace.",
-            "villas": [
-                { "title": "Villa Ana" },
-                { "title": "Villa Boryana" },
-                { "title": "Villa Violeta" },
-                { "title": "Villa Gergana" },
-                { "title": "Villa Danila" },
-                { "title": "Villa Elena" }
-            ],
-            "stats": [
-                { "label": "Satisfied Clients" },
-                { "label": "Completed Projects" },
-                { "label": "Maintained Gardens" },
-                { "label": "Irrigation Systems" }
-            ]
-        },
-        "stepsSection": {
-            "title": "A Few Easy Steps to Your Green Paradise",
-            "button": "Get an Offer",
-            "steps": [
-                {
-                    "title": "Your Inquiry",
-                    "description": "Contact us to tell us about your ideas, needs, and requirements."
-                },
-                {
-                    "title": "Ideas and Vision",
-                    "description": "We create a personalized plan and design for your garden."
-                },
-                {
-                    "title": "Execution and Services",
-                    "description": "We implement the plan with professionalism and attention to detail."
-                },
-                {
-                    "title": "The Realized Vision",
-                    "description": "Enjoy the beautifully designed space, tailored to your desires."
-                }
-            ]
-        },
-        "footerSection": {
-            "title": "Varna Gardens",
-            "button": "Get an Offer"
-        }
-    },
-    "ContactPage": {
-        "title": "Contact our team",
-        "subtitle": "Tell us how we can help",
-        "contactMethods": {
-            "mail": {
-                "title": "Send us an email",
-                "description": "Write to our team"
-            },
-            "booking": {
-                "title": "Get a Quote",
-                "description": "Monday - Friday from 8:00 AM to 5:30 PM",
-                "buttonText": "Get a Quote"
-            },
-            "phone": {
-                "title": "Call us",
-                "description": "Monday - Saturday from 8:00 AM to 5:30 PM"
-            }
-        },
-        "faq": {
-            "title": "Frequently Asked Questions",
-            "faq1": {
-                "question": "Is your consultation free?",
-                "answer": "Yes, the initial consultation is completely free."
-            },
-            "faq2": {
-                "question": "Do you offer seasonal maintenance?",
-                "answer": "Yes, we offer various seasonal maintenance packages tailored to your needs."
-            },
-            "faq3": {
-                "question": "Can you install irrigation systems?",
-                "answer": "Yes, we offer professional services for installing irrigation systems."
-            },
-            "faq4": {
-                "question": "How can I schedule a quick inspection?",
-                "answer": "You can schedule a quick inspection through our online form or by calling the listed phone number."
-            },
-            "faq5": {
-                "question": "Can I see your previous projects?",
-                "answer": "Yes, we have a rich portfolio of previous projects that we can share with you."
-            },
-            "faq6": {
-                "question": "Do you work with corporate clients?",
-                "answer": "Yes, we have extensive experience working with corporate clients and offer specialized solutions."
-            }
-        }
+        "Booking": {}
     },
     "Footer": {
         "brand": {
