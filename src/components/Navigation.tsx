@@ -48,9 +48,9 @@ export default function Navigation() {
         >
             <nav className="flex items-center justify-between bg-transparent px-2 py-3 md:px-6">
                 <div className="flex items-center gap-16">
-                    <h3 className="font-cormorant text-3xl text-primary">
+                    <Link href={"/"} className="font-cormorant text-3xl text-green">
                         {t("brand")}
-                    </h3>
+                    </Link>
                     <ul className="hidden items-center gap-8 text-lg font-light text-muted-foreground lg:flex">
                         {navLinks.map((link) => (
                             <li key={link.label}>
