@@ -70,6 +70,9 @@ export default {
   		height: {
   			screen: 'calc(100vh - var(--nav-height))'
   		},
+		minHeight:{
+			screen: 'calc(100vh - var(--nav-height))'
+		},
   		keyframes: {
   			'accordion-down': {
   				from: {
@@ -94,5 +97,5 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),require("tailwindcss-animated")],
 } satisfies Config;
