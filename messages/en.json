@@ -173,7 +173,155 @@
                 }
             }
         },
-        "Booking": {}
+        "Booking": {
+            "goBackButton": "Go Back",
+            "hero": {
+                "logoAlt": "Varna Gardens Logo",
+                "title": "Book a visit",
+                "subtitle": "Create your new vision today",
+                "button": "Start Now"
+            },
+            "form": {
+                "base": {
+                    "title": "Please enter your personal details",
+                    "subtitle": "Create your new vision today",
+                    "name": {
+                        "label": "Name",
+                        "placeholder": "Your Name..."
+                    },
+                    "email": {
+                        "label": "Email",
+                        "placeholder": "Your Email..."
+                    },
+                    "phone": {
+                        "label": "Phone",
+                        "placeholder": "Your Phone..."
+                    },
+
+                    "address": {
+                        "label": "Address",
+                        "placeholder": "Your Address..."
+                    },
+
+                    "continue": "Continue"
+                },
+                "option": {
+                    "title": "Choose the service you want",
+                    "subtitle": "Indicate whether you need a subscription plan for regular maintenance or a one-time service for a specific task.",
+                    "plan": {
+                        "title": "Subscription Plan",
+                        "description": "Ensure your garden looks perfect all year round with our flexible subscription plans."
+                    },
+                    "service": {
+                        "title": "One-Time Service",
+                        "description": "Perfect for specific needs or seasonal preparation of your garden."
+                    },
+                    "continue": "Continue"
+                },
+                "final": {
+                    "plans": {
+                        "title": "Choose your subscription plan",
+                        "description": "Your garden is always in perfect condition without needing to plan each visit. Adaptive plan.",
+                        "planCards": {
+                            "standard": {
+                                "title": "Standard",
+                                "description": "Description of the standard plan.",
+                                "features": [
+                                    "Feature 1",
+                                    "Feature 2",
+                                    "Feature 3",
+                                    "Feature 4"
+                                ]
+                            },
+                            "deluxe": {
+                                "title": "Deluxe",
+                                "description": "Description of the deluxe plan.",
+                                "features": [
+                                    "Feature 1",
+                                    "Feature 2",
+                                    "Feature 3",
+                                    "Feature 4"
+                                ]
+                            },
+                            "premium": {
+                                "title": "Premium",
+                                "description": "Description of the premium plan.",
+                                "features": [
+                                    "Feature 1",
+                                    "Feature 2",
+                                    "Feature 3",
+                                    "Feature 4"
+                                ]
+                            },
+                            "popularLabel": "Most Popular",
+                            "button": "Choose",
+                            "buttonSelected": "Chosen"
+                        }
+                    },
+                    "services": {
+                        "title": "Choose one or more services",
+                        "cleanup": {
+                            "title": "Investment Cleanup",
+                            "description": "I want to clean my garden."
+                        },
+                        "care": {
+                            "title": "Vegetation Care",
+                            "description": "I want to take care of my garden's vegetation."
+                        },
+                        "protection": {
+                            "title": "Protection and Fertilization",
+                            "description": "I want to protect and fertilize my garden."
+                        },
+                        "invest": {
+                            "title": "Investment Cleanup",
+                            "description": "I want to clean my garden."
+                        },
+                        "grass": {
+                            "title": "Grass Maintenance",
+                            "description": "I want to maintain my garden's grass."
+                        },
+                        "water": {
+                            "title": "Water Management",
+                            "description": "I want to manage the water in my garden."
+                        }
+                    },
+                    "submit": "Finnish Reservation"
+                },
+                "errors": {
+                    "name": {
+                        "required": "Name is required.",
+                        "min": "Name must be at least 2 characters long.",
+                        "max": "Name cannot exceed 50 characters."
+                    },
+                    "email": {
+                        "required": "Email is required.",
+                        "invalid": "Please enter a valid email address."
+                    },
+                    "phone": {
+                        "required": "Phone number is required.",
+                        "invalid": "Please enter a valid phone number."
+                    },
+                    "address": {
+                        "required": "Address is required."
+                    },
+                    "option": {
+                        "invalid": "Invalid option selected."
+                    },
+                    "plan": {
+                        "invalid": "Invalid plan selected."
+                    },
+                    "services": {
+                        "required": "You must select at least one service."
+                    }
+                }
+            },
+            "footer": {
+                "logoAlt": "Varna Gardens Logo",
+                "thankYou": "Thank you for your inquiry!",
+                "message": "Your request has been successfully sent. Expect a response from our team soon. 😉",
+                "button": "Back to Home"
+            }
+        }
     },
     "Footer": {
         "brand": {
