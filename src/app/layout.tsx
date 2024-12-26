@@ -112,7 +112,7 @@ export default async function AppLayout({
             <body
                 className={`${helvetica.variable} ${cormorant.variable} font-helvetica antialiased`}
             >
-               {children}
+                {children}
             </body>
         </html>
     );
