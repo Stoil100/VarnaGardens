@@ -10,19 +10,21 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import LanguageButton from "./LanguageButton";
 import MainButton from "./MainButton";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import logo from "@/../public/logo.svg";
+import { Link } from "@/i18n/routing";
+
 function LoadingOverlay() {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
             <div className="flex size-40 items-center justify-center text-center font-cormorant text-4xl text-green md:text-5xl">
                 Varna Gardens
             </div>
-            <div className="animate-ease animate-duration-[2000ms] absolute size-44 animate-spin md:size-56">
+            <div className="absolute size-44 animate-spin animate-duration-[2000ms] animate-ease md:size-56">
                 <div className="absolute inset-0 rotate-180 rounded-full border-r-4 border-t-4 border-green border-opacity-70"></div>
 
                 <div className="absolute left-1/2 top-0 flex -translate-x-1/2 transform items-center justify-center">
@@ -39,13 +41,15 @@ function LoadingOverlay() {
 
 export default function Navigation() {
     const t = useTranslations("Navigation");
+    const router = useRouter();
+    const pathname = usePathname();
     const headerRef = useRef<HTMLElement>(null);
     const [loading, setLoading] = useState(true);
     const [navLinks, setNavLinks] = useState<{ href: string; label: string }[]>(
         [],
     );
     const [actionButtons, setActionButtons] = useState<
-        { variant: string; label: string }[]
+        { variant: string; label: string; href: string }[]
     >([]);
 
     useEffect(() => {
@@ -59,20 +63,19 @@ export default function Navigation() {
     }, []);
 
     useEffect(() => {
-        // Dynamically load navLinks and actionButtons
         const loadNavigationData = async () => {
             const navLinksData = [
-                { href: "#" },
-                { href: "#" },
-                { href: "#" },
+                { href: "#hero" },
+                { href: "#services" },
+                { href: "#gallery" },
             ].map((link, index) => ({
                 ...link,
                 label: t(`navLinks.${index}.label`),
             }));
 
             const actionButtonsData = [
-                { variant: "transparent" },
-                { variant: "default" },
+                { variant: "transparent", href: "/contact" },
+                { variant: "default", href: "/booking" },
             ].map((button, index) => ({
                 ...button,
                 label: t(`actionButtons.${index}.label`),
@@ -80,11 +83,35 @@ export default function Navigation() {
 
             setNavLinks(navLinksData);
             setActionButtons(actionButtonsData);
-            setLoading(false); // Stop loading when all data is set
+            setLoading(false);
         };
 
         loadNavigationData();
     }, [t]);
+
+    const handleNavigation = (href: string) => {
+        const isHomePage = pathname.split("/").length <= 2;
+        const navHeight = parseInt(
+            getComputedStyle(document.documentElement).getPropertyValue(
+                "--nav-height",
+            ),
+            10,
+        );
+
+        if (isHomePage && href.startsWith("#")) {
+            const target = document.querySelector(href);
+            if (target) {
+                const targetPosition =
+                    target.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: targetPosition - navHeight,
+                    behavior: "smooth",
+                });
+            }
+        } else {
+            router.push("/");
+        }
+    };
 
     return (
         <>
@@ -96,7 +123,7 @@ export default function Navigation() {
                 <nav className="flex items-center justify-between bg-transparent px-2 py-3 md:px-6">
                     <div className="flex items-center gap-16">
                         <Link
-                            href={"/"}
+                            href="/"
                             className="font-cormorant text-3xl text-green"
                         >
                             {t("brand")}
@@ -104,12 +131,14 @@ export default function Navigation() {
                         <ul className="hidden items-center gap-8 text-lg font-light text-muted-foreground lg:flex">
                             {navLinks.map((link) => (
                                 <li key={link.label}>
-                                    <Link
-                                        href={link.href}
+                                    <button
+                                        onClick={() =>
+                                            handleNavigation(link.href)
+                                        }
                                         className="transition hover:text-primary"
                                     >
                                         {link.label}
-                                    </Link>
+                                    </button>
                                 </li>
                             ))}
                         </ul>
@@ -117,14 +146,17 @@ export default function Navigation() {
                     <div className="hidden items-center gap-4 lg:flex">
                         <LanguageButton />
                         {actionButtons.map((button) => (
-                            <MainButton
-                                key={button.label}
-                                variant={
-                                    button.variant as "default" | "transparent"
-                                }
-                            >
-                                {button.label}
-                            </MainButton>
+                            <Link key={button.label} href={button.href}>
+                                <MainButton
+                                    variant={
+                                        button.variant as
+                                            | "default"
+                                            | "transparent"
+                                    }
+                                >
+                                    {button.label}
+                                </MainButton>
+                            </Link>
                         ))}
                     </div>
                     <Sheet>
@@ -138,7 +170,7 @@ export default function Navigation() {
                         </SheetTrigger>
                         <SheetContent
                             side="left"
-                            className="animate-ease-in-out w-[300px] sm:w-[400px]"
+                            className="w-[300px] animate-ease-in-out sm:w-[400px]"
                         >
                             <SheetHeader>
                                 <SheetTitle className="font-cormorant text-2xl text-primary">
@@ -147,26 +179,33 @@ export default function Navigation() {
                             </SheetHeader>
                             <div className="mt-4 flex flex-col gap-4">
                                 {navLinks.map((link) => (
-                                    <Link
+                                    <button
                                         key={link.label}
-                                        href={link.href}
+                                        onClick={() =>
+                                            handleNavigation(link.href)
+                                        }
                                         className="text-lg font-light text-muted-foreground transition hover:text-primary"
                                     >
                                         {link.label}
-                                    </Link>
+                                    </button>
                                 ))}
                                 {actionButtons.map((button) => (
-                                    <MainButton
+                                    <Link
                                         key={button.label}
-                                        variant={
-                                            button.variant as
-                                                | "default"
-                                                | "transparent"
-                                        }
+                                        href={button.href}
                                         className="w-full"
                                     >
-                                        {button.label}
-                                    </MainButton>
+                                        <MainButton
+                                            variant={
+                                                button.variant as
+                                                    | "default"
+                                                    | "transparent"
+                                            }
+                                            className="w-full"
+                                        >
+                                            {button.label}
+                                        </MainButton>
+                                    </Link>
                                 ))}
                             </div>
                             <SheetDescription />
