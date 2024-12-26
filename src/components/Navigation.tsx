@@ -118,7 +118,7 @@ export default function Navigation() {
             {loading && <LoadingOverlay />}
             <header
                 ref={headerRef}
-                className="sticky top-0 z-40 w-full bg-white drop-shadow-md"
+                className="sticky top-0 z-[999] w-full bg-white drop-shadow-md"
             >
                 <nav className="flex items-center justify-between bg-transparent px-2 py-3 md:px-6">
                     <div className="flex items-center gap-16">
