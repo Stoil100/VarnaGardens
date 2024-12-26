@@ -16,7 +16,63 @@
             "heroSection": {
                 "title": "With attention to detail and true love for nature!",
                 "button": "Learn More",
-                "description": "We, the team at Varna Gardens, believe that every garden tells its own story"
+                "description": "We, the team at Varna Gardens, believe that every garden tells its own story",
+                "form":{
+                    "title": "Book a viewing appointment",
+                    "name": {
+                        "label": "Name",
+                        "placeholder": "Your Name..."
+                    },
+                    "email": {
+                        "label": "Email",
+                        "placeholder": "Your Email..."
+                    },
+                    "phone": {
+                        "label": "Phone",
+                        "placeholder": "Your Phone..."
+                    },
+                    "address": {
+                        "label": "Address",
+                        "placeholder": "Your Address..."
+                    },
+                    "services": {
+                        "label": "Service",
+                        "placeholder":"",
+                        "cleanup":"Cleanup",
+                        "care": "Care",
+                        "protection": "Protection",
+                        "invest": "Invest",
+                        "grass": "Grass",
+                        "water": "Water"
+                    },
+                    "submit":"Submit",
+                    "submitted":{
+                        "title":"Thank you for your request",
+                        "description":"Your request has been successfully sent. Expect a reply from our team very soon. 😉"
+                    },
+                    "errors": {
+                        "name": {
+                            "required": "Name is required.",
+                            "min": "Name must be at least 2 characters long.",
+                            "max": "Name cannot exceed 50 characters."
+                        },
+                        "email": {
+                            "required": "Email is required.",
+                            "invalid": "Please enter a valid email address."
+                        },
+                        "phone": {
+                            "required": "Phone number is required.",
+                            "invalid": "Please enter a valid phone number."
+                        },
+                        "address": {
+                            "required": "Address is required."
+                        },
+                        "services": {
+                            "invalid":"Invalid service selected.",
+                            "required": "You must select at least one service."
+                        }
+                    }
+                }
             },
             "plansSection": {
                 "heading": "Subscription Plans for Garden Maintenance",
@@ -197,12 +253,10 @@
                         "label": "Phone",
                         "placeholder": "Your Phone..."
                     },
-
                     "address": {
                         "label": "Address",
                         "placeholder": "Your Address..."
                     },
-
                     "continue": "Continue"
                 },
                 "option": {

@@ -1,5 +1,6 @@
 "use client";
 import MainButton from "@/components/MainButton";
+import { HeroBookingSchema } from "@/components/schemas/bookingHero";
 import {
     Carousel,
     CarouselApi,
@@ -11,34 +12,267 @@ import {
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
     ArrowLeft,
     ArrowRight,
+    BookMarked,
     CircleCheckBig,
     Flower2,
+    Mail,
+    MapPin,
+    PencilRuler,
+    Phone,
     Sprout,
     TreeDeciduous,
+    User,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import CountUp from "react-countup";
-
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+const HeroBookingForm = () => {
+    const t = useTranslations("Pages.Home.heroSection.form");
+    const formSchema = HeroBookingSchema(t);
+    const [isSubmited, setIsSubmited] = useState(false);
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        mode: "onChange",
+        defaultValues: {
+            name: "",
+            phone: "",
+            email: "",
+            address: "",
+            services: "invest",
+        },
+    });
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        setIsSubmited(true);
+        console.log(values);
+    }
+    return (
+        <div className="relative overflow-hidden md:drop-shadow-xl">
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="w-full max-w-lg space-y-4 rounded-2xl bg-white p-6"
+                >
+                    <div className="flex items-center justify-between gap-2">
+                        <BookMarked />
+                        <h3 className="text-2xl">{t("title")}</h3>
+                    </div>
+                    <div className="w-full space-y-4">
+                        <FormField
+                            control={form!.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                        <User fontWeight={1} size={16} />
+                                        {t("name.label")}
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className="border-none bg-zinc-100 outline-none"
+                                            placeholder={t("name.placeholder")}
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form!.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                        <Mail fontWeight={1} size={16} />
+                                        {t("email.label")}
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className="border-none bg-zinc-100 outline-none"
+                                            placeholder={t("email.placeholder")}
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form!.control}
+                            name="phone"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                        <Phone fontWeight={1} size={16} />
+                                        {t("phone.label")}
+                                    </FormLabel>
+                                    <div className="flex items-center gap-2">
+                                        <p className="flex h-9 items-center justify-center rounded-md bg-zinc-100 px-3 py-1 text-zinc-500">
+                                            +359
+                                        </p>
+                                        <FormControl>
+                                            <Input
+                                                className="border-none bg-zinc-100 outline-none"
+                                                placeholder={t(
+                                                    "phone.placeholder",
+                                                )}
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                    </div>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form!.control}
+                            name="address"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                        <MapPin fontWeight={1} size={16} />
+                                        {t("address.label")}
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className="border-none bg-zinc-100 outline-none"
+                                            placeholder={t(
+                                                "address.placeholder",
+                                            )}
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="services"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                        <PencilRuler fontWeight={1} size={16} />
+                                        {t("services.label")}
+                                    </FormLabel>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger className="border-none bg-zinc-100 text-base shadow-sm outline-none transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm">
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="invest">
+                                                {t("services.invest")}
+                                            </SelectItem>
+                                            <SelectItem value="cleanup">
+                                                {t("services.cleanup")}
+                                            </SelectItem>
+                                            <SelectItem value="care">
+                                                {t("services.care")}
+                                            </SelectItem>
+                                            <SelectItem value="protection">
+                                                {t("services.protection")}
+                                            </SelectItem>
+                                            <SelectItem value="grass">
+                                                {t("services.grass")}
+                                            </SelectItem>
+                                            <SelectItem value="water">
+                                                {t("services.water")}
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                        <MainButton
+                            type="submit"
+                            disabled={!form?.formState.isValid || isSubmited}
+                            variant="transparent"
+                            className="w-full"
+                        >
+                            {t("submit")}
+                        </MainButton>
+                        <MainButton
+                            type="button"
+                            className="h-full rounded-full p-3 text-xl"
+                        >
+                            <Phone />
+                        </MainButton>
+                    </div>
+                </form>
+            </Form>
+            <div
+                className={cn(
+                    "bg-whi absolute left-0 top-0 z-10 hidden h-full w-full flex-col items-center justify-center gap-4 rounded-2xl bg-white p-6 text-center",
+                    isSubmited && "flex animate-fade-left",
+                )}
+            >
+                <CircleCheckBig size={128} className="mb-4 text-green" />
+                <h2 className="text-4xl">{t("submitted.title")}</h2>
+                <h5 className="text-xl font-light">
+                    {t("submitted.description")}
+                </h5>
+            </div>
+        </div>
+    );
+};
 const HeroSection: React.FC = () => {
     const t = useTranslations("Pages.Home.heroSection");
     return (
-        <section id="hero" className="h-fit w-full p-2 md:h-screen md:p-8">
-            <div className="flex h-full w-full items-center justify-center rounded-2xl bg-[url('/heroBG.png')] bg-center bg-no-repeat p-8 md:rounded-3xl md:p-28">
-                <div className="flex h-full max-w-3xl flex-col items-center justify-between gap-4 text-center text-white md:items-start md:text-left">
+        <section
+            id="hero"
+            className="min-h-[700px] w-full space-y-4 p-2 md:h-screen md:p-8"
+        >
+            <div className="flex h-full w-full items-center justify-between rounded-2xl bg-[url('/heroBG.png')] bg-cover bg-center bg-no-repeat p-8 md:rounded-3xl md:p-14 lg:p-20 xl:p-28">
+                <div className="flex h-full max-h-[500px] flex-col items-center justify-between gap-4 text-center text-white md:max-w-xs md:items-start md:text-left lg:max-w-lg xl:max-w-2xl 2xl:max-w-3xl">
                     <div className="space-y-4 md:space-y-8">
-                        <h2 className="font-cormorant text-4xl md:text-6xl">
+                        <h2 className="font-cormorant text-4xl md:text-5xl xl:text-6xl">
                             {t("title")}
                         </h2>
-                        <MainButton className="hover:bg-white">{t("button")}</MainButton>
+                        <MainButton className="hover:bg-white">
+                            {t("button")}
+                        </MainButton>
                     </div>
                     <p className="text-xl font-extralight md:max-w-xs">
                         {t("description")}
                     </p>
                 </div>
+                <div className="hidden md:block xl:min-w-[400px]">
+                    <HeroBookingForm />
+                </div>
+            </div>
+            <div className="flex justify-center md:hidden">
+                <HeroBookingForm />
             </div>
         </section>
     );
