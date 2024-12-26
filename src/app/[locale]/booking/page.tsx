@@ -1,15 +1,30 @@
 "use client";
+import logo from "@/../public/logo.svg";
+import logoText from "@/../public/logoText.png";
+import MainButton from "@/components/MainButton";
+import { BookingSchema, BookingSchemaType } from "@/components/schemas/booking";
+import { Button } from "@/components/ui/button";
 import {
     Carousel,
     CarouselApi,
     CarouselContent,
     CarouselItem,
 } from "@/components/ui/carousel";
-import Image from "next/image";
-import React, { useEffect, useState, useTransition } from "react";
-import logo from "@/../public/logo.svg";
-import logoText from "@/../public/logoText.png";
-import MainButton from "@/components/MainButton";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import AutoHeight from "embla-carousel-auto-height";
 import {
     ChevronLeft,
     CircleCheckBig,
@@ -22,28 +37,13 @@ import {
     TreeDeciduous,
     User,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { z } from "zod";
 import { useTranslations } from "next-intl";
-import { useForm, UseFormReturn } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { cn } from "@/lib/utils";
-import { Checkbox } from "@/components/ui/checkbox";
-import { BookingSchema, BookingSchemaType } from "@/components/schemas/booking";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import AutoHeight from "embla-carousel-auto-height";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { useForm, UseFormReturn } from "react-hook-form";
+import { z } from "zod";
 
 const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
     <div className="flex h-fit w-fit gap-2 bg-transparent">
@@ -109,7 +109,7 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
     progress,
 }) => {
     const [isReady, setIsReady] = useState(false);
-    const { clearErrors, watch, getFieldState, formState } = form!;
+    const { watch, getFieldState, formState } = form!;
     const watchedBaseFields = watch(["name", "email", "phone", "address"]);
     useEffect(() => {
         const hasErrors =
