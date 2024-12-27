@@ -16,7 +16,7 @@ import {
     FormField,
     FormItem,
     FormLabel,
-    FormMessage
+    FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -27,6 +27,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -292,7 +293,8 @@ const PlanCard: React.FC<PlanCardProps> = ({
 }) => {
     const t = useTranslations("Pages.Home.plansSection");
     return (
-        <div
+        <Link
+            href="/booking"
             className={cn(
                 "relative flex flex-col gap-4 rounded-2xl border px-4 py-6 font-light shadow-lg transition-all md:max-w-sm",
                 popular ? "mt-8 border-green bg-green-50" : "border-gray-300",
@@ -326,7 +328,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
                     </li>
                 ))}
             </ul>
-        </div>
+        </Link>
     );
 };
 function PlansSection() {
@@ -402,7 +404,10 @@ const ServiceItem = ({
     image: string;
 }) => {
     return (
-        <div className="group relative flex cursor-pointer items-center gap-4 border-y-2 px-2 py-5 font-light md:px-8">
+        <Link
+            href="/booking"
+            className="group relative flex cursor-pointer items-center gap-4 border-y-2 px-2 py-5 font-light md:px-8"
+        >
             <h2 className="hidden w-1/3 text-3xl md:block">{title}</h2>
             <p className="hidden text-gray-400 transition-all md:block">
                 {description}
@@ -417,7 +422,7 @@ const ServiceItem = ({
                 className="absolute left-3/4 z-50 hidden max-w-48 opacity-0 transition-all duration-300 group-hover:opacity-100 lg:block xl:left-2/3 xl:max-w-xs"
             />
             <ArrowRight className="ml-auto size-8 rounded-full border-2 text-gray-400 transition-all duration-300 group-hover:-rotate-45 group-hover:border-green group-hover:bg-green group-hover:text-white md:size-12" />
-        </div>
+        </Link>
     );
 };
 function ServicesSection() {
@@ -704,7 +709,7 @@ function GallerySection() {
 }
 function StepsSection() {
     const t = useTranslations("Pages.Home.stepsSection");
-
+    const router = useRouter();
     const steps = [
         {
             icon: <h2 className="my-4 text-7xl font-medium text-green">01</h2>,
@@ -727,7 +732,13 @@ function StepsSection() {
         <section>
             <div className="mb-2 flex flex-col gap-4 p-2 max-md:items-center max-md:text-center md:flex-row md:justify-between md:p-8">
                 <h2 className="max-w-xl text-4xl md:text-5xl">{t("title")}</h2>
-                <MainButton>{t("button")}</MainButton>
+                <MainButton
+                    onClick={() => {
+                        router.push("/booking");
+                    }}
+                >
+                    {t("button")}
+                </MainButton>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2">
                 {steps.map((step, index) => (
@@ -748,6 +759,7 @@ function StepsSection() {
 }
 function FooterSection() {
     const t = useTranslations("Pages.Home.footerSection");
+    const router = useRouter();
     return (
         <section className="h-[50vh] bg-[url('/footerBG.png')] bg-cover bg-center">
             <div className="flex h-full w-full flex-col items-center justify-center bg-[#228B0E]/60">
@@ -757,6 +769,9 @@ function FooterSection() {
                 <MainButton
                     variant="transparent"
                     className="border-white text-white hover:border-green"
+                    onClick={() => {
+                        router.push("/booking");
+                    }}
                 >
                     <span>{t("button")}</span>
                     <ArrowRight />

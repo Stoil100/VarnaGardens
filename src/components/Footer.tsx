@@ -1,11 +1,11 @@
 "use client";
+import { Link, useRouter } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import logo from "../../public/logo.svg";
 import MainButton from "./MainButton";
-import { Link, useRouter } from "@/i18n/routing";
-import { usePathname } from "next/navigation";
 
 export default function Footer() {
     const t = useTranslations("Footer");
@@ -136,6 +136,9 @@ export default function Footer() {
                         <MainButton
                             className="w-auto border-white text-white hover:border-green"
                             variant="transparent"
+                            onClick={() => {
+                                router.push("/booking");
+                            }}
                         >
                             <span>{t("contact.button")}</span>
                             <ArrowRight className="ml-2" />
