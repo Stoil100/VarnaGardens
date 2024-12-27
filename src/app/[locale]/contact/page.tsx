@@ -22,7 +22,7 @@ interface ContactItemProps {
     isHighlighted?: boolean;
 }
 
-export function ContactItem({
+function ContactItem({
     icon: Icon,
     title,
     description,
