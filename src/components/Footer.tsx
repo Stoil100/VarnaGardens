@@ -1,15 +1,47 @@
+"use client";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import logo from "../../public/logo.svg";
 import MainButton from "./MainButton";
+import { Link, useRouter } from "@/i18n/routing";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
     const t = useTranslations("Footer");
+    const pathname = usePathname();
+    const router = useRouter();
+
+    const handleNavigation = (href: string) => {
+        const isHomePage = pathname.split("/").length <= 2;
+        const navHeight = parseInt(
+            getComputedStyle(document.documentElement).getPropertyValue(
+                "--nav-height",
+            ),
+            10,
+        );
+
+        if (isHomePage && href.startsWith("#")) {
+            const target = document.querySelector(href);
+            if (target) {
+                const targetPosition =
+                    target.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: targetPosition - navHeight,
+                    behavior: "smooth",
+                });
+            }
+        } else if (href.startsWith("/")) {
+            router.push(href);
+        } else {
+            router.push("/");
+        }
+    };
+
     const navigationLinks = [
-        { href: "/" },
-        { href: "/services" },
-        { href: "/gallery" },
+        { href: "#hero" },
+        { href: "#services" },
+        { href: "#gallery" },
         { href: "/contact" },
     ].map((navLink, index) => ({
         ...navLink,
@@ -47,12 +79,14 @@ export default function Footer() {
                         <ul className="space-y-2">
                             {navigationLinks.map((link) => (
                                 <li key={link.label}>
-                                    <a
-                                        href={link.href}
+                                    <button
+                                        onClick={() =>
+                                            handleNavigation(link.href)
+                                        }
                                         className="text-gray-400 transition-colors hover:text-zinc-300"
                                     >
                                         {link.label}
-                                    </a>
+                                    </button>
                                 </li>
                             ))}
                         </ul>
@@ -64,7 +98,7 @@ export default function Footer() {
                         <ul className="space-y-2">
                             {socialMediaLinks.map((link) => (
                                 <li key={link.label}>
-                                    <a
+                                    <Link
                                         href={link.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -72,7 +106,7 @@ export default function Footer() {
                                         className="text-gray-400 transition-colors hover:text-zinc-300"
                                     >
                                         {link.label}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -83,20 +117,20 @@ export default function Footer() {
                         </h2>
                         <ul className="mb-4 space-y-2">
                             <li>
-                                <a
+                                <Link
                                     href={`tel:${t("contact.phone")}`}
                                     className="text-gray-400 transition-colors hover:text-zinc-300"
                                 >
                                     {t("contact.phone")}
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
+                                <Link
                                     href={`mailto:${t("contact.email")}`}
                                     className="text-gray-400 transition-colors hover:text-zinc-300"
                                 >
                                     {t("contact.email")}
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                         <MainButton
@@ -116,19 +150,19 @@ export default function Footer() {
                         Rights Reserved.
                     </div>
                     <div className="mt-2 sm:mt-0">
-                        <a
+                        <Link
                             href="/privacy"
                             className="transition-colors hover:text-zinc-300"
                         >
                             Privacy Policy
-                        </a>
+                        </Link>
                         <span className="mx-2">|</span>
-                        <a
+                        <Link
                             href="/terms"
                             className="transition-colors hover:text-zinc-300"
                         >
                             Terms of Service
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
