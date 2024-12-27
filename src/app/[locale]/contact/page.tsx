@@ -1,3 +1,4 @@
+"use client";
 import logo from "@/../public/logo.svg";
 import MainButton from "@/components/MainButton";
 import {
@@ -6,6 +7,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { Bookmark, Mail, Phone, Smile } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -31,6 +33,7 @@ function ContactItem({
     buttonText,
     isHighlighted = false,
 }: ContactItemProps) {
+    const router = useRouter();
     return (
         <div
             className={cn(
@@ -66,6 +69,9 @@ function ContactItem({
                 )}
                 {buttonText && (
                     <MainButton
+                        onClick={() => {
+                            router.push("/booking");
+                        }}
                         className="mt-2 w-full text-wrap text-left"
                         variant="transparent"
                     >

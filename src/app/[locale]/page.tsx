@@ -248,6 +248,7 @@ const HeroBookingForm = () => {
 };
 const HeroSection: React.FC = () => {
     const t = useTranslations("Pages.Home.heroSection");
+    const router = useRouter();
     return (
         <section
             id="hero"
@@ -259,7 +260,12 @@ const HeroSection: React.FC = () => {
                         <h2 className="font-cormorant text-4xl md:text-5xl xl:text-6xl">
                             {t("title")}
                         </h2>
-                        <MainButton className="hover:bg-white">
+                        <MainButton
+                            className="hover:bg-white"
+                            onClick={() => {
+                                router.push("/contact");
+                            }}
+                        >
                             {t("button")}
                         </MainButton>
                     </div>
