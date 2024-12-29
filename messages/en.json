@@ -365,6 +365,7 @@
                         "invalid": "Invalid plan selected."
                     },
                     "services": {
+                        "max":"You can select up to 3 services",
                         "required": "You must select at least one service."
                     }
                 }

@@ -25,6 +25,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AutoHeight from "embla-carousel-auto-height";
+import { addDoc, collection } from "firebase/firestore";
 import {
     ChevronLeft,
     CircleCheckBig,
@@ -44,6 +45,8 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
+import { db } from "../../../../firebase/firebase.config";
+import LoadingOverlay from "@/components/Loading";
 
 const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
     <div className="flex h-fit w-fit gap-2 bg-transparent">
@@ -713,6 +716,7 @@ export default function Booking() {
     const [api, setApi] = useState<CarouselApi>();
     const formSchema = BookingSchema(t);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         mode: "onChange",
@@ -728,8 +732,13 @@ export default function Booking() {
     });
     const progress = currentIndex > 0 && currentIndex < 4 ? currentIndex : 0;
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        setLoading(true);
+        await addDoc(collection(db, "bookings"), {
+            ...values,
+            status: "pending"
+        });
+        setLoading(false);
         scrollNext();
     }
     const scrollNext = () => {
@@ -746,6 +755,7 @@ export default function Booking() {
     };
     return (
         <main>
+            {loading&&<LoadingOverlay/>}
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <Carousel

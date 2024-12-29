@@ -44,7 +44,7 @@ export const BookingSchema = (t: (arg: string) => string) =>
                 z.object({
                     option: z.literal("service"),
                     services: z
-                        .array(z.string())
+                        .array(z.string()).max(3,{message: t("form.errors.services.max")})
                         .refine((value) => value.some((item) => item), {
                             message: t("form.errors.services.required"),
                         })
