@@ -272,7 +272,7 @@ const CarouselFormOptionItem: React.FC<CarouselItemsProps> = ({
                                         <FormItem
                                             className={cn(
                                                 "flex max-w-sm flex-col gap-2 rounded-xl border border-zinc-300 p-2 font-light transition-all md:rounded-3xl md:p-4",
-                                                field.value === "invest" &&
+                                                field.value === "subscription" &&
                                                     "border-2 border-green md:scale-105",
                                             )}
                                         >
@@ -282,11 +282,11 @@ const CarouselFormOptionItem: React.FC<CarouselItemsProps> = ({
                                                 </FormLabel>
                                                 <FormControl>
                                                     <RadioGroupItem
-                                                        value="invest"
+                                                        value="subscription"
                                                         className={cn(
                                                             "size-8 border-zinc-200 fill-green stroke-none ring-0 transition-colors",
                                                             field.value ===
-                                                                "invest" &&
+                                                                "subscription" &&
                                                                 "border-2 border-green",
                                                         )}
                                                     />
@@ -649,7 +649,7 @@ const CarouselFormFinalItem: React.FC<CarouselItemsProps> = ({
             <ScrollPrevButton scrollPrev={scrollPrev} />
             <div />
             <div className="flex flex-col items-center gap-3">
-                {watchedOptionField === "invest" && (
+                {watchedOptionField === "subscription" && (
                     <FormInvestFields
                         t={(key) => t(`plans.${key}`)}
                         form={form!}
@@ -668,7 +668,7 @@ const CarouselFormFinalItem: React.FC<CarouselItemsProps> = ({
                             ? watchedOptionField === "service"
                                 ? !watchedServiceField ||
                                   getFieldState("services").invalid
-                                : watchedOptionField === "invest"
+                                : watchedOptionField === "subscription"
                                   ? !watchedPlansField ||
                                     getFieldState("plan").invalid
                                   : true

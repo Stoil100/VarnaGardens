@@ -27,14 +27,14 @@ export const BookingSchema = (t: (arg: string) => string) =>
             address: z.string({
                 required_error: t("form.errors.address.required"),
             }),
-            option: z.enum(["invest", "service"], {
+            option: z.enum(["subscription", "service"], {
                 invalid_type_error: t("form.errors.option.invalid"),
             }),
         })
         .and(
             z.union([
                 z.object({
-                    option: z.literal("invest"),
+                    option: z.literal("subscription"),
                     plan: z
                         .enum(["standart", "deluxe", "premium"], {
                             invalid_type_error: t("form.errors.plan.invalid"),
