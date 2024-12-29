@@ -14,7 +14,6 @@ type Booking ={
         | "fulfilled"
         | "expired"
         | "postponed"
-        | "deleted";
 }
 
 export type { Booking };
