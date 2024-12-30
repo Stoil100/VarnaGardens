@@ -17,6 +17,9 @@ export default {
   		]
   	},
   	extend: {
+		screens:{
+			'xs':"424px"
+		},
   		colors: {
   			green: {
   				DEFAULT: '#4eb152'

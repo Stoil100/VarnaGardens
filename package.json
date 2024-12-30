@@ -23,7 +23,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-auto-height": "^8.5.1",
     "embla-carousel-react": "^8.5.1",
-    "firebase": "^11.0.2",
+    "firebase": "^11.1.0",
     "lucide-react": "^0.464.0",
     "next": "15.0.3",
     "next-intl": "^3.25.3",

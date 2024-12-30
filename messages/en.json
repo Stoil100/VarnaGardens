@@ -17,7 +17,7 @@
                 "title": "With attention to detail and true love for nature!",
                 "button": "Learn More",
                 "description": "We, the team at Varna Gardens, believe that every garden tells its own story",
-                "form":{
+                "form": {
                     "title": "Book a viewing appointment",
                     "name": {
                         "label": "Name",
@@ -37,18 +37,18 @@
                     },
                     "services": {
                         "label": "Service",
-                        "placeholder":"",
-                        "cleanup":"Cleanup",
+                        "placeholder": "",
+                        "cleanup": "Cleanup",
                         "care": "Care",
                         "protection": "Protection",
                         "invest": "Invest",
                         "grass": "Grass",
                         "water": "Water"
                     },
-                    "submit":"Submit",
-                    "submitted":{
-                        "title":"Thank you for your request",
-                        "description":"Your request has been successfully sent. Expect a reply from our team very soon. 😉"
+                    "submit": "Submit",
+                    "submitted": {
+                        "title": "Thank you for your request",
+                        "description": "Your request has been successfully sent. Expect a reply from our team very soon. 😉"
                     },
                     "errors": {
                         "name": {
@@ -68,7 +68,7 @@
                             "required": "Address is required."
                         },
                         "services": {
-                            "invalid":"Invalid service selected.",
+                            "invalid": "Invalid service selected.",
                             "required": "You must select at least one service."
                         }
                     }
@@ -365,7 +365,7 @@
                         "invalid": "Invalid plan selected."
                     },
                     "services": {
-                        "max":"You can select up to 3 services",
+                        "max": "You can select up to 3 services",
                         "required": "You must select at least one service."
                     }
                 }
@@ -375,6 +375,59 @@
                 "thankYou": "Thank you for your inquiry!",
                 "message": "Your request has been successfully sent. Expect a response from our team soon. 😉",
                 "button": "Back to Home"
+            }
+        },
+        "Admin": {
+            "noPermission": {
+                "message": "Sorry, you don't have permission to this section",
+                "goBack": "Go Back"
+            },
+            "bookings": {
+                "notFound":"No bookings found",
+                "title": "Bookings:",
+                "sortBy": "Sort By",
+                "nameAsc": "Name (A-Z)",
+                "nameDesc": "Name (Z-A)",
+                "emailAsc": "Email (A-Z)",
+                "emailDesc": "Email (Z-A)",
+                "filterBy": "Filter by",
+                "status": "Status",
+                "statusAll": "All",
+                "statusPending": "Pending",
+                "statusConfirmed": "Confirmed",
+                "statusDeclined": "Declined",
+                "statusFulfilled": "Fulfilled",
+                "statusExpired": "Expired",
+                "statusPostponed": "Postponed",
+                "statuses": {
+                    "pending": "Pending",
+                    "confirmed": "Confirmed",
+                    "declined": "Declined",
+                    "fulfilled": "Fulfilled",
+                    "expired": "Expired",
+                    "postponed": "Postponed"
+                },
+                "option": "Option",
+                "optionAll": "All",
+                "optionSubscription": "Subscription",
+                "optionService": "Service",
+                "options": {
+                    "subscription": "Subscription",
+                    "service": "Service"
+                },
+                "services": {
+                    "cleanup": "Cleanup",
+                    "invest": "Invest",
+                    "care": "Care",
+                    "protection": "Protection",
+                    "grass": "Grass",
+                    "water": "Water"
+                },
+                "plans": {
+                    "standard": "Standard",
+                    "deluxe": "Deluxe",
+                    "premium": "Premium"
+                }
             }
         }
     },
