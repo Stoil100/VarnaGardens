@@ -134,8 +134,7 @@ const BookingComponent: React.FC<BookingProps> = ({ user, booking }) => {
                         />
                         <p>{t(`statuses.${booking.status}`)}</p>
                     </div>
-                    {(user.approved && booking.status === "pending") ||
-                        (booking.status == "postponed" && (
+                    {(user.approved && (booking.status === "pending" || booking.status === "postponed") && (
                             <div className="flex items-center gap-2">
                                 <Button
                                     className="h-fit bg-green p-2 hover:bg-green/90"
