@@ -255,7 +255,8 @@
                     },
                     "address": {
                         "label": "Address",
-                        "placeholder": "Your Address..."
+                        "placeholder": "Pick from the map...",
+                        "tooltip": "Choose current location"
                     },
                     "continue": "Continue"
                 },
@@ -383,7 +384,7 @@
                 "goBack": "Go Back"
             },
             "bookings": {
-                "notFound":"No bookings found",
+                "notFound": "No bookings found",
                 "title": "Bookings:",
                 "sortBy": "Sort By",
                 "nameAsc": "Name (A-Z)",

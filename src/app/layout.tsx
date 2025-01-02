@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Infant } from "next/font/google";
 import localFont from "next/font/local";
+import 'leaflet/dist/leaflet.css';
 import "./globals.css";
 
 const cormorant = Cormorant_Infant({

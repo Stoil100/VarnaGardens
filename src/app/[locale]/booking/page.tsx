@@ -31,6 +31,7 @@ import {
     CircleCheckBig,
     Flower,
     Flower2,
+    Locate,
     Mail,
     MapPin,
     Phone,
@@ -38,6 +39,19 @@ import {
     TreeDeciduous,
     User,
 } from "lucide-react";
+import {
+    MapContainer,
+    TileLayer,
+    Marker,
+    useMapEvents,
+} from "react-leaflet";
+import L from "leaflet"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+  } from "@/components/ui/tooltip";
 import { useTranslations } from "next-intl";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Image from "next/image";
@@ -47,6 +61,7 @@ import { useForm, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import { db } from "../../../../firebase/firebase.config";
 import LoadingOverlay from "@/components/Loading";
+import axios from "axios";
 
 const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
     <div className="flex h-fit w-fit gap-2 bg-transparent">
@@ -65,7 +80,6 @@ const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
         />
     </div>
 );
-
 const ScrollPrevButton: React.FC<{
     scrollPrev: (() => void | undefined) | undefined;
 }> = ({ scrollPrev }) => {
@@ -82,7 +96,6 @@ const ScrollPrevButton: React.FC<{
         </Button>
     );
 };
-
 type CarouselItemsProps = {
     t: (arg: string) => string;
     scrollNext?: () => void | undefined;
@@ -90,6 +103,8 @@ type CarouselItemsProps = {
     router?: AppRouterInstance;
     form?: UseFormReturn<BookingSchemaType>;
     progress?: number;
+    setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+    loading?: boolean;
 };
 const CarouselHeroItem: React.FC<CarouselItemsProps> = ({ t, scrollNext }) => (
     <CarouselItem className="flex h-fit min-h-screen flex-col items-center justify-center gap-4 p-4 text-center">
@@ -103,16 +118,67 @@ const CarouselHeroItem: React.FC<CarouselItemsProps> = ({ t, scrollNext }) => (
         </MainButton>
     </CarouselItem>
 );
+type MapPickerProps = {
+    onLocationSelect: (lat: number, lng: number) => void;
+    initialPosition?: [number, number] | null;
+};
+const MapField: React.FC<MapPickerProps> = ({
+    onLocationSelect,
+    initialPosition,
+}) => {
+    const [position, setPosition] = useState<[number, number] | null>(
+        initialPosition || null,
+    );
+    const pinIcon=L.icon({
+        iconUrl: "/pinIcon.png",
+        iconAnchor: [18, 40],
+        iconSize: [36,36], 
+    })
+    useEffect(() => {
+        if (initialPosition) {
+            setPosition(initialPosition);
+        }
+    }, [initialPosition]);
 
+    const LocationMarker = () => {
+        useMapEvents({
+            click(e) {
+                const { lat, lng } = e.latlng;
+                setPosition([lat, lng]);
+                onLocationSelect(lat, lng);
+            },
+        });
+
+        return position ? <Marker position={position} icon={pinIcon}/> : null;
+    };
+    return (
+        <MapContainer
+            center={initialPosition || [43.210192, 27.914749]}
+            zoom={13}
+            className="aspect-video w-full rounded-lg shadow-lg"
+        >
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {position && <Marker position={position} icon={pinIcon}/>}
+            <LocationMarker />
+        </MapContainer>
+    );
+};
 const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
     t,
     scrollNext,
     scrollPrev,
     form,
     progress,
+    setLoading,
 }) => {
     const [isReady, setIsReady] = useState(false);
-    const { watch, getFieldState, formState } = form!;
+    const [mapPosition, setMapPosition] = useState<[number, number] | null>(
+        null,
+    );
+    const { watch, getFieldState, formState, setValue } = form!;
     const watchedBaseFields = watch(["name", "email", "phone", "address"]);
     useEffect(() => {
         const hasErrors =
@@ -129,58 +195,140 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
 
         setIsReady(!hasErrors && !areFieldsEmpty);
     }, [watchedBaseFields, formState]);
+
+    const fetchCurrentLocation = async () => {
+        if (!navigator.geolocation) {
+            console.error("Geolocation is not supported by this browser.");
+            return;
+        }
+
+        setLoading!(true);
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+
+                try {
+                    const response = await axios.get(
+                        "https://nominatim.openstreetmap.org/reverse",
+                        {
+                            params: {
+                                lat: latitude,
+                                lon: longitude,
+                                format: "json",
+                            },
+                        },
+                    );
+
+                    const address =
+                        response.data.display_name || "Address not found";
+                    setValue("address", address);
+                    setMapPosition([latitude, longitude]);
+                } catch (error) {
+                    console.error("Error fetching address:", error);
+                } finally {
+                    setLoading!(false);
+                }
+            },
+            (error) => {
+                console.error("Error getting location:", error);
+                setLoading!(false);
+            },
+        );
+    };
+
+    const handleLocationSelect = async (lat: number, lng: number) => {
+        try {
+            const response = await axios.get(
+                "https://nominatim.openstreetmap.org/reverse",
+                {
+                    params: {
+                        lat,
+                        lon: lng,
+                        format: "json",
+                    },
+                },
+            );
+
+            const address = response.data.display_name || "Address not found";
+            setValue("address", address);
+            setMapPosition([lat, lng]);
+        } catch (error) {
+            console.error("Error fetching address:", error);
+        }
+        try {
+            const response = await axios.get(
+                "https://nominatim.openstreetmap.org/reverse",
+                {
+                    params: {
+                        lat,
+                        lon: lng,
+                        format: "json",
+                    },
+                },
+            );
+            const address = response.data.display_name || "Address not found";
+            setValue("address", address);
+        } catch (error) {
+            console.error("Error fetching address:", error);
+            setValue("address", "Error fetching address");
+        }
+    };
+
     return (
-        <CarouselItem className="relative flex h-fit min-h-screen w-screen flex-col items-center justify-between gap-4 p-4 text-center">
+        <CarouselItem className="relative flex h-fit min-h-screen w-screen flex-col items-center justify-between gap-2 p-3 text-center">
             <ScrollPrevButton scrollPrev={scrollPrev} />
-            <div />
-            <div className="max-w-lg space-y-4 md:space-y-8">
-                <div className="space-y-4">
+            <div className="md:-mb-3"/>
+            <div className="max-w-md space-y-5 md:space-y-3">
+                <div className="space-y-2">
                     <h3 className="text-2xl md:text-5xl">{t("title")}</h3>
                     <h5 className="text-lg font-light text-zinc-400 md:text-2xl">
                         {t("subtitle")}
                     </h5>
                 </div>
-                <div className="w-full space-y-6">
-                    <FormField
-                        control={form!.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
-                                    <User fontWeight={1} size={16} />
-                                    {t("name.label")}
-                                </FormLabel>
-                                <FormControl>
-                                    <Input
-                                        className="border-none bg-zinc-100 outline-none"
-                                        placeholder={t("name.placeholder")}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form!.control}
-                        name="email"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
-                                    <Mail fontWeight={1} size={16} />
-                                    {t("email.label")}
-                                </FormLabel>
-                                <FormControl>
-                                    <Input
-                                        className="border-none bg-zinc-100 outline-none"
-                                        placeholder={t("email.placeholder")}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                <div className="w-full space-y-4">
+                    <div className="flex gap-2">
+                        <FormField
+                            control={form!.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem className="flex-1">
+                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                        <User fontWeight={1} size={16} />
+                                        {t("name.label")}
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className="border-none bg-zinc-100 outline-none"
+                                            placeholder={t("name.placeholder")}
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form!.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem className="flex-1">
+                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                        <Mail fontWeight={1} size={16} />
+                                        {t("email.label")}
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            className="border-none bg-zinc-100 outline-none"
+                                            placeholder={t("email.placeholder")}
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                     <FormField
                         control={form!.control}
                         name="phone"
@@ -206,26 +354,59 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
                             </FormItem>
                         )}
                     />
-                    <FormField
-                        control={form!.control}
-                        name="address"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
-                                    <MapPin fontWeight={1} size={16} />
-                                    {t("address.label")}
-                                </FormLabel>
-                                <FormControl>
-                                    <Input
-                                        className="border-none bg-zinc-100 outline-none"
-                                        placeholder={t("address.placeholder")}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                    <div className="space-y-3">
+                        <FormField
+                            control={form!.control}
+                            name="address"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                        <MapPin fontWeight={1} size={16} />
+                                        {t("address.label")}
+                                    </FormLabel>
+                                    <div className="flex items-center gap-2">
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger
+                                                    type="button"
+                                                    onClick={
+                                                        fetchCurrentLocation
+                                                    }
+                                                    className="p-0"
+                                                >
+                                                    <MainButton
+                                                        asChild
+                                                        className="aspect-square p-2"
+                                                    >
+                                                        <Locate size={38} />
+                                                    </MainButton>
+                                                </TooltipTrigger>
+                                                <TooltipContent className="bg-green">
+                                                    <p>
+                                                        {t("address.tooltip")}
+                                                    </p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                        <FormControl>
+                                            <Input
+                                                className="border-none bg-zinc-100 outline-none"
+                                                placeholder={t(
+                                                    "address.placeholder",
+                                                )}
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                    </div>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <MapField
+                            onLocationSelect={handleLocationSelect}
+                            initialPosition={mapPosition}
+                        />
+                    </div>
                 </div>
                 <MainButton
                     type="button"
@@ -235,7 +416,7 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
                     {t("continue")}
                 </MainButton>
             </div>
-            <ProgressBar progress={progress!} />
+            <ProgressBar progress={progress!}/>
         </CarouselItem>
     );
 };
@@ -275,7 +456,8 @@ const CarouselFormOptionItem: React.FC<CarouselItemsProps> = ({
                                         <FormItem
                                             className={cn(
                                                 "flex max-w-sm flex-col gap-2 rounded-xl border border-zinc-300 p-2 font-light transition-all md:rounded-3xl md:p-4",
-                                                field.value === "subscription" &&
+                                                field.value ===
+                                                    "subscription" &&
                                                     "border-2 border-green md:scale-105",
                                             )}
                                         >
@@ -736,7 +918,7 @@ export default function Booking() {
         setLoading(true);
         await addDoc(collection(db, "bookings"), {
             ...values,
-            status: "pending"
+            status: "pending",
         });
         setLoading(false);
         scrollNext();
@@ -755,7 +937,7 @@ export default function Booking() {
     };
     return (
         <main>
-            {loading&&<LoadingOverlay/>}
+            {loading && <LoadingOverlay />}
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <Carousel
@@ -778,6 +960,7 @@ export default function Booking() {
                                 scrollNext={scrollNext}
                                 scrollPrev={scrollPrev}
                                 t={(key) => t(`form.base.${key}`)}
+                                setLoading={setLoading}
                                 progress={progress}
                             />
                             <CarouselFormOptionItem
