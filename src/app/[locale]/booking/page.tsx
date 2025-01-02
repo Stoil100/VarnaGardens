@@ -39,19 +39,14 @@ import {
     TreeDeciduous,
     User,
 } from "lucide-react";
-import {
-    MapContainer,
-    TileLayer,
-    Marker,
-    useMapEvents,
-} from "react-leaflet";
-import L from "leaflet"
+import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import L from "leaflet";
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-  } from "@/components/ui/tooltip";
+} from "@/components/ui/tooltip";
 import { useTranslations } from "next-intl";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Image from "next/image";
@@ -91,7 +86,7 @@ const ScrollPrevButton: React.FC<{
             variant="ghost"
             onClick={scrollPrev}
         >
-            <ChevronLeft />
+            <ChevronLeft className="!size-5" />
             <p className="max-md:sr-only">{t("goBackButton")}</p>
         </Button>
     );
@@ -129,11 +124,11 @@ const MapField: React.FC<MapPickerProps> = ({
     const [position, setPosition] = useState<[number, number] | null>(
         initialPosition || null,
     );
-    const pinIcon=L.icon({
+    const pinIcon = L.icon({
         iconUrl: "/pinIcon.png",
         iconAnchor: [18, 40],
-        iconSize: [36,36], 
-    })
+        iconSize: [36, 36],
+    });
     useEffect(() => {
         if (initialPosition) {
             setPosition(initialPosition);
@@ -149,7 +144,7 @@ const MapField: React.FC<MapPickerProps> = ({
             },
         });
 
-        return position ? <Marker position={position} icon={pinIcon}/> : null;
+        return position ? <Marker position={position} icon={pinIcon} /> : null;
     };
     return (
         <MapContainer
@@ -161,7 +156,7 @@ const MapField: React.FC<MapPickerProps> = ({
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {position && <Marker position={position} icon={pinIcon}/>}
+            {position && <Marker position={position} icon={pinIcon} />}
             <LocationMarker />
         </MapContainer>
     );
@@ -278,7 +273,7 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
     return (
         <CarouselItem className="relative flex h-fit min-h-screen w-screen flex-col items-center justify-between gap-2 p-3 text-center">
             <ScrollPrevButton scrollPrev={scrollPrev} />
-            <div className="md:-mb-3"/>
+            <div className="md:-mb-3" />
             <div className="max-w-md space-y-5 md:space-y-3">
                 <div className="space-y-2">
                     <h3 className="text-2xl md:text-5xl">{t("title")}</h3>
@@ -416,11 +411,10 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
                     {t("continue")}
                 </MainButton>
             </div>
-            <ProgressBar progress={progress!}/>
+            <ProgressBar progress={progress!} />
         </CarouselItem>
     );
 };
-
 const CarouselFormOptionItem: React.FC<CarouselItemsProps> = ({
     t,
     scrollNext,
@@ -529,7 +523,6 @@ const CarouselFormOptionItem: React.FC<CarouselItemsProps> = ({
         </CarouselItem>
     );
 };
-
 type PlanCardProps = {
     t: (arg: string) => string;
     value: "standart" | "deluxe" | "premium";
@@ -554,13 +547,13 @@ const PlanCard: React.FC<
     return (
         <div
             className={cn(
-                "relative flex flex-col gap-3 rounded-xl border p-2 font-light shadow-lg transition-all md:max-w-sm md:gap-4 md:rounded-2xl md:px-4 md:py-6",
+                "relative flex w-full flex-col gap-3 rounded-xl border p-2 font-light shadow-lg transition-all md:max-w-sm md:gap-4 md:rounded-2xl md:px-4 md:py-6",
                 popular ? "mt-8 border-green bg-white" : "border-gray-300",
                 isSelected && "border-green bg-green-50",
             )}
         >
             {popular && (
-                <div className="absolute -top-6 left-1/2 -z-10 h-1/6 w-full -translate-x-1/2 transform rounded-t-xl bg-green px-4 py-1 text-center text-sm font-extralight text-white outline outline-1 outline-green md:-top-8 md:rounded-t-2xl md:text-lg">
+                <div className="absolute -top-6 left-1/2 -z-10 h-1/5 w-full -translate-x-1/2 transform rounded-t-xl bg-green px-4 py-1 text-center text-sm font-extralight text-white outline outline-1 outline-green md:-top-8 md:rounded-t-2xl md:text-lg">
                     {t("planCards.popularLabel")}
                 </div>
             )}
@@ -602,7 +595,6 @@ const PlanCard: React.FC<
         </div>
     );
 };
-
 type FormFinalFieldsProps = {
     t: (arg: string) => string;
     form: UseFormReturn<BookingSchemaType>;
@@ -666,11 +658,11 @@ const FormInvestFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                             </FormDescription>
                         </div>
                         <FormControl>
-                            <div className="grid w-full grid-cols-1 content-center gap-4 p-2 md:grid-cols-3 md:gap-6 md:p-8">
+                            <div className="grid w-full grid-cols-1 content-center gap-4 p-2 md:grid-cols-3 md:p-8 lg:gap-16">
                                 {plans.map((plan, index) => (
                                     <div
                                         key={index}
-                                        className="flex items-center justify-center"
+                                        className="lg:min-w-lg flex items-center justify-center"
                                     >
                                         <PlanCard
                                             {...plan}
@@ -752,14 +744,14 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                             <FormItem
                                                 key={service.value}
                                                 className={cn(
-                                                    "relative flex w-full max-w-xs flex-col justify-between rounded-2xl border px-2 py-1 transition-all md:items-center md:px-4 md:text-center",
+                                                    "relative flex w-full max-w-xs flex-col justify-between rounded-2xl border px-2 pb-2 transition-all md:items-center md:px-4 md:text-center",
                                                     field.value?.includes(
                                                         service.value,
                                                     ) &&
                                                         "scale-105 border-2 border-green",
                                                 )}
                                             >
-                                                <div />
+                                                <div className="hidden md:block" />
                                                 <FormControl className="absolute right-2 top-2">
                                                     <Checkbox
                                                         className="size-7 rounded-full border-zinc-200 data-[state=checked]:border-green data-[state=checked]:bg-green"
@@ -869,15 +861,10 @@ const CarouselFormFinalItem: React.FC<CarouselItemsProps> = ({
     );
 };
 const CarouselFooterItem: React.FC<CarouselItemsProps> = ({ t, router }) => (
-    <CarouselItem className="flex h-fit min-h-screen w-full flex-col items-center justify-between py-8 text-center">
-        <div className="-ml-4 flex items-center justify-center gap-2">
-            <Image src={logo} alt={t("logoAlt")} className="size-8" />
-            <h5 className="font-cormorant text-2xl text-green">
-                Varna Gardens
-            </h5>
-        </div>
-        <div className="-ml-4 flex flex-col items-center justify-center gap-4">
-            <CircleCheckBig className="size-16 text-green md:size-32" />
+    <CarouselItem className="flex h-fit min-h-screen w-full flex-col items-center justify-between gap-4 py-8 text-center">
+        <div />
+        <div className="-ml-4 flex flex-col items-center justify-center gap-4 px-4">
+            <CircleCheckBig className="size-32 text-green" />
             <h3 className="text-3xl md:text-5xl">{t("thankYou")}</h3>
             <p className="max-w-xl text-center text-lg font-light text-zinc-500 md:text-2xl">
                 {t("message")}
@@ -924,7 +911,7 @@ export default function Booking() {
         scrollNext();
     }
     const scrollNext = () => {
-        progress === 2 && api?.reInit();
+        progress <= 2 && api?.reInit();
         window.scrollTo({ top: 0 });
         api?.scrollNext();
         setCurrentIndex((prev) => Math.min(prev + 1, 4));

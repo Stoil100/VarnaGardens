@@ -85,7 +85,7 @@ const HeroBookingForm = () => {
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                    <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <User fontWeight={1} size={16} />
                                         {t("name.label")}
                                     </FormLabel>
@@ -105,7 +105,7 @@ const HeroBookingForm = () => {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                    <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <Mail fontWeight={1} size={16} />
                                         {t("email.label")}
                                     </FormLabel>
@@ -125,7 +125,7 @@ const HeroBookingForm = () => {
                             name="phone"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                    <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <Phone fontWeight={1} size={16} />
                                         {t("phone.label")}
                                     </FormLabel>
@@ -152,7 +152,7 @@ const HeroBookingForm = () => {
                             name="address"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                    <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <MapPin fontWeight={1} size={16} />
                                         {t("address.label")}
                                     </FormLabel>
@@ -174,7 +174,7 @@ const HeroBookingForm = () => {
                             name="services"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="flex items-center gap-1 font-light text-zinc-400">
+                                    <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <PencilRuler fontWeight={1} size={16} />
                                         {t("services.label")}
                                     </FormLabel>
@@ -261,7 +261,7 @@ const HeroSection: React.FC = () => {
                             {t("title")}
                         </h2>
                         <MainButton
-                            className="hover:bg-white"
+                            className="hover:bg-white md:px-6 md:text-2xl"
                             onClick={() => {
                                 router.push("/contact");
                             }}
@@ -387,7 +387,7 @@ function PlansSection() {
                     {t("subheading")}
                 </p>
             </div>
-            <div className="grid w-full grid-cols-1 content-center gap-6 p-2 md:grid-cols-3 md:p-8">
+            <div className="grid w-full grid-cols-1 content-center gap-6 p-2 md:grid-cols-3 md:p-8 xl:gap-0">
                 {plans.map((plan, index) => (
                     <div
                         key={index}
@@ -632,10 +632,13 @@ function GallerySection() {
             </div>
             {activeIndex !== undefined && (
                 <Dialog open={open} onOpenChange={setOpen}>
-                    <DialogContent className="max-w-screen flex h-fit max-h-screen flex-col items-center border-none bg-transparent md:p-8">
-                        <DialogTitle>{villas[activeIndex].title}</DialogTitle>
+                    <DialogContent className="max-w-screen flex h-fit min-h-screen flex-col items-center justify-center border-none bg-transparent md:p-8">
+                        <DialogTitle className="text-2xl font-light text-white">
+                            {villas[activeIndex].title}
+                        </DialogTitle>
                         <Carousel
                             className="max-w-3xl"
+                            style={{ marginTop: "var(--nav-height)" }}
                             setApi={setApi}
                             opts={{
                                 watchDrag: false,
@@ -661,7 +664,7 @@ function GallerySection() {
                             <CarouselPrevious className="hidden border-green bg-green text-white hover:bg-transparent hover:text-green lg:flex" />
                         </Carousel>
                         <ScrollArea className="hidden h-fit w-screen p-4 md:block">
-                            <div className="mt-4 flex justify-center gap-4 pb-4">
+                            <div className="mt-4 flex justify-center gap-4 pb-4 2xl:gap-8">
                                 {villas[activeIndex].images.map(
                                     (image, index) => (
                                         <div

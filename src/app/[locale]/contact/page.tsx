@@ -122,7 +122,7 @@ export default function Contact() {
                 </h4>
             </section>
             <section className="container mx-auto">
-                <div className="grid gap-6 md:grid-cols-3">
+                <div className="grid gap-6 md:grid-cols-3 xl:gap-0">
                     {contactData.map((item, index) => (
                         <div className="flex justify-center" key={index}>
                             <ContactItem {...item} />
