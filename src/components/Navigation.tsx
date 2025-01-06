@@ -9,7 +9,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import { Link } from "@/i18n/routing";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -25,6 +25,7 @@ export default function Navigation() {
     const [navLinks, setNavLinks] = useState<{ href: string; label: string }[]>(
         [],
     );
+    const [open,setOpen] = useState(false);
     const [actionButtons, setActionButtons] = useState<
         { variant: string; label: string; href: string }[]
     >([]);
@@ -84,8 +85,10 @@ export default function Navigation() {
                     top: targetPosition - navHeight,
                     behavior: "smooth",
                 });
+                setOpen(false);
             }
         } else {
+            setOpen(false);
             router.push("/");
         }
     };
@@ -136,10 +139,10 @@ export default function Navigation() {
                             </Link>
                         ))}
                     </div>
-                    <Sheet>
+                    <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild className="lg:hidden">
                             <div className="p-2">
-                                <Menu className="h-6 w-6 text-green" />
+                                {open?<X className="h-6 w-6 text-green" />:<Menu className="h-6 w-6 text-green" />}
                                 <span className="sr-only">
                                     {t("menu.toggle")}
                                 </span>
@@ -171,6 +174,7 @@ export default function Navigation() {
                                         key={button.label}
                                         href={button.href}
                                         className="w-full"
+                                        onClick={()=>{setOpen(false)}}
                                     >
                                         <MainButton
                                             variant={
@@ -184,6 +188,9 @@ export default function Navigation() {
                                         </MainButton>
                                     </Link>
                                 ))}
+                            </div>
+                            <div className="p-2 flex items-center justify-center">
+                            <LanguageButton/>
                             </div>
                             <SheetDescription />
                         </SheetContent>
