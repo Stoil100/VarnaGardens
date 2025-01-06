@@ -525,7 +525,7 @@ const CarouselFormOptionItem: React.FC<CarouselItemsProps> = ({
 };
 type PlanCardProps = {
     t: (arg: string) => string;
-    value: "standart" | "deluxe" | "premium";
+    value: "standard" | "deluxe" | "premium";
     icon: React.ReactNode;
     title: string;
     description: string;
@@ -603,15 +603,15 @@ const FormInvestFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
     const plans: PlanCardProps[] = [
         {
             t: t,
-            value: "standart",
+            value: "standard",
             icon: <Sprout />,
-            title: t("planCards.standart.title"),
-            description: t("planCards.standart.description"),
+            title: t("planCards.standard.title"),
+            description: t("planCards.standard.description"),
             features: [
-                t("planCards.standart.features.0"),
-                t("planCards.standart.features.1"),
-                t("planCards.standart.features.2"),
-                t("planCards.standart.features.3"),
+                t("planCards.standard.features.0"),
+                t("planCards.standard.features.1"),
+                t("planCards.standard.features.2"),
+                t("planCards.standard.features.3"),
             ],
         },
         {
