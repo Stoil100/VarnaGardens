@@ -343,13 +343,13 @@ function PlansSection() {
     const plans: PlanCardProps[] = [
         {
             icon: <Sprout />,
-            title: t("plans.standard.title"),
-            description: t("plans.standard.description"),
+            title: t("plans.standart.title"),
+            description: t("plans.standart.description"),
             features: [
-                t("plans.standard.features.0"),
-                t("plans.standard.features.1"),
-                t("plans.standard.features.2"),
-                t("plans.standard.features.3"),
+                t("plans.standart.features.0"),
+                t("plans.standart.features.1"),
+                t("plans.standart.features.2"),
+                t("plans.standart.features.3"),
             ],
         },
         {

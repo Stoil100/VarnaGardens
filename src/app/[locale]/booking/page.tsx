@@ -274,14 +274,14 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
         <CarouselItem className="relative flex h-fit min-h-screen w-screen flex-col items-center justify-between gap-2 p-3 text-center">
             <ScrollPrevButton scrollPrev={scrollPrev} />
             <div className="md:-mb-3" />
-            <div className="max-w-md space-y-5 md:space-y-3">
+            <div className="max-w-lg space-y-5 md:space-y-3 flex flex-col items-center">
                 <div className="space-y-2">
                     <h3 className="text-2xl md:text-5xl">{t("title")}</h3>
                     <h5 className="text-lg font-light text-zinc-400 md:text-2xl">
                         {t("subtitle")}
                     </h5>
                 </div>
-                <div className="w-full space-y-4">
+                <div className="w-full space-y-4 max-w-md">
                     <div className="flex gap-2">
                         <FormField
                             control={form!.control}
@@ -605,13 +605,13 @@ const FormInvestFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
             t: t,
             value: "standart",
             icon: <Sprout />,
-            title: t("planCards.standard.title"),
-            description: t("planCards.standard.description"),
+            title: t("planCards.standart.title"),
+            description: t("planCards.standart.description"),
             features: [
-                t("planCards.standard.features.0"),
-                t("planCards.standard.features.1"),
-                t("planCards.standard.features.2"),
-                t("planCards.standard.features.3"),
+                t("planCards.standart.features.0"),
+                t("planCards.standart.features.1"),
+                t("planCards.standart.features.2"),
+                t("planCards.standart.features.3"),
             ],
         },
         {

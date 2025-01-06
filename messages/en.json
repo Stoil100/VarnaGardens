@@ -80,8 +80,8 @@
                 "button": "Get an Offer",
                 "popularLabel": "Most Popular",
                 "plans": {
-                    "standard": {
-                        "title": "Standard",
+                    "standart": {
+                        "title": "Standart",
                         "description": "Specifically designed for family houses and residential buildings.",
                         "features": {
                             "0": "Flexibility and convenience",
@@ -278,9 +278,9 @@
                         "title": "Choose your subscription plan",
                         "description": "Your garden is always in perfect condition without needing to plan each visit. Adaptive plan.",
                         "planCards": {
-                            "standard": {
-                                "title": "Standard",
-                                "description": "Description of the standard plan.",
+                            "standart": {
+                                "title": "Standart",
+                                "description": "Description of the standart plan.",
                                 "features": [
                                     "Feature 1",
                                     "Feature 2",
@@ -425,7 +425,7 @@
                     "water": "Water"
                 },
                 "plans": {
-                    "standard": "Standard",
+                    "standart": "Standart",
                     "deluxe": "Deluxe",
                     "premium": "Premium"
                 }
