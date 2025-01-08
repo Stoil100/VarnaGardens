@@ -379,6 +379,29 @@
             }
         },
         "Admin": {
+            "auth": {
+                "headerRegister": "Регистрирайте вашия акаунт",
+                "headerLogin": "Влезте във вашия акаунт",
+                "usingSocialNetworks": "С помощта на социални мрежи",
+                "orWith": "Или с",
+                "emailPlaceholder": "Въведете вашия Email тук...",
+                "passwordPlaceholder": "Въведете вашата парола тук...",
+                "confirmPasswordPlaceholder": "Потвърдете вашата парола тук...",
+                "alreadyHaveAccount": "Вече имате акаунт?",
+                "doNotHaveAccount": "Нямате акаунт?",
+                "loginHere": "Влезте тук",
+                "registerHere": "Регистрирайте се тук",
+                "submit": "Изпрати",
+                "emailValidation": "Моля, въведете валиден имейл адрес.",
+                "passwordUppercaseError": "Една главна буква",
+                "passwordLowercaseError": "Една малка буква",
+                "passwordNumberError": "Една цифра",
+                "passwordSpecialCharacterError": "Един специален символ",
+                "passwordMinLengthError": "Минимум 8 символа",
+                "passwordsMismatchError": "Паролите не съвпадат",
+                "toggleVisibility": "Превключване на видимост",
+                "errorMessage": "Грешка"
+            },
             "noPermission": {
                 "message": "Съжаляваме, нямате разрешение за този раздел",
                 "goBack": "Върни се"

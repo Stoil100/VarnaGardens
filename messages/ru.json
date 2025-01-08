@@ -382,6 +382,29 @@
             }
         },
         "Admin": {
+            "auth": {
+                "headerRegister": "Зарегистрируйте свой аккаунт",
+                "headerLogin": "Войдите в свой аккаунт",
+                "usingSocialNetworks": "С помощью социальных сетей",
+                "orWith": "Или с",
+                "emailPlaceholder": "Введите ваш Email здесь...",
+                "passwordPlaceholder": "Введите ваш пароль здесь...",
+                "confirmPasswordPlaceholder": "Подтвердите ваш пароль здесь...",
+                "alreadyHaveAccount": "Уже есть аккаунт?",
+                "doNotHaveAccount": "Нет аккаунта?",
+                "loginHere": "Войдите здесь",
+                "registerHere": "Зарегистрируйтесь здесь",
+                "submit": "Отправить",
+                "emailValidation": "Пожалуйста, введите действительный адрес электронной почты.",
+                "passwordUppercaseError": "Одна заглавная буква",
+                "passwordLowercaseError": "Одна строчная буква",
+                "passwordNumberError": "Одна цифра",
+                "passwordSpecialCharacterError": "Один специальный символ",
+                "passwordMinLengthError": "Минимум 8 символов",
+                "passwordsMismatchError": "Пароли не совпадают",
+                "toggleVisibility": "Переключить видимость",
+                "errorMessage": "Ошибка"
+            },
             "noPermission": {
                 "message": "Извините, у вас нет доступа к этому разделу",
                 "goBack": "Вернуться"

@@ -20,6 +20,7 @@ import {
     onSnapshot,
     updateDoc,
 } from "firebase/firestore";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
     Check,
     Hourglass,
@@ -33,6 +34,10 @@ import {
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { db } from "../../../../firebase/firebase.config";
+import AuthForm from "@/components/forms/auth";
+import MainButton from "@/components/MainButton";
+import Image from "next/image";
+import logo from "@/../public/logoText.png"
 
 type BookingProps = {
     booking: Booking;
@@ -281,6 +286,37 @@ export default function Admin() {
     return (
         <main className="min-h-screen p-2 md:p-4">
             {loading && <LoadingOverlay />}
+            {!user.uid && (
+                <div className="flex h-screen flex-col items-center justify-center gap-4">
+                    <Tabs defaultValue="login" className="w-full max-w-lg">
+                        <TabsList className="grid w-full grid-cols-2">
+                            <TabsTrigger value="login">Login</TabsTrigger>
+                            <TabsTrigger value="register">Register</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="login">
+                            <AuthForm variant="login" t={(key) => t(`auth.${key}`)}/>
+                        </TabsContent>
+                        <TabsContent value="register">
+                            <AuthForm variant="register" t={(key) => t(`auth.${key}`)} />
+                        </TabsContent>
+                    </Tabs>
+                </div>
+            )}
+            {user.uid && !user.approved && (
+                <div className="flex h-screen flex-col items-center justify-center gap-4">
+                    <Image src={logo} alt={""} />
+                    <h2 className="max-w-md text-center text-5xl">
+                        You don't have access to this page
+                    </h2>
+                    <MainButton
+                        onClick={() => {
+                            router.push("/");
+                        }}
+                    >
+                        Go back
+                    </MainButton>
+                </div>
+            )}
             {user.uid && user.approved === true && (
                 <section className="flex min-h-screen flex-col gap-4">
                     <h1 className="text-4xl">{t("bookings.title")}</h1>
@@ -288,7 +324,7 @@ export default function Admin() {
                         <p>{t("bookings.notFound")}</p>
                     ) : (
                         <div className="space-y-2 md:p-2 md:shadow-xl">
-                            <div className="xs:justify-between xs:gap-4 flex flex-wrap items-end justify-center gap-2">
+                            <div className="flex flex-wrap items-end justify-center gap-2 xs:justify-between xs:gap-4">
                                 <Select
                                     onValueChange={(value) => {
                                         const [option, direction] =
@@ -296,7 +332,7 @@ export default function Admin() {
                                         handleSort(option, direction);
                                     }}
                                 >
-                                    <SelectTrigger className="xs:w-fit w-full space-x-2 !border-none bg-gray-100 !outline-none !ring-0">
+                                    <SelectTrigger className="w-full space-x-2 !border-none bg-gray-100 !outline-none !ring-0 xs:w-fit">
                                         <p>{t("bookings.sortBy")}</p>
                                         <SelectValue />
                                     </SelectTrigger>
@@ -315,7 +351,7 @@ export default function Admin() {
                                         </SelectItem>
                                     </SelectContent>
                                 </Select>
-                                <div className="max-xs:w-full xs:justify-end flex items-center justify-between gap-2">
+                                <div className="flex items-center justify-between gap-2 max-xs:w-full xs:justify-end">
                                     <p className="min-w-fit">
                                         {t("bookings.filterBy")}
                                     </p>
@@ -332,7 +368,7 @@ export default function Admin() {
                                             );
                                         }}
                                     >
-                                        <SelectTrigger className="xs:w-fit space-x-2 !border-none bg-gray-100 !outline-none !ring-0">
+                                        <SelectTrigger className="space-x-2 !border-none bg-gray-100 !outline-none !ring-0 xs:w-fit">
                                             <SelectValue
                                                 placeholder={t(
                                                     "bookings.status",
@@ -376,7 +412,7 @@ export default function Admin() {
                                             );
                                         }}
                                     >
-                                        <SelectTrigger className="xs:w-fit space-x-2 !border-none bg-gray-100 !outline-none !ring-0">
+                                        <SelectTrigger className="space-x-2 !border-none bg-gray-100 !outline-none !ring-0 xs:w-fit">
                                             <SelectValue
                                                 placeholder={t(
                                                     "bookings.option",
