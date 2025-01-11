@@ -379,33 +379,152 @@
             }
         },
         "Admin": {
-            "auth": {
-                "headerRegister": "Регистрирайте вашия акаунт",
-                "headerLogin": "Влезте във вашия акаунт",
-                "usingSocialNetworks": "С помощта на социални мрежи",
-                "orWith": "Или с",
-                "emailPlaceholder": "Въведете вашия Email тук...",
-                "passwordPlaceholder": "Въведете вашата парола тук...",
-                "confirmPasswordPlaceholder": "Потвърдете вашата парола тук...",
-                "alreadyHaveAccount": "Вече имате акаунт?",
-                "doNotHaveAccount": "Нямате акаунт?",
-                "loginHere": "Влезте тук",
-                "registerHere": "Регистрирайте се тук",
-                "submit": "Изпрати",
-                "emailValidation": "Моля, въведете валиден имейл адрес.",
-                "passwordUppercaseError": "Една главна буква",
-                "passwordLowercaseError": "Една малка буква",
-                "passwordNumberError": "Една цифра",
-                "passwordSpecialCharacterError": "Един специален символ",
-                "passwordMinLengthError": "Минимум 8 символа",
-                "passwordsMismatchError": "Паролите не съвпадат",
-                "toggleVisibility": "Превключване на видимост",
-                "errorMessage": "Грешка"
+            "forms": {
+                "auth": {
+                    "headerRegister": "Регистрирайте вашия акаунт",
+                    "headerLogin": "Влезте във вашия акаунт",
+                    "usingSocialNetworks": "С помощта на социални мрежи",
+                    "orWith": "Или с",
+                    "emailPlaceholder": "Въведете вашия Email тук...",
+                    "passwordPlaceholder": "Въведете вашата парола тук...",
+                    "confirmPasswordPlaceholder": "Потвърдете вашата парола тук...",
+                    "alreadyHaveAccount": "Вече имате акаунт?",
+                    "doNotHaveAccount": "Нямате акаунт?",
+                    "loginHere": "Влезте тук",
+                    "registerHere": "Регистрирайте се тук",
+                    "submit": "Изпрати",
+                    "emailValidation": "Моля, въведете валиден имейл адрес.",
+                    "passwordUppercaseError": "Една главна буква",
+                    "passwordLowercaseError": "Една малка буква",
+                    "passwordNumberError": "Една цифра",
+                    "passwordSpecialCharacterError": "Един специален символ",
+                    "passwordMinLengthError": "Минимум 8 символа",
+                    "passwordsMismatchError": "Паролите не съвпадат",
+                    "toggleVisibility": "Превключване на видимост",
+                    "errorMessage": "Грешка"
+                },
+                "article": {
+                    "title": "Заглавие",
+                    "heroImage": "URL на основно изображение",
+                    "titleDescriptions": {
+                        "label": "Описания на заглавието",
+                        "placeholder": "Описание на заглавието",
+                        "addButton": "Добавяне на описание на заглавието",
+                        "removeButton": "Премахване"
+                    },
+                    "descriptions": {
+                        "label": "Описания",
+                        "placeholder": "Описание",
+                        "addButton": "Добавяне на описание",
+                        "removeButton": "Премахване"
+                    },
+                    "lists": {
+                        "label": "Списъци",
+                        "listTitle": {
+                            "placeholder": "Заглавие на списъка (по избор)"
+                        },
+                        "items": {
+                            "placeholder": "Елемент от списъка",
+                            "addButton": "Добавяне на елемент",
+                            "removeButton": "Премахване на елемент"
+                        },
+                        "addButton": "Добавяне на списък",
+                        "removeButton": "Премахване на списък"
+                    },
+                    "docs": {
+                        "label": "Документи",
+                        "docTitle": {
+                            "label": "Заглавие на документа",
+                            "placeholder": "Заглавие на документа"
+                        },
+                        "images": {
+                            "label": "Изображения",
+                            "placeholder": "URL на изображение",
+                            "addButton": "Добавяне на изображение",
+                            "removeButton": "Премахване"
+                        },
+                        "texts": {
+                            "label": "Текстове",
+                            "placeholder": "Съдържание на текста",
+                            "addTextButton": "Добавяне на текст",
+                            "addListButton": "Добавяне на списък",
+                            "listItems": {
+                                "placeholder": "Елемент от списъка",
+                                "addButton": "Добавяне на елемент в списъка",
+                                "removeButton": "Премахване"
+                            },
+                            "listTitle": {
+                                "placeholder": "Заглавие на списъка (по избор)"
+                            },
+                            "removeButton": "Премахване на текст"
+                        },
+                        "addButton": "Добавяне на документ",
+                        "removeButton": "Премахване на документ"
+                    },
+                    "type": {
+                        "label": "Тип на статията",
+                        "options": {
+                            "standard": "Стандартен",
+                            "notable": "Забележителен",
+                            "important": "Важен"
+                        }
+                    },
+                    "submit": "Изпрати",
+                    "errors": {
+                        "heroImage": {
+                            "url": "Основното изображение трябва да е валиден URL"
+                        },
+                        "title": {
+                            "required": "Заглавието е задължително"
+                        },
+                        "titleDescriptions": {
+                            "value": {
+                                "required": "Всяко описание на заглавието трябва да има стойност"
+                            }
+                        },
+                        "descriptions": {
+                            "value": {
+                                "required": "Всяко описание трябва да има стойност"
+                            }
+                        },
+                        "lists": {
+                            "items": {
+                                "value": {
+                                    "required": "Всеки елемент от списъка трябва да има стойност"
+                                },
+                                "min": "Трябва да има поне един елемент в списъка"
+                            }
+                        },
+                        "docs": {
+                            "title": {
+                                "required": "Заглавието на документа е задължително"
+                            },
+                            "images": {
+                                "value": {
+                                    "url": "Всяко изображение трябва да е валиден URL"
+                                }
+                            },
+                            "texts": {
+                                "value": {
+                                    "required": "Съдържанието на текста е задължително"
+                                },
+                                "listItems": {
+                                    "value": {
+                                        "required": "Всеки елемент от списъка трябва да има стойност"
+                                    },
+                                    "min": "Трябва да има поне един елемент в списъка"
+                                }
+                            }
+                        }
+                    }
+                }
             },
+
             "noPermission": {
                 "message": "Съжаляваме, нямате разрешение за този раздел",
                 "goBack": "Върни се"
             },
+
             "bookings": {
                 "notFound": "Не са намерени резервации",
                 "title": "Резервации:",

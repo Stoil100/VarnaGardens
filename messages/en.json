@@ -379,28 +379,145 @@
             }
         },
         "Admin": {
-            "auth": {
-                "headerRegister": "Register your account",
-                "headerLogin": "Login to your account",
-                "usingSocialNetworks": "Using social networks",
-                "orWith": "Or with",
-                "emailPlaceholder": "Enter your Email here...",
-                "passwordPlaceholder": "Enter your password here...",
-                "confirmPasswordPlaceholder": "Confirm your password here...",
-                "alreadyHaveAccount": "Already have an account?",
-                "doNotHaveAccount": "Don't have an account?",
-                "loginHere": "Login here",
-                "registerHere": "Register here",
-                "submit": "Submit",
-                "emailValidation": "Please enter a valid email address.",
-                "passwordUppercaseError": "One uppercase character",
-                "passwordLowercaseError": "One lowercase character",
-                "passwordNumberError": "One number",
-                "passwordSpecialCharacterError": "One special character",
-                "passwordMinLengthError": "Must be at least 8 characters in length",
-                "passwordsMismatchError": "The passwords did not match",
-                "toggleVisibility": "Toggle visibility",
-                "errorMessage": "Error"
+            "forms": {
+                "auth": {
+                    "headerRegister": "Register your account",
+                    "headerLogin": "Login to your account",
+                    "usingSocialNetworks": "Using social networks",
+                    "orWith": "Or with",
+                    "emailPlaceholder": "Enter your Email here...",
+                    "passwordPlaceholder": "Enter your password here...",
+                    "confirmPasswordPlaceholder": "Confirm your password here...",
+                    "alreadyHaveAccount": "Already have an account?",
+                    "doNotHaveAccount": "Don't have an account?",
+                    "loginHere": "Login here",
+                    "registerHere": "Register here",
+                    "submit": "Submit",
+                    "emailValidation": "Please enter a valid email address.",
+                    "passwordUppercaseError": "One uppercase character",
+                    "passwordLowercaseError": "One lowercase character",
+                    "passwordNumberError": "One number",
+                    "passwordSpecialCharacterError": "One special character",
+                    "passwordMinLengthError": "Must be at least 8 characters in length",
+                    "passwordsMismatchError": "The passwords did not match",
+                    "toggleVisibility": "Toggle visibility",
+                    "errorMessage": "Error"
+                },
+                "article": {
+                    "title": "Title",
+                    "heroImage": "Hero Image URL",
+                    "titleDescriptions": {
+                        "label": "Title Descriptions",
+                        "placeholder": "Title description",
+                        "addButton": "Add Title Description",
+                        "removeButton": "Remove"
+                    },
+                    "descriptions": {
+                        "label": "Descriptions",
+                        "placeholder": "Description",
+                        "addButton": "Add Description",
+                        "removeButton": "Remove"
+                    },
+                    "lists": {
+                        "label": "Lists",
+                        "listTitle": {
+                            "placeholder": "List title (optional)"
+                        },
+                        "items": {
+                            "placeholder": "List item",
+                            "addButton": "Add Item",
+                            "removeButton": "Remove Item"
+                        },
+                        "addButton": "Add List",
+                        "removeButton": "Remove List"
+                    },
+                    "docs": {
+                        "label": "Docs",
+                        "docTitle": {
+                            "label": "Doc Title",
+                            "placeholder": "Doc title"
+                        },
+                        "images": {
+                            "label": "Images",
+                            "placeholder": "Image URL",
+                            "addButton": "Add Image",
+                            "removeButton": "Remove"
+                        },
+                        "texts": {
+                            "label": "Texts",
+                            "placeholder": "Text content",
+                            "addTextButton": "Add Text",
+                            "addListButton": "Add List",
+                            "listItems": {
+                                "placeholder": "List item",
+                                "addButton": "Add List Item",
+                                "removeButton": "Remove"
+                            },
+                            "listTitle": {
+                                "placeholder": "List title (optional)"
+                            },
+                            "removeButton": "Remove Text"
+                        },
+                        "addButton": "Add Doc",
+                        "removeButton": "Remove Doc"
+                    },
+                    "type": {
+                        "label": "Article Type",
+                        "options": {
+                            "standard": "Standard",
+                            "notable": "Notable",
+                            "important": "Important"
+                        }
+                    },
+                    "submit": "Submit",
+                    "errors": {
+                        "heroImage": {
+                            "url": "Hero Image must be a valid URL"
+                        },
+                        "title": {
+                            "required": "Title is required"
+                        },
+                        "titleDescriptions": {
+                            "value": {
+                                "required": "Each title description must have a value"
+                            }
+                        },
+                        "descriptions": {
+                            "value": {
+                                "required": "Each description must have a value"
+                            }
+                        },
+                        "lists": {
+                            "items": {
+                                "value": {
+                                    "required": "Each list item must have a value"
+                                },
+                                "min": "At least one list item is required"
+                            }
+                        },
+                        "docs": {
+                            "title": {
+                                "required": "Doc title is required"
+                            },
+                            "images": {
+                                "value": {
+                                    "url": "Each image must be a valid URL"
+                                }
+                            },
+                            "texts": {
+                                "value": {
+                                    "required": "Text content is required"
+                                },
+                                "listItems": {
+                                    "value": {
+                                        "required": "Each list item must have a value"
+                                    },
+                                    "min": "At least one list item is required"
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "noPermission": {
                 "message": "Sorry, you don't have permission to this section",

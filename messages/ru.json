@@ -382,28 +382,145 @@
             }
         },
         "Admin": {
-            "auth": {
-                "headerRegister": "Зарегистрируйте свой аккаунт",
-                "headerLogin": "Войдите в свой аккаунт",
-                "usingSocialNetworks": "С помощью социальных сетей",
-                "orWith": "Или с",
-                "emailPlaceholder": "Введите ваш Email здесь...",
-                "passwordPlaceholder": "Введите ваш пароль здесь...",
-                "confirmPasswordPlaceholder": "Подтвердите ваш пароль здесь...",
-                "alreadyHaveAccount": "Уже есть аккаунт?",
-                "doNotHaveAccount": "Нет аккаунта?",
-                "loginHere": "Войдите здесь",
-                "registerHere": "Зарегистрируйтесь здесь",
-                "submit": "Отправить",
-                "emailValidation": "Пожалуйста, введите действительный адрес электронной почты.",
-                "passwordUppercaseError": "Одна заглавная буква",
-                "passwordLowercaseError": "Одна строчная буква",
-                "passwordNumberError": "Одна цифра",
-                "passwordSpecialCharacterError": "Один специальный символ",
-                "passwordMinLengthError": "Минимум 8 символов",
-                "passwordsMismatchError": "Пароли не совпадают",
-                "toggleVisibility": "Переключить видимость",
-                "errorMessage": "Ошибка"
+            "forms": {
+                "auth": {
+                    "headerRegister": "Зарегистрируйте свой аккаунт",
+                    "headerLogin": "Войдите в свой аккаунт",
+                    "usingSocialNetworks": "С помощью социальных сетей",
+                    "orWith": "Или с",
+                    "emailPlaceholder": "Введите ваш Email здесь...",
+                    "passwordPlaceholder": "Введите ваш пароль здесь...",
+                    "confirmPasswordPlaceholder": "Подтвердите ваш пароль здесь...",
+                    "alreadyHaveAccount": "Уже есть аккаунт?",
+                    "doNotHaveAccount": "Нет аккаунта?",
+                    "loginHere": "Войдите здесь",
+                    "registerHere": "Зарегистрируйтесь здесь",
+                    "submit": "Отправить",
+                    "emailValidation": "Пожалуйста, введите действительный адрес электронной почты.",
+                    "passwordUppercaseError": "Одна заглавная буква",
+                    "passwordLowercaseError": "Одна строчная буква",
+                    "passwordNumberError": "Одна цифра",
+                    "passwordSpecialCharacterError": "Один специальный символ",
+                    "passwordMinLengthError": "Минимум 8 символов",
+                    "passwordsMismatchError": "Пароли не совпадают",
+                    "toggleVisibility": "Переключить видимость",
+                    "errorMessage": "Ошибка"
+                },
+                "article": {
+                    "title": "Заголовок",
+                    "heroImage": "URL главного изображения",
+                    "titleDescriptions": {
+                        "label": "Описания заголовков",
+                        "placeholder": "Описание заголовка",
+                        "addButton": "Добавить описание заголовка",
+                        "removeButton": "Удалить"
+                    },
+                    "descriptions": {
+                        "label": "Описания",
+                        "placeholder": "Описание",
+                        "addButton": "Добавить описание",
+                        "removeButton": "Удалить"
+                    },
+                    "lists": {
+                        "label": "Списки",
+                        "listTitle": {
+                            "placeholder": "Название списка (по желанию)"
+                        },
+                        "items": {
+                            "placeholder": "Элемент списка",
+                            "addButton": "Добавить элемент",
+                            "removeButton": "Удалить элемент"
+                        },
+                        "addButton": "Добавить список",
+                        "removeButton": "Удалить список"
+                    },
+                    "docs": {
+                        "label": "Документы",
+                        "docTitle": {
+                            "label": "Название документа",
+                            "placeholder": "Название документа"
+                        },
+                        "images": {
+                            "label": "Изображения",
+                            "placeholder": "URL изображения",
+                            "addButton": "Добавить изображение",
+                            "removeButton": "Удалить"
+                        },
+                        "texts": {
+                            "label": "Тексты",
+                            "placeholder": "Содержимое текста",
+                            "addTextButton": "Добавить текст",
+                            "addListButton": "Добавить список",
+                            "listItems": {
+                                "placeholder": "Элемент списка",
+                                "addButton": "Добавить элемент списка",
+                                "removeButton": "Удалить"
+                            },
+                            "listTitle": {
+                                "placeholder": "Название списка (по желанию)"
+                            },
+                            "removeButton": "Удалить текст"
+                        },
+                        "addButton": "Добавить документ",
+                        "removeButton": "Удалить документ"
+                    },
+                    "type": {
+                        "label": "Тип статьи",
+                        "options": {
+                            "standard": "Стандартный",
+                            "notable": "Заметный",
+                            "important": "Важный"
+                        }
+                    },
+                    "submit": "Отправить",
+                    "errors": {
+                        "heroImage": {
+                            "url": "Главное изображение должно быть действительным URL"
+                        },
+                        "title": {
+                            "required": "Заголовок обязателен"
+                        },
+                        "titleDescriptions": {
+                            "value": {
+                                "required": "Каждое описание заголовка должно иметь значение"
+                            }
+                        },
+                        "descriptions": {
+                            "value": {
+                                "required": "Каждое описание должно иметь значение"
+                            }
+                        },
+                        "lists": {
+                            "items": {
+                                "value": {
+                                    "required": "Каждый элемент списка должен иметь значение"
+                                },
+                                "min": "Должен быть хотя бы один элемент в списке"
+                            }
+                        },
+                        "docs": {
+                            "title": {
+                                "required": "Название документа обязательно"
+                            },
+                            "images": {
+                                "value": {
+                                    "url": "Каждое изображение должно быть действительным URL"
+                                }
+                            },
+                            "texts": {
+                                "value": {
+                                    "required": "Содержимое текста обязательно"
+                                },
+                                "listItems": {
+                                    "value": {
+                                        "required": "Каждый элемент списка должен иметь значение"
+                                    },
+                                    "min": "Должен быть хотя бы один элемент в списке"
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "noPermission": {
                 "message": "Извините, у вас нет доступа к этому разделу",

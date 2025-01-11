@@ -20,7 +20,7 @@ import {
     onSnapshot,
     updateDoc,
 } from "firebase/firestore";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
     Check,
     Hourglass,
@@ -34,10 +34,12 @@ import {
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { db } from "../../../../firebase/firebase.config";
-import AuthForm from "@/components/forms/auth";
+import AuthForm from "@/components/forms/auth/auth";
 import MainButton from "@/components/MainButton";
 import Image from "next/image";
-import logo from "@/../public/logoText.png"
+import logo from "@/../public/logoText.png";
+import { ArticleForm } from "@/components/forms/article/article";
+// import ArticleForm from "@/components/forms/article";
 
 type BookingProps = {
     booking: Booking;
@@ -139,7 +141,9 @@ const BookingComponent: React.FC<BookingProps> = ({ user, booking }) => {
                         />
                         <p>{t(`statuses.${booking.status}`)}</p>
                     </div>
-                    {(user.approved && (booking.status === "pending" || booking.status === "postponed") && (
+                    {user.approved &&
+                        (booking.status === "pending" ||
+                            booking.status === "postponed") && (
                             <div className="flex items-center gap-2">
                                 <Button
                                     className="h-fit bg-green p-2 hover:bg-green/90"
@@ -159,7 +163,7 @@ const BookingComponent: React.FC<BookingProps> = ({ user, booking }) => {
                                     <X />
                                 </Button>
                             </div>
-                        ))}
+                        )}
                 </div>
                 <div className="space-y-2">
                     <div className="flex items-center gap-2">
@@ -294,10 +298,16 @@ export default function Admin() {
                             <TabsTrigger value="register">Register</TabsTrigger>
                         </TabsList>
                         <TabsContent value="login">
-                            <AuthForm variant="login" t={(key) => t(`auth.${key}`)}/>
+                            <AuthForm
+                                variant="login"
+                                t={(key) => t(`forms.auth.${key}`)}
+                            />
                         </TabsContent>
                         <TabsContent value="register">
-                            <AuthForm variant="register" t={(key) => t(`auth.${key}`)} />
+                            <AuthForm
+                                variant="register"
+                                t={(key) => t(`forms.auth.${key}`)}
+                            />
                         </TabsContent>
                     </Tabs>
                 </div>
@@ -306,146 +316,166 @@ export default function Admin() {
                 <div className="flex h-screen flex-col items-center justify-center gap-4">
                     <Image src={logo} alt={""} />
                     <h2 className="max-w-md text-center text-5xl">
-                        You don't have access to this page
+                        {t("noPermission.message")}
                     </h2>
                     <MainButton
                         onClick={() => {
                             router.push("/");
                         }}
                     >
-                        Go back
+                         {t("noPermission.goBack")}
                     </MainButton>
                 </div>
             )}
             {user.uid && user.approved === true && (
-                <section className="flex min-h-screen flex-col gap-4">
-                    <h1 className="text-4xl">{t("bookings.title")}</h1>
-                    {bookings.length < 1 ? (
-                        <p>{t("bookings.notFound")}</p>
-                    ) : (
-                        <div className="space-y-2 md:p-2 md:shadow-xl">
-                            <div className="flex flex-wrap items-end justify-center gap-2 xs:justify-between xs:gap-4">
-                                <Select
-                                    onValueChange={(value) => {
-                                        const [option, direction] =
-                                            value.split("_");
-                                        handleSort(option, direction);
-                                    }}
-                                >
-                                    <SelectTrigger className="w-full space-x-2 !border-none bg-gray-100 !outline-none !ring-0 xs:w-fit">
-                                        <p>{t("bookings.sortBy")}</p>
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent className="w-fit !min-w-fit">
-                                        <SelectItem value="name_asc">
-                                            {t("bookings.nameAsc")}
-                                        </SelectItem>
-                                        <SelectItem value="name_desc">
-                                            {t("bookings.nameDesc")}
-                                        </SelectItem>
-                                        <SelectItem value="email_asc">
-                                            {t("bookings.emailAsc")}
-                                        </SelectItem>
-                                        <SelectItem value="email_desc">
-                                            {t("bookings.emailDesc")}
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <div className="flex items-center justify-between gap-2 max-xs:w-full xs:justify-end">
-                                    <p className="min-w-fit">
-                                        {t("bookings.filterBy")}
-                                    </p>
+                <section className="">
+                    <div className="rounded-xl border p-2">
+                        <h3 className="text-4xl">Upload Articles:</h3>
+                        <ArticleForm/>
+                    </div>
+                    <div className="flex min-h-screen flex-col gap-4">
+                        <h1 className="text-4xl">{t("bookings.title")}</h1>
+                        {bookings.length < 1 ? (
+                            <p>{t("bookings.notFound")}</p>
+                        ) : (
+                            <div className="space-y-2 md:p-2 md:shadow-xl">
+                                <div className="flex flex-wrap items-end justify-center gap-2 xs:justify-between xs:gap-4">
                                     <Select
-                                        onValueChange={(status) => {
-                                            const newStatus =
-                                                status === "all"
-                                                    ? undefined
-                                                    : status;
-                                            setSelectedStatus(newStatus);
-                                            handleFilter(
-                                                selectedOption,
-                                                newStatus,
-                                            );
+                                        onValueChange={(value) => {
+                                            const [option, direction] =
+                                                value.split("_");
+                                            handleSort(option, direction);
                                         }}
                                     >
-                                        <SelectTrigger className="space-x-2 !border-none bg-gray-100 !outline-none !ring-0 xs:w-fit">
-                                            <SelectValue
-                                                placeholder={t(
-                                                    "bookings.status",
-                                                )}
-                                            />
+                                        <SelectTrigger className="w-full space-x-2 !border-none bg-gray-100 !outline-none !ring-0 xs:w-fit">
+                                            <p>{t("bookings.sortBy")}</p>
+                                            <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent className="w-fit !min-w-fit">
-                                            <SelectItem value="all">
-                                                {t("bookings.statusAll")}
+                                            <SelectItem value="name_asc">
+                                                {t("bookings.nameAsc")}
                                             </SelectItem>
-                                            <SelectItem value="pending">
-                                                {t("bookings.statusPending")}
+                                            <SelectItem value="name_desc">
+                                                {t("bookings.nameDesc")}
                                             </SelectItem>
-                                            <SelectItem value="confirmed">
-                                                {t("bookings.statusConfirmed")}
+                                            <SelectItem value="email_asc">
+                                                {t("bookings.emailAsc")}
                                             </SelectItem>
-                                            <SelectItem value="declined">
-                                                {t("bookings.statusDeclined")}
-                                            </SelectItem>
-                                            <SelectItem value="fulfilled">
-                                                {t("bookings.statusFulfilled")}
-                                            </SelectItem>
-                                            <SelectItem value="expired">
-                                                {t("bookings.statusExpired")}
-                                            </SelectItem>
-                                            <SelectItem value="postponed">
-                                                {t("bookings.statusPostponed")}
+                                            <SelectItem value="email_desc">
+                                                {t("bookings.emailDesc")}
                                             </SelectItem>
                                         </SelectContent>
                                     </Select>
-                                    <Select
-                                        onValueChange={(option) => {
-                                            const newOption =
-                                                option === "all"
-                                                    ? undefined
-                                                    : option;
-                                            setSelectedOption(newOption);
-                                            handleFilter(
-                                                newOption,
-                                                selectedStatus,
-                                            );
-                                        }}
-                                    >
-                                        <SelectTrigger className="space-x-2 !border-none bg-gray-100 !outline-none !ring-0 xs:w-fit">
-                                            <SelectValue
-                                                placeholder={t(
-                                                    "bookings.option",
-                                                )}
-                                            />
-                                        </SelectTrigger>
-                                        <SelectContent className="w-fit !min-w-fit">
-                                            <SelectItem value="all">
-                                                {t("bookings.optionAll")}
-                                            </SelectItem>
-                                            <SelectItem value="subscription">
-                                                {t(
-                                                    "bookings.optionSubscription",
-                                                )}
-                                            </SelectItem>
-                                            <SelectItem value="service">
-                                                {t("bookings.optionService")}
-                                            </SelectItem>
-                                        </SelectContent>
-                                    </Select>
+                                    <div className="flex items-center justify-between gap-2 max-xs:w-full xs:justify-end">
+                                        <p className="min-w-fit">
+                                            {t("bookings.filterBy")}
+                                        </p>
+                                        <Select
+                                            onValueChange={(status) => {
+                                                const newStatus =
+                                                    status === "all"
+                                                        ? undefined
+                                                        : status;
+                                                setSelectedStatus(newStatus);
+                                                handleFilter(
+                                                    selectedOption,
+                                                    newStatus,
+                                                );
+                                            }}
+                                        >
+                                            <SelectTrigger className="space-x-2 !border-none bg-gray-100 !outline-none !ring-0 xs:w-fit">
+                                                <SelectValue
+                                                    placeholder={t(
+                                                        "bookings.status",
+                                                    )}
+                                                />
+                                            </SelectTrigger>
+                                            <SelectContent className="w-fit !min-w-fit">
+                                                <SelectItem value="all">
+                                                    {t("bookings.statusAll")}
+                                                </SelectItem>
+                                                <SelectItem value="pending">
+                                                    {t(
+                                                        "bookings.statusPending",
+                                                    )}
+                                                </SelectItem>
+                                                <SelectItem value="confirmed">
+                                                    {t(
+                                                        "bookings.statusConfirmed",
+                                                    )}
+                                                </SelectItem>
+                                                <SelectItem value="declined">
+                                                    {t(
+                                                        "bookings.statusDeclined",
+                                                    )}
+                                                </SelectItem>
+                                                <SelectItem value="fulfilled">
+                                                    {t(
+                                                        "bookings.statusFulfilled",
+                                                    )}
+                                                </SelectItem>
+                                                <SelectItem value="expired">
+                                                    {t(
+                                                        "bookings.statusExpired",
+                                                    )}
+                                                </SelectItem>
+                                                <SelectItem value="postponed">
+                                                    {t(
+                                                        "bookings.statusPostponed",
+                                                    )}
+                                                </SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                        <Select
+                                            onValueChange={(option) => {
+                                                const newOption =
+                                                    option === "all"
+                                                        ? undefined
+                                                        : option;
+                                                setSelectedOption(newOption);
+                                                handleFilter(
+                                                    newOption,
+                                                    selectedStatus,
+                                                );
+                                            }}
+                                        >
+                                            <SelectTrigger className="space-x-2 !border-none bg-gray-100 !outline-none !ring-0 xs:w-fit">
+                                                <SelectValue
+                                                    placeholder={t(
+                                                        "bookings.option",
+                                                    )}
+                                                />
+                                            </SelectTrigger>
+                                            <SelectContent className="w-fit !min-w-fit">
+                                                <SelectItem value="all">
+                                                    {t("bookings.optionAll")}
+                                                </SelectItem>
+                                                <SelectItem value="subscription">
+                                                    {t(
+                                                        "bookings.optionSubscription",
+                                                    )}
+                                                </SelectItem>
+                                                <SelectItem value="service">
+                                                    {t(
+                                                        "bookings.optionService",
+                                                    )}
+                                                </SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                </div>
+                                <div className="flex w-full flex-col items-center gap-4">
+                                    {processedBookings.map((booking) => (
+                                        <BookingComponent
+                                            key={booking.id}
+                                            booking={booking}
+                                            user={user}
+                                        />
+                                    ))}
                                 </div>
                             </div>
-                            <div className="flex w-full flex-col items-center gap-4">
-                                {processedBookings.map((booking) => (
-                                    <BookingComponent
-                                        key={booking.id}
-                                        booking={booking}
-                                        user={user}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </section>
             )}
         </main>
