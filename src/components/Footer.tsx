@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import logo from "../../public/logo.svg";
 import MainButton from "./MainButton";
+import Logo from "./Logo";
 
 export default function Footer() {
     const t = useTranslations("Footer");
@@ -49,9 +50,9 @@ export default function Footer() {
     }));
 
     const socialMediaLinks = [
-        { label: "Facebook", href: "https://facebook.com" },
-        { label: "YouTube", href: "https://youtube.com" },
-        { label: "Instagram", href: "https://instagram.com" },
+        { label: "Facebook", href: "https://www.facebook.com/varnagardens" },
+        { label: "YouTube", href: "https://www.youtube.com/@Varnagardens" },
+        { label: "Instagram", href: "https://www.instagram.com/varnagardens/" },
     ];
     return (
         <footer className="w-full bg-zinc-900 px-4 pt-4 text-white sm:px-6 lg:px-8">
@@ -59,11 +60,9 @@ export default function Footer() {
                 <div className="grid grid-cols-1 gap-8 py-12 sm:grid-cols-2 lg:grid-cols-5">
                     <div className="flex flex-col max-sm:items-center max-sm:text-center lg:col-span-2">
                         <div className="mb-4 flex items-center gap-3">
-                            <Image
-                                alt="logo"
-                                src={logo}
-                                className="h-10 w-10"
-                            />
+                            <div className="size-10">
+                                <Logo />
+                            </div>
                             <h3 className="font-cormorant text-3xl sm:text-4xl">
                                 {t("brand.name")}
                             </h3>
