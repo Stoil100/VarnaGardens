@@ -261,7 +261,7 @@ export default function Admin() {
         return () => unsubscribe();
     }, []);
     const handleSort = (option: string, direction: string) => {
-        let sortedItems = [...processedBookings];
+        const sortedItems = [...processedBookings];
         if (option === "name") {
             sortedItems.sort((a, b) =>
                 direction === "asc"
