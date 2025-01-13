@@ -902,14 +902,27 @@ export default function Booking() {
     const progress = currentIndex > 0 && currentIndex < 4 ? currentIndex : 0;
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setLoading(true);
-        await addDoc(collection(db, "bookings"), {
-            ...values,
-            status: "pending",
-        });
-        setLoading(false);
-        scrollNext();
+        try {
+            setLoading(true);
+            const docRef = await addDoc(collection(db, "bookings"), {
+                ...values,
+                status: "pending",
+            });
+            const response = await axios.post("/api/mail", {
+                values,
+                status: "pending",
+                id: docRef.id,
+            });
+    
+            console.log(response);
+        } catch (error) {
+            console.error("Error during submission:", error);
+        } finally {
+            setLoading(false);
+            scrollNext();
+        }
     }
+    
     const scrollNext = () => {
         progress <= 2 && api?.reInit();
         window.scrollTo({ top: 0 });
