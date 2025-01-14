@@ -21,6 +21,8 @@ export default function LanguageButton() {
         { code: "en", label: "EN", flag: "/flags/en.svg" },
         { code: "bg", label: "БГ", flag: "/flags/bg.svg" },
         { code: "ru", label: "РУ", flag: "/flags/ru.svg" },
+        { code: "el", label: "ΕΛ", flag: "/flags/el.svg" },
+        { code: "uk", label: "УК", flag: "/flags/uk.svg" }
     ];
 
     const changeLanguage = (language: string) => {
