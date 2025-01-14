@@ -552,5 +552,46 @@
             "email": "varnagardens@gmail.com",
             "button": "Ζητήστε Προσφορά"
         }
+    },
+    "Api": {
+        "Mail": {
+            "Submitted": {
+                "headerTitle": "Σας ευχαριστούμε που επιλέξατε Varna Gardens! 🌿",
+                "greeting": "Γειά σας",
+                "intro": "Είμαστε ενθουσιασμένοι να προσθέσουμε μια πινελιά πράσινου στη ζωή σας! Ακολουθεί μια περίληψη της κράτησής σας:",
+                "bookingDetailsTitle": "Λεπτομέρειες Κράτησης",
+                "bookingDetails": {
+                    "name": "Όνομα",
+                    "email": "Ηλεκτρονική διεύθυνση",
+                    "phone": "Τηλέφωνο",
+                    "address": "Διεύθυνση",
+                    "bookingOption": "Επιλογή Κράτησης",
+                    "planChosen": "Επιλεγμένο Πλάνο",
+                    "plans": {
+                        "standard": "Βασικό",
+                        "deluxe": "Deluxe",
+                        "premium": "Premium"
+                    },
+                    "selectedServicesTitle": "Επιλεγμένες Υπηρεσίες",
+                    "services": {
+                        "cleanup": "Καθαρισμός",
+                        "care": "Φροντίδα",
+                        "protection": "Προστασία",
+                        "invest": "Επένδυση",
+                        "grass": "Χλοοτάπητας",
+                        "water": "Πότισμα"
+                    }
+                },
+                "additionalInfoTitle": "Πρόσθετες Πληροφορίες",
+                "bookingId": "Αριθμός Κράτησης",
+                "orderStatus": "Κατάσταση Παραγγελίας",
+                "teamMessage": "Η εξειδικευμένη ομάδα μας ανυπομονεί να σας παρέχει εξαιρετική υπηρεσία την προγραμματισμένη ώρα.",
+                "support": "Χρειάζεστε βοήθεια; Επικοινωνήστε μαζί μας στο",
+                "footer": {
+                    "message": "🌸 Μείνετε Πράσινοι, Μείνετε Χαρούμενοι!",
+                    "team": "Η Ομάδα Varna Gardens"
+                }
+            }
+        }
     }
 }

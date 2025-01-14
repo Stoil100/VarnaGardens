@@ -1,6 +1,6 @@
 "use client";
-import logo from "@/../public/logo.svg";
 import logoText from "@/../public/logoText.png";
+import LoadingOverlay from "@/components/Loading";
 import MainButton from "@/components/MainButton";
 import { BookingSchema, BookingSchemaType } from "@/components/schemas/booking";
 import { Button } from "@/components/ui/button";
@@ -22,10 +22,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import AutoHeight from "embla-carousel-auto-height";
 import { addDoc, collection } from "firebase/firestore";
+import L from "leaflet";
 import {
     ChevronLeft,
     CircleCheckBig,
@@ -39,24 +47,15 @@ import {
     TreeDeciduous,
     User,
 } from "lucide-react";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
-import L from "leaflet";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
+import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import { z } from "zod";
 import { db } from "../../../../firebase/firebase.config";
-import LoadingOverlay from "@/components/Loading";
-import axios from "axios";
 
 const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
     <div className="flex h-fit w-fit gap-2 bg-transparent">
@@ -274,14 +273,14 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
         <CarouselItem className="relative flex h-fit min-h-screen w-screen flex-col items-center justify-between gap-2 p-3 text-center">
             <ScrollPrevButton scrollPrev={scrollPrev} />
             <div className="md:-mb-3" />
-            <div className="max-w-lg space-y-5 md:space-y-3 flex flex-col items-center">
+            <div className="flex max-w-lg flex-col items-center space-y-5 md:space-y-3">
                 <div className="space-y-2">
                     <h3 className="text-2xl md:text-5xl">{t("title")}</h3>
                     <h5 className="text-lg font-light text-zinc-400 md:text-2xl">
                         {t("subtitle")}
                     </h5>
                 </div>
-                <div className="w-full space-y-4 max-w-md">
+                <div className="w-full max-w-md space-y-4">
                     <div className="flex gap-2">
                         <FormField
                             control={form!.control}
@@ -880,6 +879,7 @@ const CarouselFooterItem: React.FC<CarouselItemsProps> = ({ t, router }) => (
     </CarouselItem>
 );
 export default function Booking() {
+    const locale = useLocale();
     const t = useTranslations("Pages.Booking");
     const router = useRouter();
     const [api, setApi] = useState<CarouselApi>();
@@ -912,8 +912,9 @@ export default function Booking() {
                 values,
                 status: "pending",
                 id: docRef.id,
+                locale: locale,
             });
-    
+
             console.log(response);
         } catch (error) {
             console.error("Error during submission:", error);
@@ -922,7 +923,7 @@ export default function Booking() {
             scrollNext();
         }
     }
-    
+
     const scrollNext = () => {
         progress <= 2 && api?.reInit();
         window.scrollTo({ top: 0 });

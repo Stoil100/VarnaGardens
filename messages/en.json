@@ -595,5 +595,46 @@
             "email": "varnagardens@gmail.com",
             "button": "Get an Offer"
         }
+    },
+    "Api": {
+        "Mail": {
+            "Submitted": {
+                "headerTitle": "Thank You for Choosing Varna Gardens! 🌿",
+                "greeting": "Hello",
+                "intro": "We’re excited to bring a touch of green to your life! Here’s a summary of your booking:",
+                "bookingDetailsTitle": "Booking Details",
+                "bookingDetails": {
+                    "name": "Name",
+                    "email": "Email",
+                    "phone": "Telephone",
+                    "address": "Address",
+                    "bookingOption": "Booking Option",
+                    "planChosen": "Plan Chosen",
+                    "plans": {
+                        "standard": "Standard",
+                        "deluxe": "Deluxe",
+                        "premium": "Premium"
+                    },
+                    "selectedServicesTitle": "Selected Services",
+                    "services": {
+                        "cleanup": "Cleanup",
+                        "care": "Care",
+                        "protection": "Protection",
+                        "invest": "Invest",
+                        "grass": "Grass",
+                        "water": "Water"
+                    }
+                },
+                "additionalInfoTitle": "Additional Information",
+                "bookingId": "Booking ID",
+                "orderStatus": "Order Status",
+                "teamMessage": "Our expert gardening team is looking forward to providing exceptional service at your scheduled time.",
+                "support": "Need help? Reach out to us at",
+                "footer": {
+                    "message": "🌸 Stay Green, Stay Happy!",
+                    "team": "The Varna Gardens Team"
+                }
+            }
+        }
     }
 }
