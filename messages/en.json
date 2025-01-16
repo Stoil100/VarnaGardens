@@ -4,7 +4,8 @@
         "navLinks": [
             { "label": "Home" },
             { "label": "Services" },
-            { "label": "Gallery" }
+            { "label": "Gallery" },
+            { "label": "Articles" }
         ],
         "actionButtons": [{ "label": "Contact" }, { "label": "Get an Offer" }],
         "menu": {
@@ -588,6 +589,7 @@
                 { "label": "Home" },
                 { "label": "Services" },
                 { "label": "Gallery" },
+                { "label": "Articles" },
                 { "label": "Contact" }
             ]
         },

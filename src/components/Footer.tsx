@@ -43,6 +43,7 @@ export default function Footer() {
         { href: "#hero" },
         { href: "#services" },
         { href: "#gallery" },
+        { href: "/articles" },
         { href: "/contact" },
     ].map((navLink, index) => ({
         ...navLink,

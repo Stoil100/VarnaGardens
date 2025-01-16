@@ -8,10 +8,10 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import { Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import LanguageButton from "./LanguageButton";
 import MainButton from "./MainButton";
@@ -46,6 +46,7 @@ export default function Navigation() {
                 { href: "#hero" },
                 { href: "#services" },
                 { href: "#gallery" },
+                { href: "/articles" },
             ].map((link, index) => ({
                 ...link,
                 label: t(`navLinks.${index}.label`),
@@ -87,6 +88,8 @@ export default function Navigation() {
                 });
                 setOpen(false);
             }
+        }else if (href.startsWith("/")) {
+            router.push(href);
         } else {
             setOpen(false);
             router.push("/");
