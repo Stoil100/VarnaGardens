@@ -1,6 +1,5 @@
 "use client";
 import MainButton from "@/components/MainButton";
-import { HeroBookingSchema } from "@/components/schemas/bookingHero";
 import {
     Carousel,
     CarouselApi,
@@ -31,7 +30,6 @@ import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { ArticleT } from "@/models/article";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import {
     addDoc,
     collection,
@@ -43,7 +41,9 @@ import {
 import {
     ArrowLeft,
     ArrowRight,
+    Badge,
     BookMarked,
+    ChevronsUpDown,
     CircleCheckBig,
     Flower2,
     Mail,
@@ -53,6 +53,7 @@ import {
     Sprout,
     TreeDeciduous,
     User,
+    X,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
@@ -61,6 +62,15 @@ import CountUp from "react-countup";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { db } from "../../../firebase/firebase.config";
+import axios from "axios";
+import { Checkbox } from "@/components/ui/checkbox";
+import { BookingSchema } from "@/components/schemas/booking";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 
 type SectionProps = {
     t?: (arg: string) => string;
@@ -68,8 +78,10 @@ type SectionProps = {
 };
 const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
     const locale = useLocale();
-    const formSchema = HeroBookingSchema(t!);
+    const formSchema = BookingSchema((key) => t!(`errors.${key}`));
     const [isSubmited, setIsSubmited] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         mode: "onChange",
@@ -78,7 +90,8 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
             phone: "",
             email: "",
             address: "",
-            services: "invest",
+            option: "service",
+            services: ["invest"],
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -206,41 +219,102 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
                             control={form.control}
                             name="services"
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="flex flex-col">
                                     <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <PencilRuler fontWeight={1} size={16} />
                                         {t!("services.label")}
                                     </FormLabel>
-                                    <Select
-                                        onValueChange={field.onChange}
-                                        defaultValue={field.value}
+                                    <Popover
+                                        open={isOpen}
+                                        onOpenChange={setIsOpen}
                                     >
-                                        <FormControl>
-                                            <SelectTrigger className="border-none bg-zinc-100 text-base shadow-sm outline-none transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm">
-                                                <SelectValue />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            <SelectItem value="invest">
-                                                {t!("services.invest")}
-                                            </SelectItem>
-                                            <SelectItem value="cleanup">
-                                                {t!("services.cleanup")}
-                                            </SelectItem>
-                                            <SelectItem value="care">
-                                                {t!("services.care")}
-                                            </SelectItem>
-                                            <SelectItem value="protection">
-                                                {t!("services.protection")}
-                                            </SelectItem>
-                                            <SelectItem value="grass">
-                                                {t!("services.grass")}
-                                            </SelectItem>
-                                            <SelectItem value="water">
-                                                {t!("services.water")}
-                                            </SelectItem>
-                                        </SelectContent>
-                                    </Select>
+                                        <PopoverTrigger asChild>
+                                            <FormControl>
+                                                <Button
+                                                    variant="outline"
+                                                    role="combobox"
+                                                    aria-expanded={isOpen}
+                                                    className={cn(
+                                                        "w-full justify-between border-none bg-zinc-100 font-normal text-muted-foreground",
+                                                    )}
+                                                >
+                                                    {field.value!.length > 0
+                                                        ? field
+                                                              .value!.map(
+                                                                  (service) =>
+                                                                      t!(
+                                                                          `services.${service}`,
+                                                                      ),
+                                                              )
+                                                              .join(", ")
+                                                        : t!(
+                                                              "services.placeholder",
+                                                          )}
+                                                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                </Button>
+                                            </FormControl>
+                                        </PopoverTrigger>
+                                        <PopoverContent className="w-full! space-y-2">
+                                            {[
+                                                "invest",
+                                                "cleanup",
+                                                "care",
+                                                "protection",
+                                                "grass",
+                                                "water",
+                                            ].map((service) => (
+                                                <div
+                                                    key={service}
+                                                    className="flex items-center space-x-2"
+                                                >
+                                                    <Checkbox
+                                                        className="size-6 rounded-full border-zinc-200 data-[state=checked]:border-green data-[state=checked]:bg-green"
+                                                        id={service}
+                                                        checked={field.value!.includes(
+                                                            service.toString(),
+                                                        )}
+                                                        onCheckedChange={(
+                                                            checked,
+                                                        ) => {
+                                                            console.log(
+                                                                service.toString(),
+                                                            );
+                                                            const updatedValue =
+                                                                checked
+                                                                    ? [
+                                                                          ...field.value!,
+                                                                          service,
+                                                                      ]
+                                                                    : field.value!.filter(
+                                                                          (
+                                                                              val,
+                                                                          ) =>
+                                                                              val !==
+                                                                              service,
+                                                                      );
+
+                                                            if (
+                                                                updatedValue.length <=
+                                                                3
+                                                            ) {
+                                                                field.onChange(
+                                                                    updatedValue,
+                                                                );
+                                                            }
+                                                        }}
+                                                    />
+                                                    <label
+                                                        htmlFor={service}
+                                                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                                    >
+                                                        {t!(
+                                                            `services.${service}`,
+                                                        )}
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </PopoverContent>
+                                    </Popover>
                                     <FormMessage />
                                 </FormItem>
                             )}

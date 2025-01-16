@@ -883,7 +883,7 @@ export default function Booking() {
     const t = useTranslations("Pages.Booking");
     const router = useRouter();
     const [api, setApi] = useState<CarouselApi>();
-    const formSchema = BookingSchema(t);
+    const formSchema = BookingSchema((key) => t!(`form.errors.${key}`));
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loading, setLoading] = useState(false);
     const form = useForm<z.infer<typeof formSchema>>({

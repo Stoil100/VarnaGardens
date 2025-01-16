@@ -5,30 +5,30 @@ export const BookingSchema = (t: (arg: string) => string) =>
         .object({
             name: z
                 .string({
-                    required_error: t("form.errors.name.required"),
+                    required_error: t("name.required"),
                 })
-                .min(2, { message: t("form.errors.name.min") })
-                .max(50, { message: t("form.errors.name.max") }),
+                .min(2, { message: t("name.min") })
+                .max(50, { message: t("name.max") }),
             email: z
                 .string({
-                    required_error: t("form.errors.email.required"),
+                    required_error: t("email.required"),
                 })
-                .email({ message: t("form.errors.email.invalid") }),
+                .email({ message: t("email.invalid") }),
             phone: z
                 .string({
-                    required_error: t("form.errors.phone.required"),
+                    required_error: t("phone.required"),
                 })
                 .regex(
                     /^\+?[0-9]{1,3}?[-. ]?(\(?\d{1,4}\)?)?[-. ]?\d{1,4}[-. ]?\d{1,4}[-. ]?\d{1,9}$/,
                     {
-                        message: t("form.errors.phone.invalid"),
+                        message: t("phone.invalid"),
                     },
                 ),
             address: z.string({
-                required_error: t("form.errors.address.required"),
+                required_error: t("address.required"),
             }),
             option: z.enum(["subscription", "service"], {
-                invalid_type_error: t("form.errors.option.invalid"),
+                invalid_type_error: t("option.invalid"),
             }),
         })
         .and(
@@ -37,16 +37,17 @@ export const BookingSchema = (t: (arg: string) => string) =>
                     option: z.literal("subscription"),
                     plan: z
                         .enum(["standart", "deluxe", "premium"], {
-                            invalid_type_error: t("form.errors.plan.invalid"),
+                            invalid_type_error: t("plan.invalid"),
                         })
                         .optional(),
                 }),
                 z.object({
                     option: z.literal("service"),
                     services: z
-                        .array(z.string()).max(3,{message: t("form.errors.services.max")})
+                        .array(z.string())
+                        .max(3, { message: t("services.max") })
                         .refine((value) => value.some((item) => item), {
-                            message: t("form.errors.services.required"),
+                            message: t("services.required"),
                         })
                         .optional(),
                 }),

@@ -38,7 +38,7 @@
                     },
                     "services": {
                         "label": "Service",
-                        "placeholder": "",
+                        "placeholder": "Select services...",
                         "cleanup": "Cleanup",
                         "care": "Care",
                         "protection": "Protection",
@@ -68,7 +68,14 @@
                         "address": {
                             "required": "Address is required."
                         },
+                        "option": {
+                            "invalid": "Invalid option selected."
+                        },
+                        "plan": {
+                            "invalid": "Invalid plan selected."
+                        },
                         "services": {
+                            "max": "You can select up to 3 services",
                             "invalid": "Invalid service selected.",
                             "required": "You must select at least one service."
                         }
@@ -158,9 +165,9 @@
                 ]
             },
             "articlesSection": {
-                "title":"Useful tips and ideas for your garden",
-                "description":"Discover interesting articles full of useful tips to maintain and enrich your garden",
-                "button":"To Articles"
+                "title": "Useful tips and ideas for your garden",
+                "description": "Discover interesting articles full of useful tips to maintain and enrich your garden",
+                "button": "To Articles"
             },
             "stepsSection": {
                 "title": "A Few Easy Steps to Your Green Paradise",
