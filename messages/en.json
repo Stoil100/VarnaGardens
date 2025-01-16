@@ -156,6 +156,11 @@
                     { "label": "Irrigation Systems" }
                 ]
             },
+            "articlesSection": {
+                "title":"Useful tips and ideas for your garden",
+                "description":"Discover interesting articles full of useful tips to maintain and enrich your garden",
+                "button":"To Articles"
+            },
             "stepsSection": {
                 "title": "A Few Easy Steps to Your Green Paradise",
                 "button": "Get an Offer",

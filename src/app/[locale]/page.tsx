@@ -29,7 +29,15 @@ import {
 } from "@/components/ui/select";
 import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+import { ArticleT } from "@/models/article";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+    collection,
+    getDocs,
+    limit,
+    query,
+    where
+} from "firebase/firestore";
 import {
     ArrowLeft,
     ArrowRight,
@@ -45,10 +53,17 @@ import {
     User,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useCallback, useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { db } from "../../../firebase/firebase.config";
+
+type SectionProps = {
+    t?: (arg: string) => string;
+    router?: AppRouterInstance;
+};
 const HeroBookingForm = () => {
     const t = useTranslations("Pages.Home.heroSection.form");
     const formSchema = HeroBookingSchema(t);
@@ -246,9 +261,7 @@ const HeroBookingForm = () => {
         </div>
     );
 };
-const HeroSection: React.FC = () => {
-    const t = useTranslations("Pages.Home.heroSection");
-    const router = useRouter();
+const HeroSection: React.FC<SectionProps> = ({ t, router }) => {
     return (
         <section
             id="hero"
@@ -258,19 +271,19 @@ const HeroSection: React.FC = () => {
                 <div className="flex h-full max-h-[500px] flex-col items-center justify-between gap-4 text-center text-white md:max-w-xs md:items-start md:text-left lg:max-w-lg xl:max-w-2xl 2xl:max-w-3xl">
                     <div className="space-y-4 md:space-y-8">
                         <h2 className="font-cormorant text-4xl md:text-5xl xl:text-6xl">
-                            {t("title")}
+                            {t!("title")}
                         </h2>
                         <MainButton
                             className="hover:bg-white md:px-6 md:text-2xl"
                             onClick={() => {
-                                router.push("/contact");
+                                router!.push("/contact");
                             }}
                         >
-                            {t("button")}
+                            {t!("button")}
                         </MainButton>
                     </div>
                     <p className="text-xl font-extralight md:max-w-xs">
-                        {t("description")}
+                        {t!("description")}
                     </p>
                 </div>
                 <div className="hidden md:block xl:min-w-[400px]">
@@ -337,42 +350,40 @@ const PlanCard: React.FC<PlanCardProps> = ({
         </Link>
     );
 };
-function PlansSection() {
-    const t = useTranslations("Pages.Home.plansSection");
-
+const PlansSection: React.FC<SectionProps> = ({ t }) => {
     const plans: PlanCardProps[] = [
         {
             icon: <Sprout />,
-            title: t("plans.standard.title"),
-            description: t("plans.standard.description"),
+            title: t!("plans.standard.title"),
+            description: t!("plans.standard.description"),
             features: [
-                t("plans.standard.features.0"),
-                t("plans.standard.features.1"),
-                t("plans.standard.features.2"),
-                t("plans.standard.features.3"),
+                t!("plans.standard.features.0"),
+                t!("plans.standard.features.1"),
+                t!("plans.standard.features.2"),
+                t!("plans.standard.features.3"),
             ],
         },
         {
             icon: <Flower2 />,
-            title: t("plans.deluxe.title"),
-            description: t("plans.deluxe.description"),
+            title: t!("plans.deluxe.title"),
+            description: t!("plans.deluxe.description"),
             features: [
-                t("plans.deluxe.features.0"),
-                t("plans.deluxe.features.1"),
-                t("plans.deluxe.features.2"),
-                t("plans.deluxe.features.3"),
+                t!("plans.deluxe.features.0"),
+                t!("plans.deluxe.features.1"),
+                t!("plans.deluxe.features.2"),
+                t!("plans.deluxe.features.3"),
             ],
             popular: true,
         },
         {
             icon: <TreeDeciduous />,
-            title: t("plans.premium.title"),
-            description: t("plans.premium.description"),
+            title: t!("plans.premium.title"),
+            description: t!("plans.premium.description"),
             features: [
-                t("plans.premium.features.0"),
-                t("plans.premium.features.1"),
-                t("plans.premium.features.2"),
-                t("plans.premium.features.3"),
+                t!("plans.premium.features.0"),
+                t!("plans.premium.features.1"),
+                t!("plans.premium.features.2"),
+                t!("plans.premium.features.3"),
             ],
         },
     ];
@@ -381,10 +392,10 @@ function PlansSection() {
         <section className="flex flex-col items-center gap-4 p-2 md:p-8">
             <div className="mb-2 flex max-w-2xl flex-col items-center justify-center gap-4 p-2 text-center md:p-8">
                 <h2 className="max-w-xl text-4xl md:text-5xl">
-                    {t("heading")}
+                    {t!("heading")}
                 </h2>
                 <p className="text-xl font-light text-zinc-400">
-                    {t("subheading")}
+                    {t!("subheading")}
                 </p>
             </div>
             <div className="grid w-full grid-cols-1 content-center gap-6 p-2 md:grid-cols-3 md:p-8 xl:gap-0">
@@ -399,7 +410,7 @@ function PlansSection() {
             </div>
         </section>
     );
-}
+};
 const ServiceItem = ({
     title,
     description,
@@ -431,9 +442,7 @@ const ServiceItem = ({
         </Link>
     );
 };
-function ServicesSection() {
-    const t = useTranslations("Pages.Home.servicesSection");
-
+const ServicesSection: React.FC<SectionProps> = ({ t }) => {
     const services = [
         { image: "/service.png" }, // Static properties
         { image: "/service.png" },
@@ -442,14 +451,14 @@ function ServicesSection() {
         { image: "/service.png" },
     ].map((service, index) => ({
         ...service,
-        title: t(`services.${index}.title`),
-        description: t(`services.${index}.description`),
+        title: t!(`services.${index}.title`),
+        description: t!(`services.${index}.description`),
     }));
 
     return (
         <section id="services">
             <h2 className="p-8 text-center text-4xl md:text-left md:text-5xl">
-                {t("title")}
+                {t!("title")}
             </h2>
             <div>
                 {services.map((service, index) => (
@@ -458,14 +467,12 @@ function ServicesSection() {
             </div>
         </section>
     );
-}
-function GallerySection() {
+};
+const GallerySection: React.FC<SectionProps> = ({ t }) => {
     const [open, setOpen] = useState(false);
     const [activeIndex, setActiveIndex] = useState<number>();
     const [activeTabIndex, setActiveTabIndex] = useState<number>();
     const [api, setApi] = useState<CarouselApi>();
-    const t = useTranslations("Pages.Home.gallerySection");
-
     useEffect(() => {
         if (!api) {
             return;
@@ -555,7 +562,7 @@ function GallerySection() {
         },
     ].map((villa, index) => ({
         ...villa,
-        title: t(`villas.${index}.title`),
+        title: t!(`villas.${index}.title`),
     }));
 
     const stats = [
@@ -565,7 +572,7 @@ function GallerySection() {
         { value: 10 },
     ].map((stat, index) => ({
         ...stat,
-        label: t(`stats.${index}.label`),
+        label: t!(`stats.${index}.label`),
     }));
 
     return (
@@ -575,11 +582,11 @@ function GallerySection() {
         >
             <div className="flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between">
                 <h2 className="max-w-xl text-center text-4xl md:text-left md:text-5xl">
-                    {t("title")}
+                    {t!("title")}
                 </h2>
                 <div className="flex max-w-xs flex-col items-center space-y-2 text-center md:items-end md:text-right">
-                    <MainButton>{t("button")}</MainButton>
-                    <p className="text-zinc font-light">{t("description")}</p>
+                    <MainButton>{t!("button")}</MainButton>
+                    <p className="text-zinc font-light">{t!("description")}</p>
                 </div>
             </div>
             <div className="grid h-full auto-rows-[minmax(200px,_1fr)] grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -715,10 +722,131 @@ function GallerySection() {
             )}
         </section>
     );
-}
-function StepsSection() {
-    const t = useTranslations("Pages.Home.stepsSection");
-    const router = useRouter();
+};
+const ArticlesSection: React.FC<SectionProps> = ({ t, router }) => {
+    const [importantArticle, setImportantArticle] = useState<ArticleT | null>(
+        null,
+    );
+    const [notableArticles, setNotableArticles] = useState<ArticleT[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchArticles = async () => {
+            setLoading(true);
+            try {
+                const articlesRef = collection(db, "articles");
+
+                // Fetch one latest "important" article
+                const importantQuery = query(
+                    articlesRef,
+                    where("type", "==", "important"),
+                    // orderBy("uploadedAt", "desc"),
+                    limit(1),
+                );
+                const importantSnapshot = await getDocs(importantQuery);
+                const importantData = importantSnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                }))[0] as ArticleT | undefined;
+
+                // Fetch two latest "notable" articles
+                const notableQuery = query(
+                    articlesRef,
+                    where("type", "==", "notable"),
+                    // orderBy("uploadedAt", "desc"),
+                    limit(2),
+                );
+                const notableSnapshot = await getDocs(notableQuery);
+                const notableData = notableSnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data(),
+                })) as ArticleT[];
+
+                setImportantArticle(importantData || null);
+                setNotableArticles(notableData);
+            } catch (err) {
+                console.error("Error fetching articles:", err);
+                setError("Failed to load articles");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchArticles();
+    }, []);
+    return (
+        <section className="mb-8 flex h-fit flex-col space-y-6 p-2 md:min-h-screen md:p-8">
+            <div className="flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between">
+                <h2 className="max-w-xl text-center text-4xl md:text-left md:text-5xl">
+                    {t!("title")}
+                </h2>
+                <div className="flex max-w-xs flex-col items-center space-y-2 text-center md:items-end md:text-right">
+                    <p className="text-zinc font-light">{t!("description")}</p>
+                    <MainButton
+                        onClick={() => {
+                            router!.push("articles");
+                        }}
+                    >
+                        {t!("button")}
+                    </MainButton>
+                </div>
+            </div>
+            <div className="grid h-full flex-1 grid-flow-dense grid-cols-1 gap-4 md:grid-cols-2">
+                {importantArticle && (
+                    <Link
+                        href={`/articles/${importantArticle.id}`}
+                        className="group relative col-span-1 flex flex-col rounded-2xl border md:row-span-2"
+                    >
+                        <p className="absolute right-2 top-1 text-xl font-extralight text-white">
+                            {importantArticle.date}
+                        </p>
+                        <div
+                            style={{
+                                backgroundImage: `url('${importantArticle.heroImage}')`,
+                            }}
+                            className="h-full rounded-2xl bg-cover bg-center max-md:h-72"
+                        />
+                        <div className="flex items-center justify-between gap-1 px-2 py-2">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl">
+                                {importantArticle.title}
+                            </h3>
+                            <div className="drop-shadow-lg">
+                                <ArrowRight className="size-8 rounded-full border bg-white text-zinc-700 transition-all duration-300 group-hover:-rotate-45 group-hover:bg-green group-hover:text-white" />
+                            </div>
+                        </div>
+                    </Link>
+                )}
+
+                {notableArticles.map((article) => (
+                    <Link
+                        href={`/articles/${article.id}`}
+                        key={article.id}
+                        className="group relative col-span-1 row-span-1 hidden flex-col rounded-2xl border md:flex"
+                    >
+                        <p className="absolute right-2 top-1 text-xl font-extralight text-white">
+                            {article.date}
+                        </p>
+                        <div
+                            style={{
+                                backgroundImage: `url('${article.heroImage}')`,
+                            }}
+                            className="h-full rounded-2xl bg-cover bg-center"
+                        />
+
+                        <div className="flex items-center justify-between p-2">
+                            <h3 className="text-3xl">{article.title}</h3>
+                            <div className="drop-shadow-lg">
+                                <ArrowRight className="size-8 rounded-full border bg-white text-zinc-700 transition-all duration-300 group-hover:-rotate-45 group-hover:bg-green group-hover:text-white" />
+                            </div>
+                        </div>
+                    </Link>
+                ))}
+            </div>
+        </section>
+    );
+};
+const StepsSection: React.FC<SectionProps> = ({ t, router }) => {
     const steps = [
         {
             icon: <h2 className="my-4 text-7xl font-medium text-green">01</h2>,
@@ -734,19 +862,19 @@ function StepsSection() {
         },
     ].map((step, index) => ({
         ...step,
-        title: t(`steps.${index}.title`),
-        description: t(`steps.${index}.description`),
+        title: t!(`steps.${index}.title`),
+        description: t!(`steps.${index}.description`),
     }));
     return (
         <section>
             <div className="mb-2 flex flex-col gap-4 p-2 max-md:items-center max-md:text-center md:flex-row md:justify-between md:p-8">
-                <h2 className="max-w-xl text-4xl md:text-5xl">{t("title")}</h2>
+                <h2 className="max-w-xl text-4xl md:text-5xl">{t!("title")}</h2>
                 <MainButton
                     onClick={() => {
-                        router.push("/booking");
+                        router!.push("/booking");
                     }}
                 >
-                    {t("button")}
+                    {t!("button")}
                 </MainButton>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2">
@@ -765,40 +893,50 @@ function StepsSection() {
             </div>
         </section>
     );
-}
-function FooterSection() {
-    const t = useTranslations("Pages.Home.footerSection");
-    const router = useRouter();
+};
+const FooterSection: React.FC<SectionProps> = ({ t, router }) => {
     return (
         <section className="h-[50vh] bg-[url('/footerBG.png')] bg-cover bg-center">
             <div className="flex h-full w-full flex-col items-center justify-center bg-[#228B0E]/60">
                 <h1 className="font-cormorant text-[13vw] text-white">
-                    {t("title")}
+                    {t!("title")}
                 </h1>
                 <MainButton
                     variant="transparent"
                     className="border-white text-white hover:border-green"
                     onClick={() => {
-                        router.push("/booking");
+                        router!.push("/booking");
                     }}
                 >
-                    <span>{t("button")}</span>
+                    <span>{t!("button")}</span>
                     <ArrowRight />
                 </MainButton>
             </div>
         </section>
     );
-}
+};
 
 export default function Home() {
+    const t = useTranslations("Pages.Home");
+    const router = useRouter();
     return (
         <main className="h-fit w-full">
-            <HeroSection />
-            <PlansSection />
-            <ServicesSection />
-            <GallerySection />
-            <StepsSection />
-            <FooterSection />
+            <HeroSection t={(key) => t(`heroSection.${key}`)} router={router} />
+            <PlansSection t={(key) => t(`plansSection.${key}`)} />
+            <ServicesSection t={(key) => t(`servicesSection.${key}`)} />
+            <GallerySection t={(key) => t(`gallerySection.${key}`)} />
+            <ArticlesSection
+                t={(key) => t(`articlesSection.${key}`)}
+                router={router}
+            />
+            <StepsSection
+                t={(key) => t(`stepsSection.${key}`)}
+                router={router}
+            />
+            <FooterSection
+                t={(key) => t(`footerSection.${key}`)}
+                router={router}
+            />
         </main>
     );
 }
