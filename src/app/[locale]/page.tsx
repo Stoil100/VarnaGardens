@@ -31,12 +31,14 @@ import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { ArticleT } from "@/models/article";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import {
+    addDoc,
     collection,
     getDocs,
     limit,
     query,
-    where
+    where,
 } from "firebase/firestore";
 import {
     ArrowLeft,
@@ -52,7 +54,7 @@ import {
     TreeDeciduous,
     User,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useCallback, useEffect, useState } from "react";
 import CountUp from "react-countup";
@@ -64,9 +66,9 @@ type SectionProps = {
     t?: (arg: string) => string;
     router?: AppRouterInstance;
 };
-const HeroBookingForm = () => {
-    const t = useTranslations("Pages.Home.heroSection.form");
-    const formSchema = HeroBookingSchema(t);
+const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
+    const locale = useLocale();
+    const formSchema = HeroBookingSchema(t!);
     const [isSubmited, setIsSubmited] = useState(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -79,9 +81,23 @@ const HeroBookingForm = () => {
             services: "invest",
         },
     });
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        setIsSubmited(true);
-        console.log(values);
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        try {
+            const docRef = await addDoc(collection(db, "bookings"), {
+                ...values,
+                status: "pending",
+            });
+            await axios.post("/api/mail", {
+                values,
+                status: "pending",
+                id: docRef.id,
+                locale: locale,
+            });
+        } catch (error) {
+            console.error("Error during submission:", error);
+        } finally {
+            setIsSubmited(true);
+        }
     }
     return (
         <div className="relative overflow-hidden md:drop-shadow-xl">
@@ -92,7 +108,7 @@ const HeroBookingForm = () => {
                 >
                     <div className="flex items-center justify-between gap-2">
                         <BookMarked />
-                        <h3 className="text-2xl">{t("title")}</h3>
+                        <h3 className="text-2xl">{t!("title")}</h3>
                     </div>
                     <div className="w-full space-y-4">
                         <FormField
@@ -102,12 +118,12 @@ const HeroBookingForm = () => {
                                 <FormItem>
                                     <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <User fontWeight={1} size={16} />
-                                        {t("name.label")}
+                                        {t!("name.label")}
                                     </FormLabel>
                                     <FormControl>
                                         <Input
                                             className="border-none bg-zinc-100 outline-none"
-                                            placeholder={t("name.placeholder")}
+                                            placeholder={t!("name.placeholder")}
                                             {...field}
                                         />
                                     </FormControl>
@@ -122,12 +138,14 @@ const HeroBookingForm = () => {
                                 <FormItem>
                                     <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <Mail fontWeight={1} size={16} />
-                                        {t("email.label")}
+                                        {t!("email.label")}
                                     </FormLabel>
                                     <FormControl>
                                         <Input
                                             className="border-none bg-zinc-100 outline-none"
-                                            placeholder={t("email.placeholder")}
+                                            placeholder={t!(
+                                                "email.placeholder",
+                                            )}
                                             {...field}
                                         />
                                     </FormControl>
@@ -142,7 +160,7 @@ const HeroBookingForm = () => {
                                 <FormItem>
                                     <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <Phone fontWeight={1} size={16} />
-                                        {t("phone.label")}
+                                        {t!("phone.label")}
                                     </FormLabel>
                                     <div className="flex items-center gap-2">
                                         <p className="flex h-9 items-center justify-center rounded-md bg-zinc-100 px-3 py-1 text-zinc-500">
@@ -151,7 +169,7 @@ const HeroBookingForm = () => {
                                         <FormControl>
                                             <Input
                                                 className="border-none bg-zinc-100 outline-none"
-                                                placeholder={t(
+                                                placeholder={t!(
                                                     "phone.placeholder",
                                                 )}
                                                 {...field}
@@ -169,12 +187,12 @@ const HeroBookingForm = () => {
                                 <FormItem>
                                     <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <MapPin fontWeight={1} size={16} />
-                                        {t("address.label")}
+                                        {t!("address.label")}
                                     </FormLabel>
                                     <FormControl>
                                         <Input
                                             className="border-none bg-zinc-100 outline-none"
-                                            placeholder={t(
+                                            placeholder={t!(
                                                 "address.placeholder",
                                             )}
                                             {...field}
@@ -191,7 +209,7 @@ const HeroBookingForm = () => {
                                 <FormItem>
                                     <FormLabel className="text-md flex items-center gap-1 font-light text-zinc-400">
                                         <PencilRuler fontWeight={1} size={16} />
-                                        {t("services.label")}
+                                        {t!("services.label")}
                                     </FormLabel>
                                     <Select
                                         onValueChange={field.onChange}
@@ -204,22 +222,22 @@ const HeroBookingForm = () => {
                                         </FormControl>
                                         <SelectContent>
                                             <SelectItem value="invest">
-                                                {t("services.invest")}
+                                                {t!("services.invest")}
                                             </SelectItem>
                                             <SelectItem value="cleanup">
-                                                {t("services.cleanup")}
+                                                {t!("services.cleanup")}
                                             </SelectItem>
                                             <SelectItem value="care">
-                                                {t("services.care")}
+                                                {t!("services.care")}
                                             </SelectItem>
                                             <SelectItem value="protection">
-                                                {t("services.protection")}
+                                                {t!("services.protection")}
                                             </SelectItem>
                                             <SelectItem value="grass">
-                                                {t("services.grass")}
+                                                {t!("services.grass")}
                                             </SelectItem>
                                             <SelectItem value="water">
-                                                {t("services.water")}
+                                                {t!("services.water")}
                                             </SelectItem>
                                         </SelectContent>
                                     </Select>
@@ -235,7 +253,7 @@ const HeroBookingForm = () => {
                             variant="transparent"
                             className="w-full"
                         >
-                            {t("submit")}
+                            {t!("submit")}
                         </MainButton>
                         <MainButton
                             type="button"
@@ -253,9 +271,9 @@ const HeroBookingForm = () => {
                 )}
             >
                 <CircleCheckBig size={128} className="mb-4 text-green" />
-                <h2 className="text-4xl">{t("submitted.title")}</h2>
+                <h2 className="text-4xl">{t!("submitted.title")}</h2>
                 <h5 className="text-xl font-light">
-                    {t("submitted.description")}
+                    {t!("submitted.description")}
                 </h5>
             </div>
         </div>
@@ -287,11 +305,11 @@ const HeroSection: React.FC<SectionProps> = ({ t, router }) => {
                     </p>
                 </div>
                 <div className="hidden md:block xl:min-w-[400px]">
-                    <HeroBookingForm />
+                    <HeroBookingForm t={(key) => t!(`form.${key}`)} />
                 </div>
             </div>
             <div className="flex justify-center md:hidden">
-                <HeroBookingForm />
+                <HeroBookingForm t={(key) => t!(`form.${key}`)} />
             </div>
         </section>
     );
