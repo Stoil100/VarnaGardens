@@ -9,6 +9,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import MainButton from "@/components/MainButton";
+import { Trash2 } from "lucide-react";
 
 type TitleDescriptionsProps = {
     control: Control<any>;
@@ -47,7 +48,10 @@ export function TitleDescriptions({
                                         onClick={() => remove(index)}
                                         variant="destructive"
                                     >
-                                        {t("removeButton")}
+                                        <p className="max-md:hidden">
+                                            {t("removeButton")}
+                                        </p>
+                                        <Trash2 className="md:hidden" />
                                     </Button>
                                 </div>
                             </FormControl>

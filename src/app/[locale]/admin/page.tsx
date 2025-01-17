@@ -329,7 +329,7 @@ export default function Admin() {
                         <h3 className="text-4xl">Upload Articles:</h3>
                         <ArticleForm />
                     </div>
-                    <ScrollArea className="flex h-fit max-h-screen flex-col gap-4">
+                    <div className="flex h-fit  flex-col gap-4">
                         <h1 className="text-4xl">{t("bookings.title")}</h1>
                         {bookings.length < 1 ? (
                             <p>{t("bookings.notFound")}</p>
@@ -471,8 +471,8 @@ export default function Admin() {
                                 </div>
                             </div>
                         )}
-                        <ScrollBar />
-                    </ScrollArea>
+                        {/* <ScrollBar /> */}
+                    </div>
                     <div className="flex w-full justify-center">
                         <MainButton onClick={logOut} className="w-full">
                             {t("logout")} <LogOut />

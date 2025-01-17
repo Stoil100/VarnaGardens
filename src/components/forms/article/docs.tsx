@@ -9,6 +9,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import MainButton from "@/components/MainButton";
+import { Trash2 } from "lucide-react";
 
 type DocsProps = {
     control: Control<any>;
@@ -64,7 +65,8 @@ export function Docs({ control, name, t }: DocsProps) {
                         onClick={() => remove(index)}
                         variant="destructive"
                     >
-                        {t("removeButton")}
+                        <p className="max-md:hidden">{t("removeButton")}</p>
+                        <Trash2 className="md:hidden" />
                     </Button>
                 </div>
             ))}
@@ -114,7 +116,10 @@ function DocImages({
                                         onClick={() => remove(index)}
                                         variant="destructive"
                                     >
-                                        {t("removeButton")}
+                                        <p className="max-md:hidden">
+                                            {t("removeButton")}
+                                        </p>
+                                        <Trash2 className="md:hidden" />
                                     </Button>
                                 </div>
                             </FormControl>
@@ -182,7 +187,7 @@ function DocTexts({
                                                     })
                                                 }
                                                 placeholder={t(
-                                                    "listTitle.placeholder"
+                                                    "listTitle.placeholder",
                                                 )}
                                             />
                                             <DocTextListItems
@@ -199,7 +204,10 @@ function DocTexts({
                                         onClick={() => remove(index)}
                                         variant="destructive"
                                     >
-                                        {t("removeButton")}
+                                        <p className="max-md:hidden">
+                                            {t("removeButton")}
+                                        </p>
+                                        <Trash2 className="md:hidden" />
                                     </Button>
                                 </div>
                             </FormControl>
@@ -208,7 +216,7 @@ function DocTexts({
                     )}
                 />
             ))}
-            <div className="space-x-2">
+            <div className="flex flex-wrap gap-2">
                 <MainButton
                     variant="transparent"
                     type="button"
@@ -267,7 +275,10 @@ function DocTextListItems({
                                         onClick={() => remove(index)}
                                         variant="destructive"
                                     >
-                                        {t("removeButton")}
+                                        <p className="max-md:hidden">
+                                            {t("removeButton")}
+                                        </p>
+                                        <Trash2 className="md:hidden" />
                                     </Button>
                                 </div>
                             </FormControl>

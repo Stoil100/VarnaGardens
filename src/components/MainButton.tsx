@@ -11,7 +11,7 @@ export default function MainButton({
     variant?: "default" | "transparent";
 } & Omit<React.ComponentProps<typeof Button>, "variant">) {
     const baseClass =
-        "h-fit rounded-full px-4 py-1 border border-green text-xl font-extralight transition-all drop-shadow-lg";
+        "h-fit rounded-full px-4 py-1 border border-green max-sm:text-base text-wrap text-xl font-extralight transition-all drop-shadow-lg";
     const variantClasses = {
         default: "bg-green text-white hover:bg-transparent hover:text-green ",
         transparent:

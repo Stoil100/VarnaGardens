@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import MainButton from "@/components/MainButton"
+import { Trash2 } from "lucide-react"
 
 type DescriptionsProps = {
   control: Control<any>;
@@ -23,34 +24,46 @@ export function Descriptions({ control, name, t }: DescriptionsProps) {
   })
 
   return (
-    <div className="space-y-4 flex flex-col items-start">
-      <FormLabel>{t("label")}</FormLabel>
-      {fields.map((field, index) => (
-        <FormField
-          key={field.id}
-          control={control}
-          name={`${name}.${index}.value`}
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormControl>
-                <div className="flex items-center gap-2">
-                  <Input {...field} placeholder={t("placeholder")} />
-                  <Button type="button" onClick={() => remove(index)} variant="destructive">{t("removeButton")}</Button>
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      ))}
-      <MainButton
-        type="button"
-        variant="transparent"
-        onClick={() => append({ id: fields.length, value: '' })}
-      >
-        {t("addButton")}
-      </MainButton>
-    </div>
-  )
+      <div className="flex flex-col items-start space-y-4">
+          <FormLabel>{t("label")}</FormLabel>
+          {fields.map((field, index) => (
+              <FormField
+                  key={field.id}
+                  control={control}
+                  name={`${name}.${index}.value`}
+                  render={({ field }) => (
+                      <FormItem className="w-full">
+                          <FormControl>
+                              <div className="flex items-center gap-2">
+                                  <Input
+                                      {...field}
+                                      placeholder={t("placeholder")}
+                                  />
+                                  <Button
+                                      type="button"
+                                      onClick={() => remove(index)}
+                                      variant="destructive"
+                                  >
+                                      <p className="max-md:hidden">
+                                          {t("removeButton")}
+                                      </p>
+                                      <Trash2 className="md:hidden" />
+                                  </Button>
+                              </div>
+                          </FormControl>
+                          <FormMessage />
+                      </FormItem>
+                  )}
+              />
+          ))}
+          <MainButton
+              type="button"
+              variant="transparent"
+              onClick={() => append({ id: fields.length, value: "" })}
+          >
+              {t("addButton")}
+          </MainButton>
+      </div>
+  );
 }
 

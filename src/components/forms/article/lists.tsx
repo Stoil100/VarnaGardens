@@ -9,6 +9,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import MainButton from "@/components/MainButton";
+import { Trash2 } from "lucide-react";
 
 type ListsProps = {
     control: Control<any>;
@@ -26,7 +27,10 @@ export function Lists({ control, name, t }: ListsProps) {
         <div className="flex flex-col items-start gap-6">
             <FormLabel>{t("label")}</FormLabel>
             {fields.map((field, index) => (
-                <div key={field.id} className="w-full space-y-4 rounded border p-4">
+                <div
+                    key={field.id}
+                    className="w-full space-y-4 rounded border p-4"
+                >
                     <FormField
                         control={control}
                         name={`${name}.${index}.title`}
@@ -52,7 +56,8 @@ export function Lists({ control, name, t }: ListsProps) {
                         onClick={() => remove(index)}
                         variant="destructive"
                     >
-                        {t("removeButton")}
+                        <p className="max-md:hidden">{t("removeButton")}</p>
+                        <Trash2 className="md:hidden" />
                     </Button>
                 </div>
             ))}
@@ -101,7 +106,10 @@ function ListItems({
                                         onClick={() => remove(index)}
                                         variant="destructive"
                                     >
-                                        {t("removeButton")}
+                                        <p className="max-md:hidden">
+                                            {t("removeButton")}
+                                        </p>
+                                        <Trash2 className="md:hidden" />
                                     </Button>
                                 </div>
                             </FormControl>
