@@ -14,8 +14,8 @@ import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import LanguageButton from "./LanguageButton";
-import MainButton from "./MainButton";
 import LoadingOverlay from "./Loading";
+import MainButton from "./MainButton";
 export default function Navigation() {
     const t = useTranslations("Navigation");
     const router = useRouter();
@@ -25,7 +25,7 @@ export default function Navigation() {
     const [navLinks, setNavLinks] = useState<{ href: string; label: string }[]>(
         [],
     );
-    const [open,setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
     const [actionButtons, setActionButtons] = useState<
         { variant: string; label: string; href: string }[]
     >([]);
@@ -88,7 +88,7 @@ export default function Navigation() {
                 });
                 setOpen(false);
             }
-        }else if (href.startsWith("/")) {
+        } else if (href.startsWith("/")) {
             router.push(href);
         } else {
             setOpen(false);
@@ -145,7 +145,11 @@ export default function Navigation() {
                     <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild className="lg:hidden">
                             <div className="p-2">
-                                {open?<X className="h-6 w-6 text-green" />:<Menu className="h-6 w-6 text-green" />}
+                                {open ? (
+                                    <X className="h-6 w-6 text-green" />
+                                ) : (
+                                    <Menu className="h-6 w-6 text-green" />
+                                )}
                                 <span className="sr-only">
                                     {t("menu.toggle")}
                                 </span>
@@ -177,7 +181,9 @@ export default function Navigation() {
                                         key={button.label}
                                         href={button.href}
                                         className="w-full"
-                                        onClick={()=>{setOpen(false)}}
+                                        onClick={() => {
+                                            setOpen(false);
+                                        }}
                                     >
                                         <MainButton
                                             variant={
@@ -192,8 +198,8 @@ export default function Navigation() {
                                     </Link>
                                 ))}
                             </div>
-                            <div className="p-2 flex items-center justify-center">
-                            <LanguageButton/>
+                            <div className="flex items-center justify-center p-2">
+                                <LanguageButton />
                             </div>
                             <SheetDescription />
                         </SheetContent>

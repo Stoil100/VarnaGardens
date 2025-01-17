@@ -1,6 +1,5 @@
 import { AuthContextProvider } from "@/components/Providers";
 
-
 export default async function AdminLayout({
     children,
 }: Readonly<{
