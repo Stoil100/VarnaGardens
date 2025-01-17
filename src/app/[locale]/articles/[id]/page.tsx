@@ -1,16 +1,7 @@
 "use client";
 
-import { ArticleT } from "@/models/article";
-import {
-    collection,
-    doc,
-    getDoc,
-    onSnapshot,
-    orderBy,
-    query,
-} from "firebase/firestore";
-import React, { useCallback, useEffect, useState } from "react";
-import { db } from "../../../../../firebase/firebase.config";
+import LoadingOverlay from "@/components/Loading";
+import MainButton from "@/components/MainButton";
 import {
     Carousel,
     CarouselApi,
@@ -22,9 +13,11 @@ import {
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import MainButton from "@/components/MainButton";
+import { ArticleT } from "@/models/article";
+import { doc, getDoc } from "firebase/firestore";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import LoadingOverlay from "@/components/Loading";
+import React, { useCallback, useEffect, useState } from "react";
+import { db } from "../../../../../firebase/firebase.config";
 function useArticles(articleId: string) {
     const [article, setArticle] = useState<ArticleT>();
     const [loading, setLoading] = useState(true);

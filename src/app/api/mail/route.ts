@@ -4,7 +4,6 @@ import nodemailer from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export async function POST(req: Request) {
-    // const locale=getLocale();
     try {
         const { values, id, status, locale } = await req.json();
         const { name, email, phone, address, option, plan, services } = values;
@@ -16,11 +15,11 @@ export async function POST(req: Request) {
 
         const transporter = nodemailer.createTransport({
             host: process.env.NEXT_PUBLIC_MAIL_HOST,
-            port: process.env.NEXT_PUBLIC_MAIL_PORT, // Typically 587 for TLS
+            port: process.env.NEXT_PUBLIC_MAIL_PORT,
             secure: process.env.NODE_ENV !== "development",
             auth: {
-                user: process.env.NEXT_PUBLIC_MAIL_USER, // Your email address
-                pass: process.env.NEXT_PUBLIC_MAIL_PASS, // Your email password or app-specific password
+                user: process.env.NEXT_PUBLIC_MAIL_USER,
+                pass: process.env.NEXT_PUBLIC_MAIL_PASS,
             },
         } as SMTPTransport.Options);
 
@@ -38,7 +37,6 @@ export async function POST(req: Request) {
         }
 
         const statusColor = getStatusColor(status);
-        // HTML email template
         const emailHTML = `
         <!DOCTYPE html>
         <html>
@@ -151,15 +149,12 @@ export async function POST(req: Request) {
         </body>
         </html>
       `;
-        // Email options
         const mailOptions = {
             from: '"Varna Gardens" <varnagardens@gmail.com>',
             to: email,
             subject: "Your Garden’s Makeover is on the Way!",
             html: emailHTML,
         };
-
-        // Send email
         await transporter.sendMail(mailOptions);
 
         return NextResponse.json({ success: true }, { status: 200 });

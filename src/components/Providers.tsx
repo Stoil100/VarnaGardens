@@ -1,6 +1,6 @@
 "use client";
+import { AuthT } from "@/models/auth";
 import { UserT } from "@/models/user";
-import { auth, db } from "../../firebase/firebase.config";
 import {
     AuthError,
     FacebookAuthProvider,
@@ -21,7 +21,7 @@ import {
     useEffect,
     useState,
 } from "react";
-import { AuthT } from "@/models/auth";
+import { auth, db } from "../../firebase/firebase.config";
 
 interface AuthContextType {
     user: UserT;

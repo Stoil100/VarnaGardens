@@ -2,11 +2,9 @@
 import { Link, useRouter } from "@/i18n/routing";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import logo from "../../public/logo.svg";
-import MainButton from "./MainButton";
 import Logo from "./Logo";
+import MainButton from "./MainButton";
 
 export default function Footer() {
     const t = useTranslations("Footer");

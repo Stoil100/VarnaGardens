@@ -1,12 +1,12 @@
 "use client";
+import LogoTextImage from "@/components/LogoText";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { ArticleT } from "@/models/article";
 import { collection, getDocs } from "firebase/firestore";
+import { Facebook, Instagram, Youtube } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { db } from "../../../../firebase/firebase.config";
-import LogoTextImage from "@/components/LogoText";
-import { Facebook, Instagram, Youtube } from "lucide-react";
 
 const Article: React.FC<ArticleT> = ({ ...article }) => (
     <Link

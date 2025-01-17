@@ -1,5 +1,7 @@
 "use client";
 import MainButton from "@/components/MainButton";
+import { BookingSchema } from "@/components/schemas/booking";
+import { Button } from "@/components/ui/button";
 import {
     Carousel,
     CarouselApi,
@@ -8,6 +10,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import {
     Form,
@@ -18,18 +21,17 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { ArticleT } from "@/models/article";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import {
     addDoc,
     collection,
@@ -41,7 +43,6 @@ import {
 import {
     ArrowLeft,
     ArrowRight,
-    Badge,
     BookMarked,
     ChevronsUpDown,
     CircleCheckBig,
@@ -53,7 +54,6 @@ import {
     Sprout,
     TreeDeciduous,
     User,
-    X,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
@@ -62,15 +62,6 @@ import CountUp from "react-countup";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { db } from "../../../firebase/firebase.config";
-import axios from "axios";
-import { Checkbox } from "@/components/ui/checkbox";
-import { BookingSchema } from "@/components/schemas/booking";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
 
 type SectionProps = {
     t?: (arg: string) => string;

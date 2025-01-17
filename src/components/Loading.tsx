@@ -1,5 +1,5 @@
-import Image from "next/image";
 import logo from "@/../public/logo.svg";
+import Image from "next/image";
 export default function LoadingOverlay() {
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
