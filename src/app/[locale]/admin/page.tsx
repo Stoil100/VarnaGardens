@@ -24,6 +24,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
     Check,
     Hourglass,
+    LogOut,
     Mail,
     MapPin,
     Phone,
@@ -222,7 +223,7 @@ const BookingComponent: React.FC<BookingProps> = ({ user, booking }) => {
 export default function Admin() {
     const t = useTranslations("Pages.Admin");
     const router = useRouter();
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [loading, setIsLoading] = useState(false);
     const [processedBookings, setProcessedBookings] =
@@ -233,11 +234,6 @@ export default function Admin() {
     const [selectedStatus, setSelectedStatus] = useState<string | undefined>(
         undefined,
     );
-    useEffect(() => {
-        if (!user?.approved) {
-            router.push("/");
-        }
-    }, [user, router]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -323,17 +319,17 @@ export default function Admin() {
                             router.push("/");
                         }}
                     >
-                         {t("noPermission.goBack")}
+                        {t("noPermission.goBack")}
                     </MainButton>
                 </div>
             )}
             {user.uid && user.approved === true && (
-                <section className="">
+                <section className="space-y-4">
                     <div className="rounded-xl border p-2">
                         <h3 className="text-4xl">Upload Articles:</h3>
-                        <ArticleForm/>
+                        <ArticleForm />
                     </div>
-                    <div className="flex min-h-screen flex-col gap-4">
+                    <ScrollArea className="flex h-fit max-h-screen flex-col gap-4">
                         <h1 className="text-4xl">{t("bookings.title")}</h1>
                         {bookings.length < 1 ? (
                             <p>{t("bookings.notFound")}</p>
@@ -475,6 +471,12 @@ export default function Admin() {
                                 </div>
                             </div>
                         )}
+                        <ScrollBar />
+                    </ScrollArea>
+                    <div className="flex w-full justify-center">
+                        <MainButton onClick={logOut} className="w-full">
+                            {t("logout")} <LogOut />
+                        </MainButton>
                     </div>
                 </section>
             )}

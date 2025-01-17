@@ -582,7 +582,8 @@
                     "deluxe": "Deluxe",
                     "premium": "Premium"
                 }
-            }
+            },
+            "logout":"Logout"
         }
     },
     "Footer": {

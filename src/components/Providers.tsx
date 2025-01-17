@@ -1,6 +1,6 @@
 "use client";
 import { UserT } from "@/models/user";
-import { auth,db } from "../../firebase/firebase.config";
+import { auth, db } from "../../firebase/firebase.config";
 import {
     AuthError,
     FacebookAuthProvider,
@@ -125,7 +125,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
     const handleUserAfterAuth = async (user: UserT) => {
         await createUserDocument(user);
-        // router.push(`/profile`);
     };
 
     const signUp = async (values: AuthT): Promise<boolean | AuthError> => {
@@ -167,7 +166,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
                 uid: userCredential.user.uid,
                 approved: docSnap.data()!.approved,
             });
-            // router.push(`/profile`);
         } catch (error) {
             return error as AuthError;
         }
@@ -192,9 +190,8 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
                 setUser({
                     email: result.user.email,
                     uid: result.user.uid,
-                    approved: docSnap.data()!.admin,
+                    approved: docSnap.data()!.approved,
                 });
-                router.push(`/profilе`);
             }
         } catch (error) {
             return error as AuthError;
@@ -222,7 +219,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
                     uid: result.user.uid,
                     approved: docSnap.data()!.approved,
                 });
-                // router.push(`/profile`);
             }
         } catch (error) {
             return error as AuthError;
