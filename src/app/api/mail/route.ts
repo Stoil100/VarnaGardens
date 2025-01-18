@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
         const transporter = nodemailer.createTransport({
             host: process.env.NEXT_PUBLIC_MAIL_HOST,
-            port: process.env.NEXT_PUBLIC_MAIL_PORT,
+            port: process.env.NODE_ENV !== "development" ? 465 : 587,
             secure: process.env.NODE_ENV !== "development",
             auth: {
                 user: process.env.NEXT_PUBLIC_MAIL_USER,
