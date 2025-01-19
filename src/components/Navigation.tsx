@@ -156,15 +156,15 @@ export default function Navigation() {
                             </div>
                         </SheetTrigger>
                         <SheetContent
-                            side="left"
-                            className="w-[300px] animate-ease-in-out sm:w-[400px]"
+                            side="top"
+                            className="w-full animate-ease-in-out flex justify-center flex-col"
                         >
                             <SheetHeader>
                                 <SheetTitle className="font-cormorant text-2xl text-primary">
                                     {t("brand")}
                                 </SheetTitle>
                             </SheetHeader>
-                            <div className="mt-4 flex flex-col gap-4">
+                            <div className="mt-4 flex flex-col gap-4 items-center">
                                 {navLinks.map((link) => (
                                     <button
                                         key={link.label}
@@ -180,7 +180,7 @@ export default function Navigation() {
                                     <Link
                                         key={button.label}
                                         href={button.href}
-                                        className="w-full"
+                                        className="w-full max-w-xs"
                                         onClick={() => {
                                             setOpen(false);
                                         }}
