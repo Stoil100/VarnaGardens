@@ -868,7 +868,7 @@ const ArticlesSection: React.FC<SectionProps> = ({ t, router }) => {
                     <p className="text-zinc font-light">{t!("description")}</p>
                     <MainButton
                         onClick={() => {
-                            router!.push("articles");
+                            router!.push("/articles");
                         }}
                     >
                         {t!("button")}
