@@ -190,7 +190,7 @@ export default async function AppLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="bg">
             <body
                 className={`${helvetica.variable} ${cormorant.variable} font-helvetica antialiased`}
             >
