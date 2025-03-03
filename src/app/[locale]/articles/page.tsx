@@ -23,18 +23,23 @@ const Article: React.FC<ArticleT> = ({ ...article }) => (
             className="h-full w-full transform object-cover transition-transform duration-500 ease-out group-hover:scale-110"
         />
         <div className="absolute top-2 flex w-full justify-between px-2">
-            <h4 className="text-xl font-extralight">{article.date}</h4>
+            <h4 className="text-md font-extralight sm:text-xl">
+                {article.date}
+            </h4>
         </div>
         <div className="absolute bottom-2 left-2 space-y-4">
             <h2
                 className={cn(
-                    article.type === "important" ? "text-5xl" : "text-4xl",
+                    "text-xl",
+                    article.type === "important"
+                        ? "sm:text-5xl"
+                        : "sm:text-4xl",
                 )}
             >
                 {article.title}
             </h2>
             {article.type === "important" && (
-                <p className="text-lg font-extralight">
+                <p className="text-lg font-extralight max-md:hidden">
                     {article.titleDescriptions![0].value}
                 </p>
             )}
@@ -254,14 +259,15 @@ export default function Articles() {
     }
 
     const fillerOptions = [
-        <div
-            className="col-span-1 row-span-1 flex items-center justify-center rounded-2xl border-2 border-green bg-white text-center"
+        <Link
+            href="/"
+            className="col-span-1 row-span-1 flex aspect-square items-center justify-center rounded-2xl border-2 border-green bg-white text-center"
             key="filler-1"
         >
             <LogoTextImage />
-        </div>,
+        </Link>,
         <div
-            className="col-span-1 row-span-1 flex items-center justify-center gap-4 rounded-2xl border-8 border-double border-white bg-green text-center text-white"
+            className="col-span-1 row-span-1 flex aspect-square items-center justify-center gap-4 rounded-2xl border-8 border-double border-white bg-green text-center text-white"
             key="filler-2"
         >
             <Link
@@ -287,13 +293,13 @@ export default function Articles() {
             </Link>
         </div>,
         <div
-            className="col-span-1 row-span-1 flex items-center justify-center rounded-2xl border-2 border-green bg-white text-center text-green"
+            className="col-span-1 row-span-1 flex aspect-square items-center justify-center rounded-2xl border-2 border-green bg-white text-center text-green"
             key="filler-3"
         >
             <span className="font-cormorant text-6xl">Varna Gardens</span>
         </div>,
         <div
-            className="col-span-1 row-span-1 flex flex-col items-center justify-center rounded-2xl border-8 border-double border-white bg-green p-2 text-center text-white"
+            className="col-span-1 row-span-1 flex aspect-square flex-col items-center justify-center rounded-2xl border-8 border-double border-white bg-green p-2 text-center text-white"
             key="filler-4"
         >
             <span className="font-cormorant text-2xl font-light">
@@ -319,13 +325,11 @@ export default function Articles() {
         return React.cloneElement(randomFiller, { key: `filler-${index}` });
     });
     return (
-        <section className="min-h-screen p-3 md:p-8">
-            <div className="grid grid-flow-dense grid-cols-4 gap-3 md:auto-cols-[calc(33vw-2rem)] md:auto-rows-[calc(33vw-2rem)] lg:auto-cols-[calc(25vw-2rem)] lg:auto-rows-[calc(25vw-2rem)]">
-                {articles.map((article) => (
-                    <Article key={article.id} {...article} />
-                ))}
-                {fillers}
-            </div>
+        <section className="grid-auto-flow-dense grid min-h-screen w-full grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-4">
+            {articles.map((article) => (
+                <Article key={article.id} {...article} />
+            ))}
+            {fillers}
         </section>
     );
 }
