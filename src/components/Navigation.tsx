@@ -142,68 +142,70 @@ export default function Navigation() {
                             </Link>
                         ))}
                     </div>
-                    <Sheet open={open} onOpenChange={setOpen}>
-                        <SheetTrigger asChild className="lg:hidden">
-                            <div className="p-2">
-                                {open ? (
-                                    <X className="h-6 w-6 text-green" />
-                                ) : (
-                                    <Menu className="h-6 w-6 text-green" />
-                                )}
-                                <span className="sr-only">
-                                    {t("menu.toggle")}
-                                </span>
-                            </div>
-                        </SheetTrigger>
-                        <SheetContent
-                            side="top"
-                            className="w-full animate-ease-in-out flex justify-center flex-col"
-                        >
-                            <SheetHeader>
-                                <SheetTitle className="font-cormorant text-2xl text-primary">
-                                    {t("brand")}
-                                </SheetTitle>
-                            </SheetHeader>
-                            <div className="mt-4 flex flex-col gap-4 items-center">
-                                {navLinks.map((link) => (
-                                    <button
-                                        key={link.label}
-                                        onClick={() =>
-                                            handleNavigation(link.href)
-                                        }
-                                        className="text-lg font-light text-muted-foreground transition hover:text-primary"
-                                    >
-                                        {link.label}
-                                    </button>
-                                ))}
-                                {actionButtons.map((button) => (
-                                    <Link
-                                        key={button.label}
-                                        href={button.href}
-                                        className="w-full max-w-xs"
-                                        onClick={() => {
-                                            setOpen(false);
-                                        }}
-                                    >
-                                        <MainButton
-                                            variant={
-                                                button.variant as
-                                                    | "default"
-                                                    | "transparent"
+                    <div className="flex items-center justify-center lg:hidden">
+                        <div className="flex items-center justify-center">
+                            <LanguageButton />
+                        </div>
+                        <Sheet open={open} onOpenChange={setOpen}>
+                            <SheetTrigger asChild>
+                                <div className="p-2">
+                                    {open ? (
+                                        <X className="h-6 w-6 text-green" />
+                                    ) : (
+                                        <Menu className="h-6 w-6 text-green" />
+                                    )}
+                                    <span className="sr-only">
+                                        {t("menu.toggle")}
+                                    </span>
+                                </div>
+                            </SheetTrigger>
+                            <SheetContent
+                                side="top"
+                                className="flex w-full flex-col justify-center animate-ease-in-out"
+                            >
+                                <SheetHeader>
+                                    <SheetTitle className="font-cormorant text-2xl text-primary">
+                                        {t("brand")}
+                                    </SheetTitle>
+                                </SheetHeader>
+                                <div className="mt-4 flex flex-col items-center gap-4">
+                                    {navLinks.map((link) => (
+                                        <button
+                                            key={link.label}
+                                            onClick={() =>
+                                                handleNavigation(link.href)
                                             }
-                                            className="w-full"
+                                            className="text-lg font-light text-muted-foreground transition hover:text-primary"
                                         >
-                                            {button.label}
-                                        </MainButton>
-                                    </Link>
-                                ))}
-                            </div>
-                            <div className="flex items-center justify-center p-2">
-                                <LanguageButton />
-                            </div>
-                            <SheetDescription />
-                        </SheetContent>
-                    </Sheet>
+                                            {link.label}
+                                        </button>
+                                    ))}
+                                    {actionButtons.map((button) => (
+                                        <Link
+                                            key={button.label}
+                                            href={button.href}
+                                            className="w-full max-w-xs"
+                                            onClick={() => {
+                                                setOpen(false);
+                                            }}
+                                        >
+                                            <MainButton
+                                                variant={
+                                                    button.variant as
+                                                        | "default"
+                                                        | "transparent"
+                                                }
+                                                className="w-full"
+                                            >
+                                                {button.label}
+                                            </MainButton>
+                                        </Link>
+                                    ))}
+                                </div>
+                                <SheetDescription />
+                            </SheetContent>
+                        </Sheet>
+                    </div>
                 </nav>
             </header>
         </>
