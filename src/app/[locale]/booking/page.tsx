@@ -124,7 +124,7 @@ const MapField: React.FC<MapPickerProps> = ({
         initialPosition || null,
     );
     const pinIcon = L.icon({
-        iconUrl: "/pinIcon.png",
+        iconUrl: "/tools/pin.png",
         iconAnchor: [18, 40],
         iconSize: [36, 36],
     });
