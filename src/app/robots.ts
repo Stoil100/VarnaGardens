@@ -1,17 +1,14 @@
-import { NextResponse } from "next/server";
+import { MetadataRoute } from "next";
 
-export async function GET() {
-    const robotsTxt = `
-    User-agent: *
-    Disallow: /admin/
-    Disallow: /api/
-
-    Sitemap: https://varnagardens.com/sitemap.xml
-  `;
-
-    return new NextResponse(robotsTxt, {
-        headers: {
-            "Content-Type": "text/plain",
-        },
-    });
+export default function robots(): MetadataRoute.Robots {
+    return {
+        rules: [
+            {
+                userAgent: "*",
+                allow: "/",
+                disallow: ["/admin/", "/api/"],
+            },
+        ],
+        sitemap: "https://varnagardens.com/sitemap.xml",
+    };
 }

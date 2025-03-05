@@ -1,8 +1,9 @@
 import { collection, getDocs } from "firebase/firestore";
-import { NextResponse } from "next/server";
+import { MetadataRoute } from "next";
 import { db } from "../../firebase/firebase.config";
 
 const SITE_URL = "https://varnagardens.com";
+
 const staticPaths = [
     { path: "", priority: 1.0 },
     { path: "contact", priority: 0.5 },
@@ -10,50 +11,28 @@ const staticPaths = [
     { path: "articles", priority: 0.8 },
 ];
 
-export async function GET() {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     try {
         const articlesSnapshot = await getDocs(collection(db, "articles"));
+
         const dynamicPaths = articlesSnapshot.docs.map((doc) => ({
-            loc: `articles/${doc.id}`,
-            lastmod: doc.data().date || new Date().toISOString().split("T")[0],
+            url: `${SITE_URL}/articles/${doc.id}`,
+            lastModified: new Date(doc.data().date || Date.now()).toISOString(),
             priority: 0.9,
         }));
 
-        const urls = [
+        const urls: MetadataRoute.Sitemap = [
             ...staticPaths.map((item) => ({
-                loc: `${SITE_URL}/${item.path}`,
-                lastmod: new Date().toISOString().split("T")[0],
+                url: `${SITE_URL}/${item.path}`,
+                lastModified: new Date().toISOString(),
                 priority: item.priority,
             })),
-            ...dynamicPaths.map((path) => ({
-                loc: `${SITE_URL}/${path.loc}`,
-                lastmod: path.lastmod,
-                priority: path.priority,
-            })),
+            ...dynamicPaths,
         ];
 
-        const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        ${urls
-            .map(
-                (url) => `
-          <url>
-            <loc>${url.loc}</loc>
-            <lastmod>${url.lastmod}</lastmod>
-            <changefreq>weekly</changefreq>
-            <priority>${url.priority}</priority>
-          </url>`,
-            )
-            .join("")}
-      </urlset>`;
-
-        return new NextResponse(sitemap, {
-            headers: {
-                "Content-Type": "application/xml",
-            },
-        });
+        return urls;
     } catch (error) {
         console.error("Error generating sitemap:", error);
-        return new NextResponse("Internal Server Error", { status: 500 });
+        return [];
     }
 }
