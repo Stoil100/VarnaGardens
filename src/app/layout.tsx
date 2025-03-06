@@ -194,7 +194,7 @@ export const metadata: Metadata = {
         shortcut: "/favicon-32x32.png",
         apple: "/apple-touch-icon.png",
     },
-    authors: [{ name: "Varna Gardens", url: "https://varnagardens.bg" }],
+    authors: [{ name: "Varna Gardens", url: "https://varnagardens.com" }],
     openGraph: {
         title: "Varna Gardens | Градинарски услуги във Варна",
         description:
