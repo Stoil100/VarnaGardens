@@ -62,6 +62,7 @@ import CountUp from "react-countup";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { db } from "../../../firebase/firebase.config";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 type SectionProps = {
     t?: (arg: string) => string;
@@ -556,6 +557,9 @@ const GallerySection: React.FC<SectionProps> = ({ t }) => {
     const [activeIndex, setActiveIndex] = useState<number>();
     const [activeTabIndex, setActiveTabIndex] = useState<number>();
     const [api, setApi] = useState<CarouselApi>();
+    const { isIntersecting, ref } = useIntersectionObserver({
+        threshold: 0.5,
+    });
     useEffect(() => {
         if (!api) {
             return;
@@ -648,15 +652,12 @@ const GallerySection: React.FC<SectionProps> = ({ t }) => {
         title: t!(`villas.${index}.title`),
     }));
 
-    const stats = [
-        { value: 120 },
-        { value: 70 },
-        { value: 50 },
-        { value: 10 },
-    ].map((stat, index) => ({
-        ...stat,
-        label: t!(`stats.${index}.label`),
-    }));
+    const stats = [{ value: 120 }, { value: 70 }, { value: 50 }].map(
+        (stat, index) => ({
+            ...stat,
+            label: t!(`stats.${index}.label`),
+        }),
+    );
 
     return (
         <section
@@ -703,22 +704,25 @@ const GallerySection: React.FC<SectionProps> = ({ t }) => {
                     </div>
                 ))}
             </div>
-            <div className="flex flex-wrap justify-evenly gap-2 p-10">
-                {stats.map((stat, index) => (
-                    <div
-                        key={index}
-                        className="flex flex-col items-center gap-2 md:items-start"
-                    >
-                        <CountUp
-                            end={stat.value}
-                            className="text-6xl font-medium"
-                            suffix="+"
-                        />
-                        <p className="text-lg font-extralight text-zinc-400">
-                            {stat.label}
-                        </p>
-                    </div>
-                ))}
+            <div ref={ref} className="flex flex-wrap justify-evenly gap-2 p-10">
+                {stats.map(
+                    (stat, index) =>
+                        isIntersecting && (
+                            <div
+                                key={index}
+                                className="flex flex-col items-center gap-2 md:items-start"
+                            >
+                                <CountUp
+                                    end={stat.value}
+                                    className="text-6xl font-medium"
+                                    suffix="+"
+                                />
+                                <p className="text-lg font-extralight text-zinc-400">
+                                    {stat.label}
+                                </p>
+                            </div>
+                        ),
+                )}
             </div>
             {activeIndex !== undefined && (
                 <Dialog open={open} onOpenChange={setOpen}>

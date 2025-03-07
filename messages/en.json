@@ -160,8 +160,7 @@
                 "stats": [
                     { "label": "Satisfied Clients" },
                     { "label": "Completed Projects" },
-                    { "label": "Maintained Gardens" },
-                    { "label": "Irrigation Systems" }
+                    { "label": "Maintained Gardens" }
                 ]
             },
             "articlesSection": {
