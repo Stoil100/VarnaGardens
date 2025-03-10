@@ -733,7 +733,7 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                         <h2 className="mb-4 text-center text-2xl font-normal md:text-5xl">
                             {t("title")}
                         </h2>
-                        <div className="flex max-w-4xl flex-wrap justify-center gap-4 md:justify-between">
+                        <div className="flex max-w-3xl flex-wrap justify-center gap-4 md:justify-between">
                             {services.map((service) => (
                                 <FormField
                                     key={service.value}
@@ -744,7 +744,7 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                             <FormItem
                                                 key={service.value}
                                                 className={cn(
-                                                    "relative flex w-full max-w-sm flex-col justify-between rounded-2xl border px-2 pb-1 transition-all md:items-center md:px-4 md:text-center",
+                                                    "relative flex w-full max-w-xs flex-col justify-between rounded-2xl border px-2 pb-1 transition-all md:items-center md:px-4 md:text-center",
                                                     field.value?.includes(
                                                         service.value,
                                                     ) &&
