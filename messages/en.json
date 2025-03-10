@@ -39,12 +39,12 @@
                     "services": {
                         "label": "Service",
                         "placeholder": "Select services...",
-                        "cleanup": "Cleanup",
-                        "care": "Care",
-                        "protection": "Protection",
-                        "invest": "Invest",
-                        "grass": "Grass",
-                        "water": "Water"
+                        "mowing": "Mowing",
+                        "shaping": "Shaping",
+                        "pruning": "Pruning",
+                        "fertilizing": "Fertilizing",
+                        "irrigation": "Irrigation",
+                        "weeding": "Weeding"
                     },
                     "submit": "Submit",
                     "submitted": {
@@ -327,30 +327,31 @@
                     },
                     "services": {
                         "title": "Choose one or more services",
-                        "cleanup": {
-                            "title": "Investment Cleanup",
-                            "description": "I want to clean my garden."
+                        "mowing": {
+                            "title": "Mowing and Lawn Shaping",
+                            "description": "Maintaining the grass through regular mowing and giving it a finished look."
                         },
-                        "care": {
-                            "title": "Vegetation Care",
-                            "description": "I want to take care of my garden's vegetation."
+                        "shaping": {
+                            "title": "Shaping and Trimming Hedges (Shrubs)",
+                            "description": "Trimming and shaping shrubs to maintain an aesthetic appearance."
                         },
-                        "protection": {
-                            "title": "Protection and Fertilization",
-                            "description": "I want to protect and fertilize my garden."
+                        "pruning": {
+                            "title": "Pruning and Shaping Trees",
+                            "description": "Removing dry branches and shaping trees for healthy growth."
                         },
-                        "invest": {
-                            "title": "Investment Cleanup",
-                            "description": "I want to clean my garden."
+                        "fertilizing": {
+                            "title": "Soil Enrichment with Suitable Fertilizers",
+                            "description": "Enhancing the soil with nutrients for better plant development."
                         },
-                        "grass": {
-                            "title": "Grass Maintenance",
-                            "description": "I want to maintain my garden's grass."
+                        "irrigation": {
+                            "title": "Foliar Fertilization for Optimal Plant Growth",
+                            "description": "Spraying plants with liquid fertilizers for rapid nutrient absorption."
                         },
-                        "water": {
-                            "title": "Water Management",
-                            "description": "I want to manage the water in my garden."
-                        }
+                        "weeding": {
+                            "title": "Weeding - Removing Unwanted Weeds",
+                            "description": "Eliminating weeds to maintain a clean and healthy garden."
+                        },
+                        "max": "You can select up to 3 services"
                     },
                     "submit": "Finnish Reservation"
                 },
@@ -582,7 +583,7 @@
                     "premium": "Premium"
                 }
             },
-            "logout":"Logout"
+            "logout": "Logout"
         }
     },
     "Footer": {

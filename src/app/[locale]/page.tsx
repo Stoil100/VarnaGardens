@@ -27,6 +27,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { ArticleT } from "@/models/article";
@@ -60,9 +61,9 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { useCallback, useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { db } from "../../../firebase/firebase.config";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 type SectionProps = {
     t?: (arg: string) => string;
@@ -83,7 +84,7 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
             email: "",
             address: "",
             option: "service",
-            services: ["invest"],
+            services: ["mowing"],
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -248,12 +249,12 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
                                         </PopoverTrigger>
                                         <PopoverContent className="w-full! space-y-2">
                                             {[
-                                                "invest",
-                                                "cleanup",
-                                                "care",
-                                                "protection",
-                                                "grass",
-                                                "water",
+                                                "mowing",
+                                                "shaping",
+                                                "pruning",
+                                                "fertilizing",
+                                                "irrigation",
+                                                "weeding",
                                             ].map((service) => (
                                                 <div
                                                     key={service}
@@ -268,9 +269,6 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
                                                         onCheckedChange={(
                                                             checked,
                                                         ) => {
-                                                            console.log(
-                                                                service.toString(),
-                                                            );
                                                             const updatedValue =
                                                                 checked
                                                                     ? [
@@ -291,6 +289,12 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
                                                             ) {
                                                                 field.onChange(
                                                                     updatedValue,
+                                                                );
+                                                            } else {
+                                                                toast.error(
+                                                                    t!(
+                                                                        "errors.services.max",
+                                                                    ),
                                                                 );
                                                             }
                                                         }}

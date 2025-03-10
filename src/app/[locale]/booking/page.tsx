@@ -54,6 +54,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
+import { toast } from "sonner";
 import { z } from "zod";
 import { db } from "../../../../firebase/firebase.config";
 
@@ -686,40 +687,40 @@ const FormInvestFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
 const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
     const services = [
         {
-            value: "cleanup",
+            value: "mowing",
             icon: <Flower size={38} />,
-            title: t("cleanup.title"),
-            description: t("cleanup.description"),
+            title: t("mowing.title"),
+            description: t("mowing.description"),
         },
         {
-            value: "care",
+            value: "shaping",
             icon: <Flower size={38} />,
-            title: t("care.title"),
-            description: t("care.description"),
+            title: t("shaping.title"),
+            description: t("shaping.description"),
         },
         {
-            value: "protection",
+            value: "pruning",
             icon: <Flower size={38} />,
-            title: t("protection.title"),
-            description: t("protection.description"),
+            title: t("pruning.title"),
+            description: t("pruning.description"),
         },
         {
-            value: "invest",
+            value: "fertilizing",
             icon: <Flower size={38} />,
-            title: t("invest.title"),
-            description: t("invest.description"),
+            title: t("fertilizing.title"),
+            description: t("fertilizing.description"),
         },
         {
-            value: "grass",
+            value: "irrigation",
             icon: <Flower size={38} />,
-            title: t("grass.title"),
-            description: t("grass.description"),
+            title: t("irrigation.title"),
+            description: t("irrigation.description"),
         },
         {
-            value: "water",
+            value: "weeding",
             icon: <Flower size={38} />,
-            title: t("water.title"),
-            description: t("water.description"),
+            title: t("weeding.title"),
+            description: t("weeding.description"),
         },
     ];
     return (
@@ -732,7 +733,7 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                         <h2 className="mb-4 text-center text-2xl font-normal md:text-5xl">
                             {t("title")}
                         </h2>
-                        <div className="flex max-w-3xl flex-wrap justify-center gap-4 md:justify-between">
+                        <div className="flex max-w-4xl flex-wrap justify-center gap-4 md:justify-between">
                             {services.map((service) => (
                                 <FormField
                                     key={service.value}
@@ -743,7 +744,7 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                             <FormItem
                                                 key={service.value}
                                                 className={cn(
-                                                    "relative flex w-full max-w-xs flex-col justify-between rounded-2xl border px-2 pb-2 transition-all md:items-center md:px-4 md:text-center",
+                                                    "relative flex w-full max-w-sm flex-col justify-between rounded-2xl border px-2 pb-1 transition-all md:items-center md:px-4 md:text-center",
                                                     field.value?.includes(
                                                         service.value,
                                                     ) &&
@@ -760,7 +761,7 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                                         onCheckedChange={(
                                                             checked,
                                                         ) => {
-                                                            field.onChange(
+                                                            const updatedValue =
                                                                 checked
                                                                     ? [
                                                                           ...(field.value ||
@@ -773,12 +774,23 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                                                           ) =>
                                                                               value !==
                                                                               service.value,
-                                                                      ),
-                                                            );
+                                                                      );
+                                                            if (
+                                                                updatedValue!
+                                                                    .length <= 3
+                                                            ) {
+                                                                field.onChange(
+                                                                    updatedValue,
+                                                                );
+                                                            } else {
+                                                                toast.error(
+                                                                    t("max"),
+                                                                );
+                                                            }
                                                         }}
                                                     />
                                                 </FormControl>
-                                                <div className="flex items-center gap-2 max-md:w-5/6 max-md:self-start md:flex-col">
+                                                <div className="flex items-center gap-1 max-md:w-5/6 max-md:self-start md:flex-col">
                                                     <div
                                                         className={cn(
                                                             "h-fit rounded-xl border-2",
@@ -793,7 +805,7 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                                         {service.title}
                                                     </FormLabel>
                                                 </div>
-                                                <FormDescription className="text-md font-light">
+                                                <FormDescription className="text-sm font-light">
                                                     {service.description}
                                                 </FormDescription>
                                             </FormItem>
