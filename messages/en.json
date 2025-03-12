@@ -201,7 +201,8 @@
             "contactMethods": {
                 "mail": {
                     "title": "Send us an email",
-                    "description": "Write to our team"
+                    "description": "Write to our team",
+                    "dialog": "Message us"
                 },
                 "booking": {
                     "title": "Get a Quote",
@@ -238,6 +239,56 @@
                 "faq6": {
                     "question": "Do you work with corporate clients?",
                     "answer": "Yes, we have extensive experience working with corporate clients and offer specialized solutions."
+                }
+            },
+            "form": {
+                "title": "Contact Us",
+                "subtitle": "Fill out the form below and we'll get back to you as soon as possible.",
+                "name": {
+                    "label": "Name",
+                    "placeholder": "Your Name..."
+                },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "Your Email..."
+                },
+                "phone": {
+                    "label": "Phone",
+                    "placeholder": "Your Phone..."
+                },
+                "message": {
+                    "label": "Message",
+                    "placeholder": "Your message"
+                },
+                "submit": "Submit",
+                "toast": {
+                    "success": {
+                        "title": "Message sent!",
+                        "description": "We'll get back to you as soon as possible."
+                    },
+                    "error": {
+                        "title": "Something went wrong!",
+                        "description": "Your message couldn't be sent. Please try again."
+                    }
+                },
+                "errors": {
+                    "name": {
+                        "required": "Name is required.",
+                        "min": "Name must be at least 2 characters long.",
+                        "max": "Name cannot exceed 50 characters."
+                    },
+                    "email": {
+                        "required": "Email is required.",
+                        "invalid": "Please enter a valid email address."
+                    },
+                    "phone": {
+                        "required": "Phone number is required.",
+                        "invalid": "Please enter a valid phone number."
+                    },
+                    "message": {
+                        "required": "Message is required.",
+                        "max": "Message cannot exceed 500 characters."
+                    }
                 }
             }
         },

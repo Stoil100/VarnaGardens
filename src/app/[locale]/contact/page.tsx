@@ -1,5 +1,6 @@
 "use client";
 import logo from "@/../public/logo.svg";
+import ContactForm from "@/components/forms/contact";
 import MainButton from "@/components/MainButton";
 import {
     Accordion,
@@ -7,6 +8,13 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
 import { useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { Bookmark, Mail, Phone, Smile } from "lucide-react";
@@ -15,22 +23,26 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface ContactItemProps {
+    t?: (args: string) => string;
     icon: any;
     title: string;
     description: string;
     linkText?: string;
     linkHref?: string;
     buttonText?: string;
+    dialogText?: string;
     isHighlighted?: boolean;
 }
 
 function ContactItem({
+    t,
     icon: Icon,
     title,
     description,
     linkText,
     linkHref,
     buttonText,
+    dialogText,
     isHighlighted = false,
 }: ContactItemProps) {
     const router = useRouter();
@@ -73,11 +85,25 @@ function ContactItem({
                             router.push("/booking");
                         }}
                         className="mt-2 w-full text-wrap text-left"
-                        variant="transparent"
                     >
                         {buttonText}
                         <span className="ml-1">→</span>
                     </MainButton>
+                )}
+                {dialogText && (
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <MainButton variant="transparent">
+                                {dialogText}
+                            </MainButton>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle />
+                            </DialogHeader>
+                            <ContactForm t={(key) => t!(`form.${key}`)} />
+                        </DialogContent>
+                    </Dialog>
                 )}
             </div>
         </div>
@@ -94,6 +120,8 @@ export default function Contact() {
             description: t("contactMethods.mail.description"),
             linkText: "varnagardens@gmail.com",
             linkHref: "mailto:varnagardens@gmail.com",
+            dialogText: t("contactMethods.mail.dialog"),
+            t,
         },
         {
             icon: Bookmark,
