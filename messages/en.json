@@ -443,6 +443,10 @@
             }
         },
         "Admin": {
+            "tabs": {
+                "login": "Login",
+                "register": "Register"
+            },
             "forms": {
                 "auth": {
                     "headerRegister": "Register your account",

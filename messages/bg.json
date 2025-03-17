@@ -443,6 +443,10 @@
             }
         },
         "Admin": {
+            "tabs": {
+                "login": "Вход",
+                "register": "Регистрация"
+            },
             "forms": {
                 "auth": {
                     "headerRegister": "Регистрирайте вашия акаунт",

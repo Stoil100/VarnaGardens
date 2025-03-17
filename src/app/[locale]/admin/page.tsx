@@ -290,8 +290,12 @@ export default function Admin() {
                 <div className="flex h-screen flex-col items-center justify-center gap-4">
                     <Tabs defaultValue="login" className="w-full max-w-lg">
                         <TabsList className="grid w-full grid-cols-2">
-                            <TabsTrigger value="login">Login</TabsTrigger>
-                            <TabsTrigger value="register">Register</TabsTrigger>
+                            <TabsTrigger value="login">
+                                {t("tabs.login")}
+                            </TabsTrigger>
+                            <TabsTrigger value="register">
+                                {t("tabs.register")}
+                            </TabsTrigger>
                         </TabsList>
                         <TabsContent value="login">
                             <AuthForm
@@ -329,7 +333,7 @@ export default function Admin() {
                         <h3 className="text-4xl">Upload Articles:</h3>
                         <ArticleForm />
                     </div>
-                    <div className="flex h-fit  flex-col gap-4">
+                    <div className="flex h-fit flex-col gap-4">
                         <h1 className="text-4xl">{t("bookings.title")}</h1>
                         {bookings.length < 1 ? (
                             <p>{t("bookings.notFound")}</p>

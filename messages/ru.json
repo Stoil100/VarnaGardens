@@ -446,6 +446,10 @@
             }
         },
         "Admin": {
+            "tabs": {
+                "login": "Вход",
+                "register": "Регистрация"
+            },
             "forms": {
                 "auth": {
                     "headerRegister": "Зарегистрируйте свой аккаунт",
