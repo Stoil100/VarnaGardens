@@ -628,12 +628,12 @@
                     "service": "Послуга"
                 },
                 "services": {
-                    "cleanup": "Прибирання",
-                    "invest": "Інвестування",
-                    "care": "Догляд",
-                    "protection": "Захист",
-                    "grass": "Газон",
-                    "water": "Полив"
+                    "mowing": "Скошування",
+                    "shaping": "Формування",
+                    "pruning": "Обрізка",
+                    "fertilizing": "Добриво",
+                    "irrigation": "Зрошення",
+                    "weeding": "Прополка"
                 },
                 "plans": {
                     "standard": "Стандартний",

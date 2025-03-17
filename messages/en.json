@@ -625,12 +625,12 @@
                     "service": "Service"
                 },
                 "services": {
-                    "cleanup": "Cleanup",
-                    "invest": "Invest",
-                    "care": "Care",
-                    "protection": "Protection",
-                    "grass": "Grass",
-                    "water": "Water"
+                    "mowing": "Mowing",
+                    "shaping": "Shaping",
+                    "pruning": "Pruning",
+                    "fertilizing": "Fertilizing",
+                    "irrigation": "Irrigation",
+                    "weeding": "Weeding"
                 },
                 "plans": {
                     "standard": "Standard",

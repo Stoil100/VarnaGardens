@@ -629,12 +629,12 @@
                     "service": "Υπηρεσία"
                 },
                 "services": {
-                    "cleanup": "Καθαρισμός",
-                    "invest": "Επένδυση",
-                    "care": "Φροντίδα",
-                    "protection": "Προστασία",
-                    "grass": "Γκαζόν",
-                    "water": "Πότισμα"
+                    "mowing": "Κούρεμα",
+                    "shaping": "Διαμόρφωση",
+                    "pruning": "Κλάδεμα",
+                    "fertilizing": "Λίπανση",
+                    "irrigation": "Άρδευση",
+                    "weeding": "Ξεχορτάριασμα"
                 },
                 "plans": {
                     "standard": "Βασικό",

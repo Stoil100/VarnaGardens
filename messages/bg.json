@@ -625,12 +625,12 @@
                     "service": "Услуга"
                 },
                 "services": {
-                    "cleanup": "Почистване",
-                    "invest": "Инвестиране",
-                    "care": "Грижа",
-                    "protection": "Защита",
-                    "grass": "Трева",
-                    "water": "Вода"
+                    "mowing": "Косене",
+                    "shaping": "Оформяне",
+                    "pruning": "Подрязване",
+                    "fertilizing": "Торене",
+                    "irrigation": "Напояване",
+                    "weeding": "Плевене"
                 },
                 "plans": {
                     "standard": "Стандарт",
