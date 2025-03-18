@@ -699,6 +699,7 @@
                     "weeding": "Плевене"
                 },
                 "plans": {
+                    "base": "Базов",
                     "standard": "Стандарт",
                     "deluxe": "Делукс",
                     "premium": "Премиум"
@@ -747,6 +748,7 @@
                     "bookingOption": "Опция за резервация",
                     "planChosen": "Избран план",
                     "plans": {
+                        "base": "Базов",
                         "standard": "Стандартен",
                         "deluxe": "Делукс",
                         "premium": "Премиум"

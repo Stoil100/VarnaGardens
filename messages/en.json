@@ -436,7 +436,10 @@
                                 },
                                 "target": "For those who want the best – a garden that always looks like it’s from a magazine.",
                                 "ideal": "Luxury properties, residences, corporate buildings, and hotels with high-standard gardens"
-                            }
+                            },
+                            "popularLabel": "Most Popular",
+                            "button": "Choose",
+                            "buttonSelected": "Chosen"
                         }
                     },
                     "services": {
@@ -696,6 +699,7 @@
                     "weeding": "Weeding"
                 },
                 "plans": {
+                    "base": "Base",
                     "standard": "Standard",
                     "deluxe": "Deluxe",
                     "premium": "Premium"
@@ -744,6 +748,7 @@
                     "bookingOption": "Booking Option",
                     "planChosen": "Plan Chosen",
                     "plans": {
+                        "base": "Base",
                         "standard": "Standard",
                         "deluxe": "Deluxe",
                         "premium": "Premium"
