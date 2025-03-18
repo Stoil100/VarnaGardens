@@ -1,6 +1,7 @@
 "use client";
 import MainButton from "@/components/MainButton";
 import { BookingSchema, BookingSchemaType } from "@/components/schemas/booking";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     Carousel,
@@ -27,6 +28,11 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
@@ -45,13 +51,16 @@ import {
     ArrowLeft,
     ArrowRight,
     BookMarked,
+    Calendar,
     ChevronsUpDown,
     CircleCheckBig,
     Flower2,
+    Info,
     Mail,
     MapPin,
     PencilRuler,
     Phone,
+    Shovel,
     Sprout,
     TreeDeciduous,
     User,
@@ -385,24 +394,34 @@ const HeroSection: React.FC<SectionProps> = ({ t, router }) => {
 };
 type PlanCardProps = {
     icon: React.ReactNode;
+    badge: {
+        frequency: string;
+        info: string;
+    };
     title: string;
     description: string;
     features: string[];
     popular?: boolean;
+    target: string;
+    ideal: string;
+    t: (args: string) => string;
 };
 const PlanCard: React.FC<PlanCardProps> = ({
     icon,
+    badge,
     title,
     description,
     features,
+    target,
+    ideal,
     popular = false,
+    t,
 }) => {
-    const t = useTranslations("Pages.Home.plansSection");
     return (
         <Link
             href="/booking"
             className={cn(
-                "relative flex flex-col gap-4 rounded-2xl border px-4 py-6 font-light shadow-lg transition-all md:max-w-sm",
+                "relative flex flex-col gap-4 rounded-2xl border px-4 py-6 font-light shadow-lg transition-all md:max-w-xs",
                 popular ? "mt-8 border-green bg-green-50" : "border-gray-300",
             )}
         >
@@ -411,13 +430,35 @@ const PlanCard: React.FC<PlanCardProps> = ({
                     {t("popularLabel")}
                 </div>
             )}
-            <div
-                className={cn(
-                    "z-50 flex h-12 w-12 items-center justify-center rounded-full",
-                    popular ? "bg-green text-white" : "bg-gray-100 text-green",
-                )}
-            >
-                {icon}
+            <div className="flex justify-between">
+                <div
+                    className={cn(
+                        "z-50 flex h-12 w-12 items-center justify-center rounded-full",
+                        popular
+                            ? "bg-green text-white"
+                            : "bg-gray-100 text-green",
+                    )}
+                >
+                    {icon}
+                </div>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Badge
+                            variant={popular ? "default" : "outline"}
+                            className={cn(
+                                "flex h-fit w-fit items-center gap-1 rounded-full border-green text-green",
+                                popular &&
+                                    "bg-green text-white hover:bg-green/90",
+                            )}
+                        >
+                            <Calendar className="h-3 w-3" />
+                            <span>{badge.frequency}</span>
+                        </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent className="border border-green bg-white text-green shadow-md">
+                        <p>{badge.info}</p>
+                    </TooltipContent>
+                </Tooltip>
             </div>
             <h3 className="text-3xl">{title}</h3>
             <p className="text-zinc-500">{description}</p>
@@ -434,13 +475,44 @@ const PlanCard: React.FC<PlanCardProps> = ({
                     </li>
                 ))}
             </ul>
+            <div className="hidden justify-between gap-2 lg:flex">
+                <Tooltip>
+                    <TooltipTrigger asChild className="min-w-4 text-green">
+                        <Info />
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-60 border border-green bg-white text-green shadow-md">
+                        <p>{ideal}</p>
+                    </TooltipContent>
+                </Tooltip>
+                <p className="text-xs text-gray-400">{target}</p>
+            </div>
         </Link>
     );
 };
 const PlansSection: React.FC<SectionProps> = ({ t }) => {
     const plans: PlanCardProps[] = [
         {
+            icon: <Shovel />,
+            badge: {
+                frequency: t!("plans.base.badge.frequency"),
+                info: t!("plans.base.badge.info"),
+            },
+            title: t!("plans.base.title"),
+            description: t!("plans.base.description"),
+            features: [
+                t!("plans.base.features.0"),
+                t!("plans.base.features.1"),
+            ],
+            target: t!("plans.base.target"),
+            ideal: t!("plans.base.ideal"),
+            t: t!,
+        },
+        {
             icon: <Sprout />,
+            badge: {
+                frequency: t!("plans.standard.badge.frequency"),
+                info: t!("plans.standard.badge.info"),
+            },
             title: t!("plans.standard.title"),
             description: t!("plans.standard.description"),
             features: [
@@ -449,9 +521,16 @@ const PlansSection: React.FC<SectionProps> = ({ t }) => {
                 t!("plans.standard.features.2"),
                 t!("plans.standard.features.3"),
             ],
+            target: t!("plans.standard.target"),
+            ideal: t!("plans.standard.ideal"),
+            t: t!,
         },
         {
             icon: <Flower2 />,
+            badge: {
+                frequency: t!("plans.deluxe.badge.frequency"),
+                info: t!("plans.deluxe.badge.info"),
+            },
             title: t!("plans.deluxe.title"),
             description: t!("plans.deluxe.description"),
             features: [
@@ -460,10 +539,17 @@ const PlansSection: React.FC<SectionProps> = ({ t }) => {
                 t!("plans.deluxe.features.2"),
                 t!("plans.deluxe.features.3"),
             ],
+            target: t!("plans.deluxe.target"),
+            ideal: t!("plans.deluxe.ideal"),
+            t: t!,
             popular: true,
         },
         {
             icon: <TreeDeciduous />,
+            badge: {
+                frequency: t!("plans.premium.badge.frequency"),
+                info: t!("plans.premium.badge.info"),
+            },
             title: t!("plans.premium.title"),
             description: t!("plans.premium.description"),
             features: [
@@ -471,7 +557,11 @@ const PlansSection: React.FC<SectionProps> = ({ t }) => {
                 t!("plans.premium.features.1"),
                 t!("plans.premium.features.2"),
                 t!("plans.premium.features.3"),
+                t!("plans.premium.features.4"),
             ],
+            target: t!("plans.premium.target"),
+            ideal: t!("plans.premium.ideal"),
+            t: t!,
         },
     ];
 
@@ -485,7 +575,7 @@ const PlansSection: React.FC<SectionProps> = ({ t }) => {
                     {t!("subheading")}
                 </p>
             </div>
-            <div className="grid w-full grid-cols-1 content-center gap-6 p-2 md:grid-cols-3 md:p-8 xl:gap-0">
+            <div className="grid w-full grid-cols-1 content-center gap-6 p-2 md:grid-cols-2 md:p-8 lg:grid-cols-4 xl:gap-0">
                 {plans.map((plan, index) => (
                     <div
                         key={index}

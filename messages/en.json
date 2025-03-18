@@ -88,35 +88,68 @@
                 "button": "Get an Offer",
                 "popularLabel": "Most Popular",
                 "plans": {
-                    "standard": {
-                        "title": "Standard",
-                        "description": "Specifically designed for family houses and residential buildings.",
+                    "base": {
+                        "badge": {
+                            "frequency": "1 month",
+                            "info": "This service is performed once every month"
+                        },
+                        "title": "Basic",
+                        "description": "Essential maintenance for a tidy garden",
                         "features": {
-                            "0": "Flexibility and convenience",
-                            "1": "Visit every 10 days",
-                            "2": "Comprehensive garden care",
-                            "3": "Ideal for small and medium gardens"
-                        }
+                            "0": "Regular lawn mowing for a fresh and even look",
+                            "1": "Clearing fallen leaves, branches, and garden debris"
+                        },
+                        "target": "For those who want their garden to look clean and neat without extra effort.",
+                        "ideal": "Small yards, low-maintenance properties, or clients who take care of flowers and plants themselves"
+                    },
+                    "standard": {
+                        "badge": {
+                            "frequency": "2 weeks",
+                            "info": "This service is performed every two weeks"
+                        },
+                        "title": "Standard",
+                        "description": "A garden that is always well-maintained",
+                        "features": {
+                            "0": "All services from the Basic plan",
+                            "1": "Professional trimming of hedges and shrubs",
+                            "2": "Clearing lawns of moss and weeds",
+                            "3": "Fertilizing plants with appropriate nutrients"
+                        },
+                        "target": "For those who want more than basic care – a clean, organized, and fresh garden all year round.",
+                        "ideal": "Medium-sized yards, family homes, residential complexes with shared green areas"
                     },
                     "deluxe": {
+                        "badge": {
+                            "frequency": "10 days",
+                            "info": "This service is performed every ten days"
+                        },
                         "title": "Deluxe",
-                        "description": "Specifically designed for family houses and residential buildings.",
+                        "description": "A flawless garden without compromises",
                         "features": {
-                            "0": "Flexibility and convenience",
-                            "1": "Visit every 10 days",
-                            "2": "Comprehensive garden care",
-                            "3": "Ideal for small and medium gardens"
-                        }
+                            "0": "All services from the Standard plan",
+                            "1": "Professional pruning of trees and ornamental plants",
+                            "2": "Effective pest and disease treatment",
+                            "3": "Care for seasonal plants"
+                        },
+                        "target": "For those who want a perfect garden – beautiful, green, and healthy.",
+                        "ideal": "Gardens with diverse plant life, houses with large green spaces, luxury properties"
                     },
                     "premium": {
+                        "badge": {
+                            "frequency": "1 week",
+                            "info": "This service is performed every week"
+                        },
                         "title": "Premium",
-                        "description": "Specifically designed for family houses and residential buildings.",
+                        "description": "Exclusive garden care",
                         "features": {
-                            "0": "Flexibility and convenience",
-                            "1": "Visit every 10 days",
-                            "2": "Comprehensive garden care",
-                            "3": "Ideal for small and medium gardens"
-                        }
+                            "0": "All services from the Deluxe plan",
+                            "1": "Personalized fertilization plan based on plant types",
+                            "2": "Special care for exotic and delicate plants",
+                            "3": "Installation and maintenance of automatic irrigation systems",
+                            "4": "Comprehensive monitoring of garden health with seasonal recommendations"
+                        },
+                        "target": "For those who want the best – a garden that always looks like it’s from a magazine.",
+                        "ideal": "Luxury properties, residences, corporate buildings, and hotels with high-standard gardens"
                     }
                 }
             },
