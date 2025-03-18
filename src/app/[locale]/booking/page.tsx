@@ -3,6 +3,7 @@ import logoText from "@/../public/logoText.png";
 import LoadingOverlay from "@/components/Loading";
 import MainButton from "@/components/MainButton";
 import { BookingSchema, BookingSchemaType } from "@/components/schemas/booking";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     Carousel,
@@ -35,14 +36,17 @@ import AutoHeight from "embla-carousel-auto-height";
 import { addDoc, collection } from "firebase/firestore";
 import L from "leaflet";
 import {
+    Calendar,
     ChevronLeft,
     CircleCheckBig,
     Flower,
     Flower2,
+    Info,
     Locate,
     Mail,
     MapPin,
     Phone,
+    Shovel,
     Sprout,
     TreeDeciduous,
     User,
@@ -55,7 +59,6 @@ import React, { useEffect, useState } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import { toast } from "sonner";
-import { z } from "zod";
 import { db } from "../../../../firebase/firebase.config";
 
 const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
@@ -524,46 +527,52 @@ const CarouselFormOptionItem: React.FC<CarouselItemsProps> = ({
     );
 };
 type PlanCardProps = {
-    t: (arg: string) => string;
-    value: "standard" | "deluxe" | "premium";
     icon: React.ReactNode;
+    badge: {
+        frequency: string;
+        info: string;
+    };
     title: string;
     description: string;
     features: string[];
     popular?: boolean;
+    target: string;
+    ideal: string;
+    t: (args: string) => string;
+    value: "base" | "standard" | "deluxe" | "premium";
 };
 const PlanCard: React.FC<
     PlanCardProps & { isSelected: boolean; onClick: () => void }
 > = ({
-    t,
     icon,
+    badge,
     title,
     description,
     features,
+    target,
+    ideal,
     popular = false,
+    t,
     isSelected,
     onClick,
 }) => {
     return (
         <div
             className={cn(
-                "relative flex w-full flex-col gap-3 rounded-xl border p-2 font-light shadow-lg transition-all md:max-w-sm md:gap-4 md:rounded-2xl md:px-4 md:py-6",
+                "relative flex flex-col gap-4 rounded-2xl border px-4 py-6 font-light shadow-lg transition-all md:max-w-xs",
                 popular ? "mt-8 border-green bg-white" : "border-gray-300",
                 isSelected && "border-green bg-green-50",
             )}
         >
             {popular && (
-                <div className="absolute -top-6 left-1/2 -z-10 h-1/5 w-full -translate-x-1/2 transform rounded-t-xl bg-green px-4 py-1 text-center text-sm font-extralight text-white outline outline-1 outline-green md:-top-8 md:rounded-t-2xl md:text-lg">
+                <div className="absolute -top-8 left-1/2 -z-10 h-1/6 w-full -translate-x-1/2 transform rounded-t-2xl bg-green px-4 py-1 text-center text-lg font-extralight text-white outline outline-1 outline-green">
                     {t("planCards.popularLabel")}
                 </div>
             )}
-            {isSelected && (
-                <CircleCheckBig className="absolute right-2 top-2 text-green" />
-            )}
-            <div className="flex flex-row gap-2 max-md:items-center md:flex-col">
+            <div className="flex justify-between">
                 <div
                     className={cn(
-                        "!z-50 flex h-12 w-12 items-center justify-center rounded-full",
+                        "z-50 flex h-12 w-12 items-center justify-center rounded-full",
                         popular
                             ? "bg-green text-white"
                             : "bg-gray-100 text-green",
@@ -571,9 +580,30 @@ const PlanCard: React.FC<
                 >
                     {icon}
                 </div>
-
-                <h3 className="text-2xl md:text-3xl">{title}</h3>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Badge
+                            variant={popular ? "default" : "outline"}
+                            className={cn(
+                                "flex h-fit w-fit items-center gap-1 rounded-full border-green text-green",
+                                popular &&
+                                    "bg-green text-white hover:bg-green/90",
+                            )}
+                        >
+                            <Calendar className="h-3 w-3" />
+                            <span>{badge.frequency}</span>
+                        </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent className="border border-green bg-white text-green shadow-md">
+                        <p>{badge.info}</p>
+                    </TooltipContent>
+                </Tooltip>
             </div>
+            <div className="flex items-center justify-between">
+                <h3 className="text-3xl">{title}</h3>
+                {isSelected && <CircleCheckBig className="text-green" />}
+            </div>
+
             <p className="text-zinc-500">{description}</p>
             <MainButton
                 type="button"
@@ -592,6 +622,17 @@ const PlanCard: React.FC<
                     </li>
                 ))}
             </ul>
+            <div className="hidden justify-between gap-2 lg:flex">
+                <Tooltip>
+                    <TooltipTrigger asChild className="min-w-4 text-green">
+                        <Info />
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-60 border border-green bg-white text-green shadow-md">
+                        <p>{ideal}</p>
+                    </TooltipContent>
+                </Tooltip>
+                <p className="text-xs text-gray-400">{target}</p>
+            </div>
         </div>
     );
 };
@@ -602,53 +643,89 @@ type FormFinalFieldsProps = {
 const FormInvestFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
     const plans: PlanCardProps[] = [
         {
-            t: t,
-            value: "standard",
-            icon: <Sprout />,
-            title: t("planCards.standard.title"),
-            description: t("planCards.standard.description"),
+            value: "base",
+            icon: <Shovel />,
+            badge: {
+                frequency: t!("planCards.base.badge.frequency"),
+                info: t!("planCards.base.badge.info"),
+            },
+            title: t!("planCards.base.title"),
+            description: t!("planCards.base.description"),
             features: [
-                t("planCards.standard.features.0"),
-                t("planCards.standard.features.1"),
-                t("planCards.standard.features.2"),
-                t("planCards.standard.features.3"),
+                t!("planCards.base.features.0"),
+                t!("planCards.base.features.1"),
             ],
+            target: t!("planCards.base.target"),
+            ideal: t!("planCards.base.ideal"),
+            t: t!,
         },
         {
-            t: t,
+            value: "standard",
+            icon: <Sprout />,
+            badge: {
+                frequency: t!("planCards.standard.badge.frequency"),
+                info: t!("planCards.standard.badge.info"),
+            },
+            title: t!("planCards.standard.title"),
+            description: t!("planCards.standard.description"),
+            features: [
+                t!("planCards.standard.features.0"),
+                t!("planCards.standard.features.1"),
+                t!("planCards.standard.features.2"),
+                t!("planCards.standard.features.3"),
+            ],
+            target: t!("planCards.standard.target"),
+            ideal: t!("planCards.standard.ideal"),
+            t: t!,
+        },
+        {
             value: "deluxe",
             icon: <Flower2 />,
-            title: t("planCards.deluxe.title"),
-            description: t("planCards.deluxe.description"),
+            badge: {
+                frequency: t!("planCards.deluxe.badge.frequency"),
+                info: t!("planCards.deluxe.badge.info"),
+            },
+            title: t!("planCards.deluxe.title"),
+            description: t!("planCards.deluxe.description"),
             features: [
-                t("planCards.deluxe.features.0"),
-                t("planCards.deluxe.features.1"),
-                t("planCards.deluxe.features.2"),
-                t("planCards.deluxe.features.3"),
+                t!("planCards.deluxe.features.0"),
+                t!("planCards.deluxe.features.1"),
+                t!("planCards.deluxe.features.2"),
+                t!("planCards.deluxe.features.3"),
             ],
+            target: t!("planCards.deluxe.target"),
+            ideal: t!("planCards.deluxe.ideal"),
+            t: t!,
             popular: true,
         },
         {
-            t: t,
             value: "premium",
             icon: <TreeDeciduous />,
-            title: t("planCards.premium.title"),
-            description: t("planCards.premium.description"),
+            badge: {
+                frequency: t!("planCards.premium.badge.frequency"),
+                info: t!("planCards.premium.badge.info"),
+            },
+            title: t!("planCards.premium.title"),
+            description: t!("planCards.premium.description"),
             features: [
-                t("planCards.premium.features.0"),
-                t("planCards.premium.features.1"),
-                t("planCards.premium.features.2"),
-                t("planCards.premium.features.3"),
+                t!("planCards.premium.features.0"),
+                t!("planCards.premium.features.1"),
+                t!("planCards.premium.features.2"),
+                t!("planCards.premium.features.3"),
+                t!("planCards.premium.features.4"),
             ],
+            target: t!("planCards.premium.target"),
+            ideal: t!("planCards.premium.ideal"),
+            t: t!,
         },
     ];
     return (
-        <div>
+        <div className="w-full">
             <FormField
                 control={form.control}
                 name="plan"
                 render={({ field }) => (
-                    <FormItem className="space-y-3">
+                    <FormItem className="w-full space-y-3">
                         <div className="flex flex-col items-center justify-center space-y-2 text-center">
                             <FormLabel className="text-2xl font-normal md:text-5xl">
                                 {t("title")}
@@ -657,12 +734,12 @@ const FormInvestFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                 {t("description")}
                             </FormDescription>
                         </div>
-                        <FormControl>
-                            <div className="grid w-full grid-cols-1 content-center gap-4 p-2 md:grid-cols-3 md:p-8 lg:gap-16">
+                        <FormControl className="w-full">
+                            <div className="grid w-full grid-cols-1 content-center gap-6 p-2 md:grid-cols-2 md:p-8 lg:grid-cols-4 xl:gap-0">
                                 {plans.map((plan, index) => (
                                     <div
                                         key={index}
-                                        className="lg:min-w-lg flex items-center justify-center"
+                                        className="flex items-center justify-center"
                                     >
                                         <PlanCard
                                             {...plan}
@@ -836,7 +913,7 @@ const CarouselFormFinalItem: React.FC<CarouselItemsProps> = ({
         <CarouselItem className="relative flex h-fit min-h-screen w-full flex-col items-center justify-between gap-2 p-4">
             <ScrollPrevButton scrollPrev={scrollPrev} />
             <div />
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex w-full flex-col items-center gap-3">
                 {watchedOptionField === "subscription" && (
                     <FormInvestFields
                         t={(key) => t(`plans.${key}`)}
@@ -898,7 +975,7 @@ export default function Booking() {
     const formSchema = BookingSchema((key) => t!(`form.errors.${key}`));
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loading, setLoading] = useState(false);
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<BookingSchemaType>({
         resolver: zodResolver(formSchema),
         mode: "onChange",
         defaultValues: {
@@ -913,7 +990,7 @@ export default function Booking() {
     });
     const progress = currentIndex > 0 && currentIndex < 4 ? currentIndex : 0;
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: BookingSchemaType) {
         try {
             setLoading(true);
             const docRef = await addDoc(collection(db, "bookings"), {

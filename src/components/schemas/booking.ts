@@ -36,7 +36,7 @@ export const BookingSchema = (t: (arg: string) => string) =>
                 z.object({
                     option: z.literal("subscription"),
                     plan: z
-                        .enum(["standart", "deluxe", "premium"], {
+                        .enum(["base", "standard", "deluxe", "premium"], {
                             invalid_type_error: t("plan.invalid"),
                         })
                         .optional(),
