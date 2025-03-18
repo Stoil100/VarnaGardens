@@ -81,3 +81,6 @@ export const ArticlesSchema = (t: (arg: string) => string) =>
             .optional(),
         type: z.enum(["standard", "notable", "important"]),
     });
+export type ArticlesSchemaType = z.infer<ReturnType<typeof ArticlesSchema>>;
+
+

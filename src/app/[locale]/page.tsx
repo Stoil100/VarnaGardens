@@ -1,6 +1,6 @@
 "use client";
 import MainButton from "@/components/MainButton";
-import { BookingSchema } from "@/components/schemas/booking";
+import { BookingSchema, BookingSchemaType } from "@/components/schemas/booking";
 import { Button } from "@/components/ui/button";
 import {
     Carousel,
@@ -62,7 +62,6 @@ import { useCallback, useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 import { db } from "../../../firebase/firebase.config";
 
 type SectionProps = {
@@ -75,7 +74,7 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
     const [isSubmited, setIsSubmited] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<BookingSchemaType>({
         resolver: zodResolver(formSchema),
         mode: "onChange",
         defaultValues: {
@@ -87,7 +86,7 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
             services: ["mowing"],
         },
     });
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: BookingSchemaType) {
         try {
             const docRef = await addDoc(collection(db, "bookings"), {
                 ...values,

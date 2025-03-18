@@ -25,3 +25,4 @@ export const AuthSchema = (variant: string, t: (arg: string) => string) =>
                 });
             }
         });
+export type AuthSchemaType = z.infer<ReturnType<typeof AuthSchema>>;

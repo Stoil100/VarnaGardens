@@ -1,31 +1,29 @@
 "use client";
 
 import { useAuth } from "@/components/Providers";
-import { AuthSchema } from "@/components/schemas/auth";
+import { AuthSchema, AuthSchemaType } from "@/components/schemas/auth";
 import { Form } from "@/components/ui/form";
 import { useRouter } from "@/i18n/routing";
-import { AuthT } from "@/models/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { Footer } from "./footer";
 import { Header } from "./header";
 import { Inputs } from "./inputs";
 import { Socials } from "./socials";
-type FormVariant = {
+type AuthFormProps = {
     variant: "register" | "login";
     t: (arg: string) => string;
 };
 
-const AuthForm = ({ variant = "login", t }: FormVariant) => {
+const AuthForm = ({ variant = "login", t }: AuthFormProps) => {
     const formSchema = AuthSchema(variant, t);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const { signUp, googleLogin, facebookLogin, logIn } = useAuth();
     const router = useRouter();
 
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<AuthSchemaType>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
@@ -34,14 +32,14 @@ const AuthForm = ({ variant = "login", t }: FormVariant) => {
         },
     });
 
-    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const onSubmit = async (values:AuthSchemaType) => {
         setIsLoading(true);
         try {
             let errorMessage: any;
             if (variant === "register") {
-                errorMessage = await signUp(values as AuthT);
+                errorMessage = await signUp(values);
             } else {
-                errorMessage = await logIn(values as AuthT);
+                errorMessage = await logIn(values);
             }
             if (errorMessage !== null) {
                 const errorMessageMap: Record<string, string> = {

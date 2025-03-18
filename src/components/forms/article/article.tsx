@@ -1,7 +1,10 @@
 "use client";
 
 import MainButton from "@/components/MainButton";
-import { ArticlesSchema } from "@/components/schemas/article";
+import {
+    ArticlesSchema,
+    ArticlesSchemaType,
+} from "@/components/schemas/article";
 import {
     Form,
     FormControl,
@@ -13,21 +16,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { addDoc, collection } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { db } from "../../../../firebase/firebase.config";
 import { Descriptions } from "./descriptions";
 import { Docs } from "./docs";
 import { Lists } from "./lists";
 import { TitleDescriptions } from "./titleDescriptions";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../../../firebase/firebase.config";
 
 export function ArticleForm() {
     const t = useTranslations("Pages.Admin.forms.article");
     const formSchema = ArticlesSchema(t);
-    type FormValues = z.infer<typeof formSchema>;
-    const form = useForm<FormValues>({
+    const form = useForm<ArticlesSchemaType>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             title: "",
@@ -35,18 +36,18 @@ export function ArticleForm() {
             type: "standard",
         },
     });
-    
-    async function onSubmit(values: FormValues) {
+
+    async function onSubmit(values: ArticlesSchemaType) {
         function getDate() {
             const today = new Date();
             const month = today.getMonth() + 1;
             const year = today.getFullYear();
             const date = today.getDate();
             return `${date}/${month}/${year}`;
-          }
+        }
         await addDoc(collection(db, "articles"), {
             ...values,
-            date: getDate()
+            date: getDate(),
         });
         form.reset();
     }
@@ -150,7 +151,7 @@ export function ArticleForm() {
                 />
 
                 <MainButton className="w-full" type="submit">
-                    Submit
+                    {t("submit")}
                 </MainButton>
             </form>
         </Form>
