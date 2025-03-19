@@ -165,20 +165,20 @@ export default function Contact() {
                 <Accordion
                     type="single"
                     collapsible
-                    className="w-full max-w-lg"
+                    className="w-full max-w-2xl"
                 >
-                    {faqKeys.map((key, index) => (
+                    {Array.from({ length: 12 }).map((_, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
                             <AccordionTrigger className="flex gap-4 text-base font-normal">
                                 <div className="flex w-full items-center gap-6 text-lg">
                                     <div className="rounded-md border-2 p-1">
                                         <Smile className="h-5 w-5 shrink-0 text-muted-foreground" />
                                     </div>
-                                    <h4>{t(`faq.${key}.question`)}</h4>
+                                    <h4>{t(`faq.${index}.question`)}</h4>
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="pl-9">
-                                {t(`faq.${key}.answer`)}
+                                {t(`faq.${index}.answer`)}
                             </AccordionContent>
                         </AccordionItem>
                     ))}
