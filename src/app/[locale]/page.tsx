@@ -653,6 +653,7 @@ const GallerySection: React.FC<SectionProps> = ({ t }) => {
     const [api, setApi] = useState<CarouselApi>();
     const { isIntersecting, ref } = useIntersectionObserver({
         threshold: 0.5,
+        freezeOnceVisible: true,
     });
     useEffect(() => {
         if (!api) {
