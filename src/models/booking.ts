@@ -1,20 +1,16 @@
-type Booking ={
-    id?:string,
-    address: string;
-    email: string;
-    name: string;
-    phone: string;
-    option: "subscription" | "service";
-    plan?: "standart" | "deluxe" | "premium";
-    services?: string[];
+import { BookingSchemaType } from "@/components/schemas/booking";
+import { Timestamp } from "firebase/firestore";
+
+type Booking = BookingSchemaType & {
+    id: string;
     status:
         | "pending"
         | "confirmed"
         | "declined"
         | "fulfilled"
         | "expired"
-        | "postponed"
-}
+        | "postponed";
+    createdAt: Timestamp;
+};
 
 export type { Booking };
-  

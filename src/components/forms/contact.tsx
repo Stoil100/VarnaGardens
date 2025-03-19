@@ -20,6 +20,8 @@ import {
     ContactSchemaType,
     ContactSchema as formSchema,
 } from "../schemas/contact";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../../../firebase/firebase.config";
 
 type ContactFormProps = {
     t: (arg: string) => string;
@@ -40,7 +42,10 @@ export default function ContactForm({ t }: ContactFormProps) {
     async function onSubmit(values: ContactSchemaType) {
         setIsLoading(true);
         try {
-            // await submitContactForm(values);
+            await addDoc(collection(db, "inquiries"), {
+                ...values,
+                createdAt: serverTimestamp(),
+            });
             toast.success(t("toast.success.title"), {
                 description: t("toast.success.description"),
             });

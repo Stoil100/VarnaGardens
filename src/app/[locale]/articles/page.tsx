@@ -2,13 +2,13 @@
 import LogoTextImage from "@/components/LogoText";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-import { ArticleT } from "@/models/article";
+import { Article } from "@/models/article";
 import { collection, getDocs } from "firebase/firestore";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { db } from "../../../../firebase/firebase.config";
 
-const Article: React.FC<ArticleT> = ({ ...article }) => (
+const ArticleLink: React.FC<Article> = ({ ...article }) => (
     <Link
         href={`articles/${article.id}`}
         className={cn(
@@ -24,7 +24,7 @@ const Article: React.FC<ArticleT> = ({ ...article }) => (
         />
         <div className="absolute top-2 flex w-full justify-between px-2">
             <h4 className="text-md font-extralight sm:text-xl">
-                {article.date}
+                {article.createdAt.toDate().toLocaleDateString("en-GB")}
             </h4>
         </div>
         <div className="absolute bottom-2 left-2 space-y-4">
@@ -48,18 +48,18 @@ const Article: React.FC<ArticleT> = ({ ...article }) => (
 );
 
 export default function Articles() {
-    const [articles, setArticles] = useState<ArticleT[]>([]);
+    const [articles, setArticles] = useState<Article[]>([]);
     useEffect(() => {
         const fetchArticles = async () => {
             try {
                 const articlesCollection = collection(db, "articles");
                 const articleSnapshot = await getDocs(articlesCollection);
-                const articlesList: ArticleT[] = articleSnapshot.docs.map(
+                const articlesList: Article[] = articleSnapshot.docs.map(
                     (doc) =>
                         ({
                             id: doc.id,
                             ...doc.data(),
-                        }) as ArticleT,
+                        }) as Article,
                 );
                 setArticles(articlesList);
             } catch (error) {
@@ -327,7 +327,7 @@ export default function Articles() {
     return (
         <section className="grid-auto-flow-dense grid min-h-screen w-full grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-4">
             {articles.map((article) => (
-                <Article key={article.id} {...article} />
+                <ArticleLink key={article.id} {...article} />
             ))}
             {fillers}
         </section>

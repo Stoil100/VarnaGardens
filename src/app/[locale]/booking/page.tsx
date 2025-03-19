@@ -33,7 +33,7 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import AutoHeight from "embla-carousel-auto-height";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import L from "leaflet";
 import {
     Calendar,
@@ -996,6 +996,7 @@ export default function Booking() {
             const docRef = await addDoc(collection(db, "bookings"), {
                 ...values,
                 status: "pending",
+                createdAt:serverTimestamp()
             });
             const response = await axios.post("/api/mail", {
                 values,

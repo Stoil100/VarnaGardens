@@ -565,6 +565,7 @@
                     "errorMessage": "Ошибка"
                 },
                 "article": {
+                    "upload": "Загрузить статью",
                     "title": "Заголовок",
                     "heroImage": "URL главного изображения",
                     "titleDescriptions": {
@@ -683,6 +684,15 @@
             "noPermission": {
                 "message": "Извините, у вас нет доступа к этому разделу",
                 "goBack": "Вернуться"
+            },
+            "inquiries": {
+                "notFound": "Запросы не найдены",
+                "title": "Запросы:",
+                "name": "Имя:",
+                "email": "Электронная почта:",
+                "phone": "Телефон:",
+                "message": "Сообщение",
+                "delete": "Удалить контакт"
             },
             "bookings": {
                 "notFound": "бронирования не найдены",

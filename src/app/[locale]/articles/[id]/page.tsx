@@ -13,13 +13,13 @@ import {
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import { ArticleT } from "@/models/article";
 import { doc, getDoc } from "firebase/firestore";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { db } from "../../../../../firebase/firebase.config";
+import { Article } from "@/models/article";
 function useArticles(articleId: string) {
-    const [article, setArticle] = useState<ArticleT>();
+    const [article, setArticle] = useState<Article>();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
     useEffect(() => {
@@ -39,7 +39,7 @@ function useArticles(articleId: string) {
                     setArticle({
                         id: docSnap.id,
                         ...docSnap.data(),
-                    } as ArticleT);
+                    } as Article);
                 } else {
                     setError(new Error("Article not found"));
                 }
@@ -55,7 +55,7 @@ function useArticles(articleId: string) {
 
     return { article, loading, error };
 }
-export default function Article({
+export default function ArticlePage({
     params,
 }: {
     params: Promise<{ id: string }>;

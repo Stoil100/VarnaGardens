@@ -565,6 +565,7 @@
                     "errorMessage": "Помилка"
                 },
                 "article": {
+                    "upload": "Завантажити статтю",
                     "title": "Назва",
                     "heroImage": "URL Головного Зображення",
                     "titleDescriptions": {
@@ -683,6 +684,15 @@
             "noPermission": {
                 "message": "Вибачте, у вас немає доступу до цього розділу",
                 "goBack": "Повернутися"
+            },
+            "inquiries": {
+                "notFound": "Запитів не знайдено",
+                "title": "Запити:",
+                "name": "Ім'я:",
+                "email": "Електронна пошта:",
+                "phone": "Телефон:",
+                "message": "Повідомлення",
+                "delete": "Видалити контакт"
             },
             "bookings": {
                 "notFound": "Бронювань не знайдено",

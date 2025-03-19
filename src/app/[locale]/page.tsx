@@ -36,7 +36,7 @@ import {
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { Link, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-import { ArticleT } from "@/models/article";
+import { Article } from "@/models/article";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import {
@@ -44,6 +44,7 @@ import {
     collection,
     getDocs,
     limit,
+    orderBy,
     query,
     where,
 } from "firebase/firestore";
@@ -904,10 +905,10 @@ const GallerySection: React.FC<SectionProps> = ({ t }) => {
     );
 };
 const ArticlesSection: React.FC<SectionProps> = ({ t, router }) => {
-    const [importantArticle, setImportantArticle] = useState<ArticleT | null>(
+    const [importantArticle, setImportantArticle] = useState<Article | null>(
         null,
     );
-    const [notableArticles, setNotableArticles] = useState<ArticleT[]>([]);
+    const [notableArticles, setNotableArticles] = useState<Article[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -921,27 +922,27 @@ const ArticlesSection: React.FC<SectionProps> = ({ t, router }) => {
                 const importantQuery = query(
                     articlesRef,
                     where("type", "==", "important"),
-                    // orderBy("uploadedAt", "desc"),
+                    orderBy("createdAt", "desc"),
                     limit(1),
                 );
                 const importantSnapshot = await getDocs(importantQuery);
                 const importantData = importantSnapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data(),
-                }))[0] as ArticleT | undefined;
+                }))[0] as Article | undefined;
 
                 // Fetch two latest "notable" articles
                 const notableQuery = query(
                     articlesRef,
                     where("type", "==", "notable"),
-                    // orderBy("uploadedAt", "desc"),
+                    orderBy("createdAt", "desc"),
                     limit(2),
                 );
                 const notableSnapshot = await getDocs(notableQuery);
                 const notableData = notableSnapshot.docs.map((doc) => ({
                     id: doc.id,
                     ...doc.data(),
-                })) as ArticleT[];
+                })) as Article[];
 
                 setImportantArticle(importantData || null);
                 setNotableArticles(notableData);
@@ -955,6 +956,7 @@ const ArticlesSection: React.FC<SectionProps> = ({ t, router }) => {
 
         fetchArticles();
     }, []);
+    if (!importantArticle && notableArticles.length <= 0) return;
     return (
         <section className="mb-8 flex h-fit flex-col space-y-6 p-2 md:min-h-screen md:p-8">
             <div className="flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between">
@@ -979,7 +981,9 @@ const ArticlesSection: React.FC<SectionProps> = ({ t, router }) => {
                         className="group relative col-span-1 flex flex-col rounded-2xl border md:row-span-2"
                     >
                         <p className="absolute right-2 top-1 text-xl font-extralight text-white">
-                            {importantArticle.date}
+                            {importantArticle.createdAt
+                                .toDate()
+                                .toLocaleDateString("en-GB")}
                         </p>
                         <div
                             style={{
@@ -1005,7 +1009,9 @@ const ArticlesSection: React.FC<SectionProps> = ({ t, router }) => {
                         className="group relative col-span-1 row-span-1 hidden flex-col rounded-2xl border md:flex"
                     >
                         <p className="absolute right-2 top-1 text-xl font-extralight text-white">
-                            {article.date}
+                            {article.createdAt
+                                .toDate()
+                                .toLocaleDateString("en-GB")}
                         </p>
                         <div
                             style={{

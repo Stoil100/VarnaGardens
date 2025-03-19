@@ -562,6 +562,7 @@
                     "errorMessage": "Error"
                 },
                 "article": {
+                    "upload": "Upload article",
                     "title": "Title",
                     "heroImage": "Hero Image URL",
                     "titleDescriptions": {
@@ -680,6 +681,15 @@
             "noPermission": {
                 "message": "Sorry, you don't have permission to this section",
                 "goBack": "Go Back"
+            },
+            "inquiries": {
+                "notFound": "No inquiries found",
+                "title": "Inquiries:",
+                "name": "Name:",
+                "email": "Email:",
+                "phone": "Phone:",
+                "message": "Message",
+                "delete": "Delete contact"
             },
             "bookings": {
                 "notFound": "No bookings found",

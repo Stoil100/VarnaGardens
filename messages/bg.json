@@ -562,6 +562,7 @@
                     "errorMessage": "Грешка"
                 },
                 "article": {
+                    "upload": "Качи статия",
                     "title": "Заглавие",
                     "heroImage": "URL на основно изображение",
                     "titleDescriptions": {
@@ -680,6 +681,15 @@
             "noPermission": {
                 "message": "Съжаляваме, нямате разрешение за този раздел",
                 "goBack": "Върни се"
+            },
+            "inquiries": {
+                "notFound":"Не са намерени запитвания",
+                "title":"Запитвания:",
+                "name": "Име:",
+                "email": "Имейл:",
+                "phone": "Телефон:",
+                "message": "Съобщение",
+                "delete": "Изтрий контакт"
             },
             "bookings": {
                 "notFound": "Не са намерени резервации",

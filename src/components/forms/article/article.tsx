@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { db } from "../../../../firebase/firebase.config";
@@ -38,16 +38,9 @@ export function ArticleForm() {
     });
 
     async function onSubmit(values: ArticlesSchemaType) {
-        function getDate() {
-            const today = new Date();
-            const month = today.getMonth() + 1;
-            const year = today.getFullYear();
-            const date = today.getDate();
-            return `${date}/${month}/${year}`;
-        }
         await addDoc(collection(db, "articles"), {
             ...values,
-            date: getDate(),
+            createdAt: serverTimestamp(),
         });
         form.reset();
     }

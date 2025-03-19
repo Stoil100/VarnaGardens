@@ -112,7 +112,6 @@ function ContactItem({
 
 export default function Contact() {
     const t = useTranslations("Pages.Contact");
-    const faqKeys = ["faq1", "faq2", "faq3", "faq4", "faq5", "faq6"] as const;
     const contactData = [
         {
             icon: Mail,
