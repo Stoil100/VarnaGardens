@@ -2,7 +2,7 @@ import logo from "@/../public/logo.svg";
 import Image from "next/image";
 export default function LoadingOverlay() {
     return (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
+        <div className="fixed inset-0 z-[9999] flex h-dvh items-center justify-center bg-white">
             <div className="flex size-40 items-center justify-center text-center font-cormorant text-4xl text-green md:text-5xl">
                 Varna Gardens
             </div>
