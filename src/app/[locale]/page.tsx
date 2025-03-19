@@ -422,7 +422,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
         <Link
             href="/booking"
             className={cn(
-                "relative flex flex-col gap-4 rounded-2xl border px-4 py-6 font-light shadow-lg transition-all md:max-w-xs",
+                "group relative flex flex-col gap-4 rounded-2xl border px-4 py-6 font-light shadow-lg transition-all md:max-w-xs",
                 popular ? "mt-8 border-green bg-green-50" : "border-gray-300",
             )}
         >
@@ -465,7 +465,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
             <p className="text-zinc-500">{description}</p>
             <MainButton
                 variant={popular ? "default" : "transparent"}
-                className="my-2"
+                className="my-2 group-hover:scale-105"
             >
                 {t("button")}
             </MainButton>
