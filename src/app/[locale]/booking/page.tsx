@@ -26,7 +26,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
     Tooltip,
     TooltipContent,
-    TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
@@ -363,29 +362,23 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
                                         {t("address.label")}
                                     </FormLabel>
                                     <div className="flex items-center gap-2">
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger
-                                                    type="button"
-                                                    onClick={
-                                                        fetchCurrentLocation
-                                                    }
-                                                    className="p-0"
+                                        <Tooltip>
+                                            <TooltipTrigger
+                                                type="button"
+                                                onClick={fetchCurrentLocation}
+                                                className="p-0"
+                                            >
+                                                <MainButton
+                                                    asChild
+                                                    className="aspect-square p-2"
                                                 >
-                                                    <MainButton
-                                                        asChild
-                                                        className="aspect-square p-2"
-                                                    >
-                                                        <Locate size={38} />
-                                                    </MainButton>
-                                                </TooltipTrigger>
-                                                <TooltipContent className="bg-green">
-                                                    <p>
-                                                        {t("address.tooltip")}
-                                                    </p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
+                                                    <Locate size={38} />
+                                                </MainButton>
+                                            </TooltipTrigger>
+                                            <TooltipContent className="bg-green">
+                                                <p>{t("address.tooltip")}</p>
+                                            </TooltipContent>
+                                        </Tooltip>
                                         <FormControl>
                                             <Input
                                                 className="border-none bg-zinc-100 outline-none"
@@ -594,7 +587,7 @@ const PlanCard: React.FC<
                             <span>{badge.frequency}</span>
                         </Badge>
                     </TooltipTrigger>
-                    <TooltipContent className="border border-green bg-white text-green shadow-md">
+                    <TooltipContent className="max-w-60 border border-green bg-white text-green shadow-md">
                         <p>{badge.info}</p>
                     </TooltipContent>
                 </Tooltip>
@@ -624,7 +617,10 @@ const PlanCard: React.FC<
             </ul>
             <div className="hidden justify-between gap-2 lg:flex">
                 <Tooltip>
-                    <TooltipTrigger asChild className="min-w-4 text-green">
+                    <TooltipTrigger
+                        asChild
+                        className="min-w-4 cursor-help text-muted-foreground"
+                    >
                         <Info />
                     </TooltipTrigger>
                     <TooltipContent className="max-w-60 border border-green bg-white text-green shadow-md">
@@ -838,6 +834,7 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                                         onCheckedChange={(
                                                             checked,
                                                         ) => {
+                                                            // Create the new updated array
                                                             const updatedValue =
                                                                 checked
                                                                     ? [
@@ -852,6 +849,35 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                                                               value !==
                                                                               service.value,
                                                                       );
+
+                                                            if (
+                                                                service.value ===
+                                                                    "weeding" &&
+                                                                checked &&
+                                                                updatedValue?.length ===
+                                                                    1
+                                                            ) {
+                                                                toast.error(
+                                                                    t!(
+                                                                        "weeding.tooltip",
+                                                                    ),
+                                                                );
+                                                                return;
+                                                            }
+                                                            if (
+                                                                !checked &&
+                                                                updatedValue?.length ===
+                                                                    1 &&
+                                                                updatedValue[0] ===
+                                                                    "weeding"
+                                                            ) {
+                                                                toast.error(
+                                                                    t!(
+                                                                        "weeding.tooltip",
+                                                                    ),
+                                                                );
+                                                                return;
+                                                            }
                                                             if (
                                                                 updatedValue!
                                                                     .length <= 3
@@ -881,6 +907,23 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                                     <FormLabel className="text-lg font-normal md:text-2xl">
                                                         {service.title}
                                                     </FormLabel>
+                                                    {service.value ===
+                                                        "weeding" && (
+                                                        <Tooltip>
+                                                            <TooltipTrigger
+                                                                asChild
+                                                            >
+                                                                <Info className="h-4 w-4 cursor-help text-muted-foreground" />
+                                                            </TooltipTrigger>
+                                                            <TooltipContent className="max-w-60">
+                                                                <p>
+                                                                    {t!(
+                                                                        "weeding.tooltip",
+                                                                    )}
+                                                                </p>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    )}
                                                 </div>
                                                 <FormDescription className="text-sm font-light">
                                                     {service.description}
@@ -988,6 +1031,13 @@ export default function Booking() {
             services: undefined,
         },
     });
+    useEffect(() => {
+        if (form.watch("option") === "service")
+            form.setValue("services", ["mowing"]);
+        else {
+            form.setValue("services", undefined);
+        }
+    }, [form.watch("option")]);
     const progress = currentIndex > 0 && currentIndex < 4 ? currentIndex : 0;
 
     async function onSubmit(values: BookingSchemaType) {
@@ -996,7 +1046,7 @@ export default function Booking() {
             const docRef = await addDoc(collection(db, "bookings"), {
                 ...values,
                 status: "pending",
-                createdAt:serverTimestamp()
+                createdAt: serverTimestamp(),
             });
             const response = await axios.post("/api/mail", {
                 values,

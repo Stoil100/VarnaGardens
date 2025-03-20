@@ -245,7 +245,7 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
                                                               .value!.map(
                                                                   (service) =>
                                                                       t!(
-                                                                          `services.${service}`,
+                                                                          `services.${service}${service === "weeding" ? ".value" : ""}`,
                                                                       ),
                                                               )
                                                               .join(", ")
@@ -291,6 +291,34 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
                                                                               val !==
                                                                               service,
                                                                       );
+                                                            if (
+                                                                service ===
+                                                                    "weeding" &&
+                                                                checked &&
+                                                                updatedValue.length ===
+                                                                    1
+                                                            ) {
+                                                                toast.error(
+                                                                    t!(
+                                                                        "services.weeding.tooltip",
+                                                                    ),
+                                                                );
+                                                                return;
+                                                            }
+                                                            if (
+                                                                !checked &&
+                                                                updatedValue.length ===
+                                                                    1 &&
+                                                                updatedValue[0] ===
+                                                                    "weeding"
+                                                            ) {
+                                                                toast.error(
+                                                                    t!(
+                                                                        "services.weeding.tooltip",
+                                                                    ),
+                                                                );
+                                                                return;
+                                                            }
 
                                                             if (
                                                                 updatedValue.length <=
@@ -308,14 +336,28 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
                                                             }
                                                         }}
                                                     />
-                                                    <label
-                                                        htmlFor={service}
-                                                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                                    >
+                                                    <FormLabel className="flex items-center text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                                                         {t!(
-                                                            `services.${service}`,
+                                                            `services.${service}${service === "weeding" ? ".value" : ""}`,
                                                         )}
-                                                    </label>
+                                                        {service ===
+                                                            "weeding" && (
+                                                            <Tooltip>
+                                                                <TooltipTrigger
+                                                                    asChild
+                                                                >
+                                                                    <Info className="ml-1 h-4 w-4 cursor-help text-muted-foreground" />
+                                                                </TooltipTrigger>
+                                                                <TooltipContent className="max-w-60">
+                                                                    <p>
+                                                                        {t!(
+                                                                            "services.weeding.tooltip",
+                                                                        )}
+                                                                    </p>
+                                                                </TooltipContent>
+                                                            </Tooltip>
+                                                        )}
+                                                    </FormLabel>
                                                 </div>
                                             ))}
                                         </PopoverContent>
@@ -456,7 +498,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
                             <span>{badge.frequency}</span>
                         </Badge>
                     </TooltipTrigger>
-                    <TooltipContent className="border border-green bg-white text-green shadow-md">
+                    <TooltipContent className="max-w-60 border border-green bg-white text-green shadow-md">
                         <p>{badge.info}</p>
                     </TooltipContent>
                 </Tooltip>
@@ -478,7 +520,10 @@ const PlanCard: React.FC<PlanCardProps> = ({
             </ul>
             <div className="hidden justify-between gap-2 lg:flex">
                 <Tooltip>
-                    <TooltipTrigger asChild className="min-w-4 text-green">
+                    <TooltipTrigger
+                        asChild
+                        className="min-w-4 cursor-help text-muted-foreground"
+                    >
                         <Info />
                     </TooltipTrigger>
                     <TooltipContent className="max-w-60 border border-green bg-white text-green shadow-md">

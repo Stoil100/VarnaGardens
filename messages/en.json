@@ -44,7 +44,10 @@
                         "pruning": "Pruning",
                         "fertilizing": "Fertilizing",
                         "irrigation": "Irrigation",
-                        "weeding": "Weeding"
+                        "weeding": {
+                            "value": "Weeding",
+                            "tooltip": "The weeding service is only available in combination with another service"
+                        }
                     },
                     "submit": "Submit",
                     "submitted": {
@@ -490,7 +493,8 @@
                         },
                         "weeding": {
                             "title": "Weeding - Removing Unwanted Weeds",
-                            "description": "Eliminating weeds to maintain a clean and healthy garden."
+                            "description": "Eliminating weeds to maintain a clean and healthy garden.",
+                            "tooltip": "The weeding service is only available in combination with another service"
                         },
                         "max": "You can select up to 3 services"
                     },
@@ -789,12 +793,12 @@
                     },
                     "selectedServicesTitle": "Selected Services",
                     "services": {
-                        "cleanup": "Cleanup",
-                        "care": "Care",
-                        "protection": "Protection",
-                        "invest": "Invest",
-                        "grass": "Grass",
-                        "water": "Water"
+                        "mowing": "Mowing",
+                        "shaping": "Shaping",
+                        "pruning": "Pruning",
+                        "fertilizing": "Fertilizing",
+                        "irrigation": "Irrigation",
+                        "weeding": "Weeding"
                     }
                 },
                 "additionalInfoTitle": "Additional Information",
