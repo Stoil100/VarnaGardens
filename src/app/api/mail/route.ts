@@ -68,6 +68,9 @@ export async function POST(req: Request) {
             .header img {
               max-width: 120px;
               margin-bottom: 10px;
+              background-color:#fff;
+              border-radius:9999px;
+              padding:4px;
             }
             .header h1 {
               font-size: 26px;
