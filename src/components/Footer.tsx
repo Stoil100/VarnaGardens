@@ -147,22 +147,22 @@ export default function Footer() {
                 <hr className="border-zinc-700" />
                 <div className="flex flex-col items-center justify-between py-6 text-sm text-gray-400 sm:flex-row">
                     <div>
-                        &copy; {new Date().getFullYear()} Varna Gardens. All
-                        Rights Reserved.
+                        &copy; {new Date().getFullYear()} Varna Gardens Ltd.{" "}
+                        {t("copyright")}
                     </div>
                     <div className="mt-2 sm:mt-0">
                         <Link
                             href="/privacy"
                             className="transition-colors hover:text-zinc-300"
                         >
-                            Privacy Policy
+                            {t("privacy")}
                         </Link>
                         <span className="mx-2">|</span>
                         <Link
                             href="/terms"
                             className="transition-colors hover:text-zinc-300"
                         >
-                            Terms of Service
+                            {t("terms")}
                         </Link>
                     </div>
                 </div>

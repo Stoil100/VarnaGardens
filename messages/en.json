@@ -769,7 +769,10 @@
             "phone": "+359 889 431 671",
             "email": "varnagardens@gmail.com",
             "button": "Get an Offer"
-        }
+        },
+        "copyright": "All Rights Reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
     },
     "Api": {
         "Mail": {
