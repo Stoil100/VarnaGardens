@@ -12,6 +12,11 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import {
     Form,
@@ -69,17 +74,12 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
 import CountUp from "react-countup";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { db } from "../../../firebase/firebase.config";
-import {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import Image from "next/image";
 
 type SectionProps = {
     t?: (arg: string) => string;
@@ -721,11 +721,11 @@ const ServicesSection: React.FC<SectionProps> = ({ t }) => {
                             />
                         ))}
                     </CollapsibleContent>
-                    <div className="mt-2 flex max-md:justify-center md:ml-4">
+                    <div className="mt-2 flex justify-center ml-4">
                         <CollapsibleTrigger asChild>
                             <Button
                                 variant="ghost"
-                                className="text-lg font-extralight text-gray-400 hover:border-green hover:bg-transparent hover:text-green"
+                                className="text-3xl font-extralight text-gray-400 hover:border-green hover:bg-transparent hover:text-green"
                             >
                                 {isOpen ? t!("showLess") : t!("showMore")}
                                 <ChevronDown
