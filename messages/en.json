@@ -160,26 +160,44 @@
                 "title": "One-Time Services for Green Spaces",
                 "services": [
                     {
-                        "title": "Investment Cleaning",
-                        "description": "Complete cleaning and restoration of terrains and properties"
+                        "title": "Lawn mowing and shaping",
+                        "description": "We maintain the lawn at a customer-chosen height, ensuring it looks even, fresh, and well-shaped throughout the season."
                     },
                     {
-                        "title": "Vegetation Care",
-                        "description": "Specialized care for shrubs, trees, and flowers"
+                        "title": "Shrub and hedge trimming",
+                        "description": "We keep hedges and shrubs in the desired shape and height, promoting density and healthy growth."
                     },
                     {
-                        "title": "Protection and Fertilization",
-                        "description": "Protection for your plants against diseases and pests"
+                        "title": "Lawn aeration",
+                        "description": "We improve soil structure by perforating small holes, allowing better absorption of water, air, and nutrients."
                     },
                     {
-                        "title": "Garden Refreshment",
-                        "description": "Professional renewal of your garden"
+                        "title": "Tree pruning",
+                        "description": "We perform seasonal sanitary and shaping pruning to maintain the health and safety of trees."
                     },
                     {
-                        "title": "Irrigation Systems",
-                        "description": "Installation and maintenance of irrigation systems"
+                        "title": "Soil and plant fertilization",
+                        "description": "We fertilize with organic and mineral nutrients suited to the season and plant needs, including foliar feeding for quick absorption."
+                    },
+                    {
+                        "title": "Weeding",
+                        "description": "We regularly remove weeds to maintain a clean and tidy garden appearance."
+                    },
+                    {
+                        "title": "Tree cutting and thinning",
+                        "description": "We remove dead or unwanted branches to ensure safety and healthy tree growth."
+                    },
+                    {
+                        "title": "High grass mowing",
+                        "description": "We mow overgrown areas with dense vegetation – ideal for cleaning neglected properties."
+                    },
+                    {
+                        "title": "High grass mulching",
+                        "description": "We use mulching mowing that finely chops the grass for natural fertilization and moisture retention."
                     }
-                ]
+                ],
+                "showMore": "Show more",
+                "showLess": "Show less"
             },
             "gallerySection": {
                 "title": "Inspiration from the Nature Around Us",

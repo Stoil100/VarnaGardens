@@ -53,6 +53,7 @@ import {
     ArrowRight,
     BookMarked,
     Calendar,
+    ChevronDown,
     ChevronsUpDown,
     CircleCheckBig,
     Flower2,
@@ -68,11 +69,17 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import CountUp from "react-countup";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { db } from "../../../firebase/firebase.config";
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import Image from "next/image";
 
 type SectionProps = {
     t?: (arg: string) => string;
@@ -646,48 +653,89 @@ const ServiceItem = ({
     return (
         <Link
             href="/booking"
-            className="group relative flex cursor-pointer items-center gap-4 border-y-2 px-2 py-5 font-light md:px-8"
+            className="group relative flex min-h-[100px] cursor-pointer items-center gap-4 border-y-2 px-2 py-5 font-light md:min-h-[120px] md:px-8"
         >
-            <h2 className="hidden w-1/3 text-3xl md:block">{title}</h2>
-            <p className="hidden text-gray-400 transition-all md:block">
-                {description}
-            </p>
-            <div className="flex w-full max-w-52 flex-col md:hidden">
-                <h2 className="text-2xl">{title}</h2>
-                <p className="text-gray-400 transition-all">{description}</p>
+            <h2 className="block w-full text-2xl max-sm:max-w-60 md:w-1/3 md:text-3xl">
+                {title}
+            </h2>
+            <div className="relative hidden md:block">
+                <p className="line-clamp-2 max-w-md text-gray-400 transition-all group-hover:line-clamp-none">
+                    {description}
+                </p>
             </div>
-            <img
-                src={image}
+            <Image
+                src={image || "/placeholder.svg"}
                 alt={title}
-                className="absolute left-3/4 z-50 hidden max-w-48 opacity-0 transition-all duration-300 group-hover:opacity-100 lg:block xl:left-2/3 xl:max-w-xs"
+                width={320}
+                height={180}
+                className="aspect-retro absolute left-3/4 z-50 hidden max-w-48 -rotate-3 rounded-2xl object-cover object-center opacity-0 transition-all duration-300 group-hover:opacity-100 lg:block xl:left-2/3 xl:max-w-xs"
             />
             <ArrowRight className="ml-auto size-8 rounded-full border-2 text-gray-400 transition-all duration-300 group-hover:-rotate-45 group-hover:border-green group-hover:bg-green group-hover:text-white md:size-12" />
         </Link>
     );
 };
 const ServicesSection: React.FC<SectionProps> = ({ t }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     const services = [
-        { image: "/service.png" }, // Static properties
-        { image: "/service.png" },
-        { image: "/service.png" },
-        { image: "/service.png" },
-        { image: "/service.png" },
+        { image: "/services/mowing.jpg" },
+        { image: "/services/trimming.jpg" },
+        { image: "/services/aeration.jpg" },
+        { image: "/services/pruning.jpg" },
+        { image: "/services/fertilization.jpg" },
+        { image: "/services/weeding.jpg" },
+        { image: "/services/cutting.jpg" },
+        { image: "/services/highMowing.jpg" },
+        { image: "/services/mulching.jpg" },
     ].map((service, index) => ({
         ...service,
         title: t!(`services.${index}.title`),
         description: t!(`services.${index}.description`),
     }));
+    const initialServices = services.slice(0, 5);
+    const additionalServices = services.slice(5);
 
     return (
         <section id="services">
             <h2 className="p-8 text-center text-4xl md:text-left md:text-5xl">
                 {t!("title")}
             </h2>
+
             <div>
-                {services.map((service, index) => (
-                    <ServiceItem key={index} {...service} />
+                {initialServices.map((service, index) => (
+                    <ServiceItem key={`initial-${index}`} {...service} />
                 ))}
             </div>
+
+            {additionalServices.length > 0 && (
+                <Collapsible
+                    open={isOpen}
+                    onOpenChange={setIsOpen}
+                    className="w-full"
+                >
+                    <CollapsibleContent className="data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up">
+                        {additionalServices.map((service, index) => (
+                            <ServiceItem
+                                key={`additional-${index}`}
+                                {...service}
+                            />
+                        ))}
+                    </CollapsibleContent>
+                    <div className="mt-2 flex max-md:justify-center md:ml-4">
+                        <CollapsibleTrigger asChild>
+                            <Button
+                                variant="ghost"
+                                className="text-lg font-extralight text-gray-400 hover:border-green hover:bg-transparent hover:text-green"
+                            >
+                                {isOpen ? t!("showLess") : t!("showMore")}
+                                <ChevronDown
+                                    className={`size-5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                                />
+                            </Button>
+                        </CollapsibleTrigger>
+                    </div>
+                </Collapsible>
+            )}
         </section>
     );
 };
