@@ -845,9 +845,11 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({
                 name="services"
                 render={() => (
                     <FormItem>
-                        <h2 className="mb-4 text-center text-2xl font-normal md:text-5xl">
-                            {t("title")}
-                        </h2>
+                        {type && (
+                            <h2 className="mb-4 text-center text-2xl font-normal md:text-5xl">
+                                {t(`title.${type}`)}
+                            </h2>
+                        )}
                         <div
                             className={cn(
                                 "flex flex-wrap justify-center gap-4 md:justify-between",

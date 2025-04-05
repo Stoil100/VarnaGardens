@@ -491,7 +491,10 @@
                     "submit": "Finnish Reservation"
                 },
                 "services": {
-                    "title": "Choose one or more services",
+                    "title": {
+                        "service": "Select one or more services",
+                        "subscription": "Which care should we include in your subscription?"
+                    },
                     "mowing": {
                         "title": "Mowing and Lawn Shaping",
                         "description": "Maintaining the grass through regular mowing and giving it a finished look."
