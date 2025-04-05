@@ -96,66 +96,68 @@
                     "base": {
                         "badge": {
                             "frequency": "1 month",
-                            "info": "This service is performed once every month"
+                            "info": "This plan is carried out once a month"
                         },
                         "title": "Basic",
-                        "description": "Essential maintenance for a tidy garden",
+                        "description": "Essential care for a tidy garden",
                         "features": {
-                            "0": "Regular lawn mowing for a fresh and even look",
-                            "1": "Clearing fallen leaves, branches, and garden debris"
+                            "0": "Seasonal newsletter with useful yard tips",
+                            "1": "Standard priority for extra service requests"
                         },
-                        "target": "For those who want their garden to look clean and neat without extra effort.",
-                        "ideal": "Small yards, low-maintenance properties, or clients who take care of flowers and plants themselves"
+                        "target": "For those who want a neat garden without unnecessary effort.",
+                        "ideal": "Ideal for clients who mostly maintain their yard themselves but want expert oversight."
                     },
                     "standard": {
                         "badge": {
                             "frequency": "2 weeks",
-                            "info": "This service is performed every two weeks"
+                            "info": "This plan is carried out every two weeks"
                         },
                         "title": "Standard",
-                        "description": "A garden that is always well-maintained",
+                        "description": "A garden that always looks maintained",
                         "features": {
-                            "0": "All services from the Basic plan",
-                            "1": "Professional trimming of hedges and shrubs",
-                            "2": "Clearing lawns of moss and weeds",
-                            "3": "Fertilizing plants with appropriate nutrients"
+                            "0": "Electronic report with photos after each visit",
+                            "1": "Seasonal schedule with care recommendations",
+                            "2": "Increased priority for service changes or extra requests"
                         },
-                        "target": "For those who want more than basic care – a clean, organized, and fresh garden all year round.",
-                        "ideal": "Medium-sized yards, family homes, residential complexes with shared green areas"
+                        "target": "For those who want more than just basic care – a clean, fresh garden all year long.",
+                        "ideal": "Suitable for family homes and co-ops with moderate needs for attention and organization."
                     },
                     "deluxe": {
                         "badge": {
                             "frequency": "10 days",
-                            "info": "This service is performed every ten days"
+                            "info": "This plan is carried out every ten days"
                         },
                         "title": "Deluxe",
-                        "description": "A flawless garden without compromises",
+                        "description": "A refined garden without compromise",
                         "features": {
-                            "0": "All services from the Standard plan",
-                            "1": "Professional pruning of trees and ornamental plants",
-                            "2": "Effective pest and disease treatment",
-                            "3": "Care for seasonal plants"
+                            "0": "Electronic report with photos after each visit",
+                            "1": "Free soil fertilization (up to 2 times per season)",
+                            "2": "High priority for service and urgent requests",
+                            "3": "Exclusive discounts on planting and landscaping"
                         },
                         "target": "For those who want a perfect garden – beautiful, green, and healthy.",
-                        "ideal": "Gardens with diverse plant life, houses with large green spaces, luxury properties"
+                        "ideal": "Gardens with diverse vegetation, large yards, luxury properties"
                     },
                     "premium": {
                         "badge": {
                             "frequency": "1 week",
-                            "info": "This service is performed every week"
+                            "info": "This plan is carried out weekly"
                         },
                         "title": "Premium",
                         "description": "Exclusive garden care",
                         "features": {
-                            "0": "All services from the Deluxe plan",
-                            "1": "Personalized fertilization plan based on plant types",
-                            "2": "Special care for exotic and delicate plants",
-                            "3": "Installation and maintenance of automatic irrigation systems",
-                            "4": "Comprehensive monitoring of garden health with seasonal recommendations"
+                            "0": "Electronic report with photos after each visit",
+                            "1": "Free soil fertilization (up to 4 times a year)",
+                            "2": "VIP priority – fastest response to any request",
+                            "3": "Exclusive discounts on planting and landscaping",
+                            "4": "Personal assistant for coordination and advice"
                         },
-                        "target": "For those who want the best – a garden that always looks like it’s from a magazine.",
-                        "ideal": "Luxury properties, residences, corporate buildings, and hotels with high-standard gardens"
-                    }
+                        "target": "For those who want the very best – a garden that always looks like it's from a magazine.",
+                        "ideal": "Luxury properties, residences, prestigious buildings, and hotels with gardens requiring flawless appearance"
+                    },
+                    "popularLabel": "Most Popular",
+                    "button": "Choose",
+                    "buttonSelected": "Selected"
                 }
             },
             "servicesSection": {

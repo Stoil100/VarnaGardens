@@ -521,7 +521,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
             <ul className="space-y-2 text-sm text-gray-600">
                 {features.map((feature, index) => (
                     <li key={index} className="flex items-center gap-2">
-                        <span className="text-green">✔</span> {feature}
+                        <span className="text-green">{index === 0 ? "✔" : "🎁"}</span> {feature}
                     </li>
                 ))}
             </ul>
@@ -572,7 +572,6 @@ const PlansSection: React.FC<SectionProps> = ({ t }) => {
                 t!("plans.standard.features.0"),
                 t!("plans.standard.features.1"),
                 t!("plans.standard.features.2"),
-                t!("plans.standard.features.3"),
             ],
             target: t!("plans.standard.target"),
             ideal: t!("plans.standard.ideal"),
