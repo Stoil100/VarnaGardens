@@ -1,4 +1,5 @@
 "use client";
+import LoadingOverlay from "@/components/Loading";
 import MainButton from "@/components/MainButton";
 import { BookingSchema, BookingSchemaType } from "@/components/schemas/booking";
 import { Badge } from "@/components/ui/badge";
@@ -51,6 +52,7 @@ import {
     limit,
     orderBy,
     query,
+    serverTimestamp,
     where,
 } from "firebase/firestore";
 import {
@@ -90,6 +92,7 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
     const formSchema = BookingSchema((key) => t!(`errors.${key}`));
     const [isSubmited, setIsSubmited] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<BookingSchemaType>({
         resolver: zodResolver(formSchema),
@@ -105,22 +108,30 @@ const HeroBookingForm: React.FC<SectionProps> = ({ t }) => {
     });
     async function onSubmit(values: BookingSchemaType) {
         try {
+            setIsLoading(true);
+            const cleanedValues = Object.fromEntries(
+                Object.entries(values).filter(([_, v]) => v !== undefined),
+            );
             const docRef = await addDoc(collection(db, "bookings"), {
-                ...values,
+                ...cleanedValues,
                 status: "pending",
+                createdAt: serverTimestamp(),
             });
-            await axios.post("/api/mail", {
+            const response = await axios.post("/api/mail", {
                 values,
                 status: "pending",
                 id: docRef.id,
                 locale: locale,
             });
+            console.log(response);
         } catch (error) {
             console.error("Error during submission:", error);
         } finally {
             setIsSubmited(true);
+            setIsLoading(false);
         }
     }
+    if (isLoading) return <LoadingOverlay />;
     return (
         <div className="relative overflow-hidden md:drop-shadow-xl">
             <Form {...form}>
@@ -521,7 +532,10 @@ const PlanCard: React.FC<PlanCardProps> = ({
             <ul className="space-y-2 text-sm text-gray-600">
                 {features.map((feature, index) => (
                     <li key={index} className="flex items-center gap-2">
-                        <span className="text-green">{index === 0 ? "✔" : "🎁"}</span> {feature}
+                        <span className="text-green">
+                            {index === 0 ? "✔" : "🎁"}
+                        </span>{" "}
+                        {feature}
                     </li>
                 ))}
             </ul>
