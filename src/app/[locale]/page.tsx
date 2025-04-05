@@ -668,7 +668,7 @@ const ServiceItem = ({
                 alt={title}
                 width={320}
                 height={180}
-                className="aspect-retro absolute left-3/4 z-50 hidden max-w-48 -rotate-3 rounded-2xl object-cover object-center opacity-0 transition-all duration-300 group-hover:opacity-100 lg:block xl:left-2/3 xl:max-w-xs"
+                className="absolute left-3/4 z-50 hidden aspect-retro max-w-48 -rotate-3 rounded-2xl object-cover object-center opacity-0 transition-all duration-300 group-hover:opacity-100 lg:block xl:left-2/3 xl:max-w-xs"
             />
             <ArrowRight className="ml-auto size-8 rounded-full border-2 text-gray-400 transition-all duration-300 group-hover:-rotate-45 group-hover:border-green group-hover:bg-green group-hover:text-white md:size-12" />
         </Link>
@@ -721,7 +721,7 @@ const ServicesSection: React.FC<SectionProps> = ({ t }) => {
                             />
                         ))}
                     </CollapsibleContent>
-                    <div className="mt-2 flex justify-center ml-4">
+                    <div className="ml-4 mt-2 flex justify-center">
                         <CollapsibleTrigger asChild>
                             <Button
                                 variant="ghost"

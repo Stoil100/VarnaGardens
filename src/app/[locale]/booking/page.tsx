@@ -60,7 +60,10 @@ import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 import { toast } from "sonner";
 import { db } from "../../../../firebase/firebase.config";
 
-const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
+const ProgressBar: React.FC<{
+    progress: number;
+    option: "service" | "subscription";
+}> = ({ progress, option }) => (
     <div className="flex h-fit w-fit gap-2 bg-transparent">
         <div className="h-2 w-12 rounded-full bg-green" />
         <div
@@ -75,6 +78,14 @@ const ProgressBar: React.FC<{ progress: number }> = ({ progress }) => (
                 progress >= 3 && "w-12 bg-green",
             )}
         />
+        {option === "subscription" && (
+            <div
+                className={cn(
+                    "h-2 w-8 rounded-full bg-zinc-300 transition-all",
+                    progress >= 4 && "w-12 bg-green",
+                )}
+            />
+        )}
     </div>
 );
 const ScrollPrevButton: React.FC<{
@@ -177,6 +188,7 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
     );
     const { watch, getFieldState, formState, setValue } = form!;
     const watchedBaseFields = watch(["name", "email", "phone", "address"]);
+    const watchedOptionField = watch("option");
     useEffect(() => {
         const hasErrors =
             getFieldState("name").invalid ||
@@ -407,7 +419,7 @@ const CarouselFormBaseItem: React.FC<CarouselItemsProps> = ({
                     {t("continue")}
                 </MainButton>
             </div>
-            <ProgressBar progress={progress!} />
+            <ProgressBar progress={progress!} option={watchedOptionField} />
         </CarouselItem>
     );
 };
@@ -515,7 +527,7 @@ const CarouselFormOptionItem: React.FC<CarouselItemsProps> = ({
                     {t("continue")}
                 </MainButton>
             </div>
-            <ProgressBar progress={progress!} />
+            <ProgressBar progress={progress!} option={watchedOptionField} />
         </CarouselItem>
     );
 };
@@ -611,7 +623,10 @@ const PlanCard: React.FC<
             <ul className="space-y-2 text-sm text-gray-600 max-md:hidden">
                 {features.map((feature, index) => (
                     <li key={index} className="flex items-center gap-2">
-                        <span className="text-green">✔</span> {feature}
+                        <span className="text-green">
+                            {index === 0 ? "✔" : "🎁"}
+                        </span>{" "}
+                        {feature}
                     </li>
                 ))}
             </ul>
@@ -635,8 +650,9 @@ const PlanCard: React.FC<
 type FormFinalFieldsProps = {
     t: (arg: string) => string;
     form: UseFormReturn<BookingSchemaType>;
+    type?: "service" | "subscription";
 };
-const FormInvestFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
+const FormPlanTypeFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
     const plans: PlanCardProps[] = [
         {
             value: "base",
@@ -668,7 +684,6 @@ const FormInvestFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                 t!("planCards.standard.features.0"),
                 t!("planCards.standard.features.1"),
                 t!("planCards.standard.features.2"),
-                t!("planCards.standard.features.3"),
             ],
             target: t!("planCards.standard.target"),
             ideal: t!("planCards.standard.ideal"),
@@ -757,7 +772,11 @@ const FormInvestFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
         </div>
     );
 };
-const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
+const FormServicesFields: React.FC<FormFinalFieldsProps> = ({
+    t,
+    form,
+    type,
+}) => {
     const services = [
         {
             value: "mowing",
@@ -795,7 +814,30 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
             title: t("weeding.title"),
             description: t("weeding.description"),
         },
+        ...(type === "subscription"
+            ? [
+                  {
+                      value: "trimming",
+                      icon: <Flower size={38} />,
+                      title: t("trimming.title"),
+                      description: t("trimming.description"),
+                  },
+                  {
+                      value: "lowering",
+                      icon: <Flower size={38} />,
+                      title: t("lowering.title"),
+                      description: t("lowering.description"),
+                  },
+                  {
+                      value: "mulching",
+                      icon: <Flower size={38} />,
+                      title: t("mulching.title"),
+                      description: t("mulching.description"),
+                  },
+              ]
+            : []),
     ];
+
     return (
         <div>
             <FormField
@@ -806,7 +848,14 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                         <h2 className="mb-4 text-center text-2xl font-normal md:text-5xl">
                             {t("title")}
                         </h2>
-                        <div className="flex max-w-3xl flex-wrap justify-center gap-4 md:justify-between">
+                        <div
+                            className={cn(
+                                "flex flex-wrap justify-center gap-4 md:justify-between",
+                                type === "subscription"
+                                    ? "max-w-5xl"
+                                    : "max-w-3xl",
+                            )}
+                        >
                             {services.map((service) => (
                                 <FormField
                                     key={service.value}
@@ -879,8 +928,13 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
                                                                 return;
                                                             }
                                                             if (
-                                                                updatedValue!
-                                                                    .length <= 3
+                                                                type ===
+                                                                    "subscription" ||
+                                                                (type ===
+                                                                    "service" &&
+                                                                    updatedValue!
+                                                                        .length <=
+                                                                        3)
                                                             ) {
                                                                 field.onChange(
                                                                     updatedValue,
@@ -941,7 +995,51 @@ const FormServicesFields: React.FC<FormFinalFieldsProps> = ({ t, form }) => {
         </div>
     );
 };
-const CarouselFormFinalItem: React.FC<CarouselItemsProps> = ({
+const CarouselFormServicesItem: React.FC<CarouselItemsProps> = ({
+    t,
+    scrollNext,
+    scrollPrev,
+    form,
+    progress,
+}) => {
+    const { watch, getFieldState } = form!;
+    const watchedOptionField = watch("option");
+    const watchedServiceField = watch("services");
+    return (
+        <CarouselItem className="relative flex h-fit min-h-screen w-full flex-col items-center justify-between gap-2 p-4">
+            <ScrollPrevButton scrollPrev={scrollPrev} />
+            <div />
+            <div className="flex w-full flex-col items-center gap-3">
+                <FormServicesFields
+                    t={t}
+                    form={form!}
+                    type={watchedOptionField}
+                />
+
+                <MainButton
+                    type={
+                        watchedOptionField === "subscription"
+                            ? "button"
+                            : "submit"
+                    }
+                    disabled={
+                        !watchedServiceField ||
+                        getFieldState("services").invalid ||
+                        (watchedOptionField === "service" &&
+                            !form?.formState.isValid)
+                    }
+                    onClick={scrollNext}
+                >
+                    {watchedOptionField === "subscription"
+                        ? t("continue")
+                        : t("submit")}
+                </MainButton>
+            </div>
+            <ProgressBar progress={progress!} option={watchedOptionField} />
+        </CarouselItem>
+    );
+};
+const CarouselFormPlanItem: React.FC<CarouselItemsProps> = ({
     t,
     scrollNext,
     scrollPrev,
@@ -957,18 +1055,7 @@ const CarouselFormFinalItem: React.FC<CarouselItemsProps> = ({
             <ScrollPrevButton scrollPrev={scrollPrev} />
             <div />
             <div className="flex w-full flex-col items-center gap-3">
-                {watchedOptionField === "subscription" && (
-                    <FormInvestFields
-                        t={(key) => t(`plans.${key}`)}
-                        form={form!}
-                    />
-                )}
-                {watchedOptionField === "service" && (
-                    <FormServicesFields
-                        t={(key) => t(`services.${key}`)}
-                        form={form!}
-                    />
-                )}
+                <FormPlanTypeFields t={t} form={form!} />
                 <MainButton
                     type="submit"
                     disabled={
@@ -987,7 +1074,7 @@ const CarouselFormFinalItem: React.FC<CarouselItemsProps> = ({
                     {t("submit")}
                 </MainButton>
             </div>
-            <ProgressBar progress={progress!} />
+            <ProgressBar progress={progress!} option={watchedOptionField} />
         </CarouselItem>
     );
 };
@@ -1027,24 +1114,23 @@ export default function Booking() {
             email: "",
             address: "",
             option: undefined,
+            services: ["mowing"],
             plan: undefined,
-            services: undefined,
         },
     });
+    const progress = currentIndex > 0 && currentIndex < 5 ? currentIndex : 0;
     useEffect(() => {
         if (form.watch("option") === "service")
             form.setValue("services", ["mowing"]);
-        else {
-            form.setValue("services", undefined);
-        }
     }, [form.watch("option")]);
-    const progress = currentIndex > 0 && currentIndex < 4 ? currentIndex : 0;
-
     async function onSubmit(values: BookingSchemaType) {
         try {
             setLoading(true);
+            const cleanedValues = Object.fromEntries(
+                Object.entries(values).filter(([_, v]) => v !== undefined),
+            );
             const docRef = await addDoc(collection(db, "bookings"), {
-                ...values,
+                ...cleanedValues,
                 status: "pending",
                 createdAt: serverTimestamp(),
             });
@@ -1054,7 +1140,6 @@ export default function Booking() {
                 id: docRef.id,
                 locale: locale,
             });
-
             console.log(response);
         } catch (error) {
             console.error("Error during submission:", error);
@@ -1065,7 +1150,7 @@ export default function Booking() {
     }
 
     const scrollNext = () => {
-        progress <= 2 && api?.reInit();
+        progress === 2 && api?.reInit();
         window.scrollTo({ top: 0 });
         api?.scrollNext();
         setCurrentIndex((prev) => Math.min(prev + 1, 4));
@@ -1111,13 +1196,22 @@ export default function Booking() {
                                 t={(key) => t(`form.option.${key}`)}
                                 progress={progress}
                             />
-                            <CarouselFormFinalItem
+                            <CarouselFormServicesItem
                                 form={form}
                                 scrollNext={scrollNext}
                                 scrollPrev={scrollPrev}
-                                t={(key) => t(`form.final.${key}`)}
+                                t={(key) => t(`form.services.${key}`)}
                                 progress={progress}
                             />
+                            {form.watch("option") === "subscription" && (
+                                <CarouselFormPlanItem
+                                    form={form}
+                                    scrollNext={scrollNext}
+                                    scrollPrev={scrollPrev}
+                                    t={(key) => t(`form.plans.${key}`)}
+                                    progress={progress}
+                                />
+                            )}
                             <CarouselFooterItem
                                 t={(key) => t(`footer.${key}`)}
                                 router={router}

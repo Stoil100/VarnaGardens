@@ -13,11 +13,11 @@ import {
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import { Article } from "@/models/article";
 import { doc, getDoc } from "firebase/firestore";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React, { useCallback, useEffect, useState } from "react";
 import { db } from "../../../../../firebase/firebase.config";
-import { Article } from "@/models/article";
 function useArticles(articleId: string) {
     const [article, setArticle] = useState<Article>();
     const [loading, setLoading] = useState(true);

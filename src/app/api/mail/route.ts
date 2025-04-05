@@ -123,20 +123,21 @@ export async function POST(req: Request) {
                 <li><strong>${t("bookingDetails.email")}:</strong> ${email}</li>
                 <li><strong>${t("bookingDetails.phone")}:</strong> ${phone}</li>
                 <li><strong>${t("bookingDetails.address")}:</strong> ${address}</li>
-                <li><strong>${t("bookingDetails.bookingOption")}:</strong> ${option}</li>
+                <li><strong>${t("bookingDetails.bookingOption")}:</strong>  ${t(`bookingDetails.option.${option}`)}</li>
                 ${
-                    values.option === "subscription"
-                        ? `<li><strong>${t("bookingDetails.planChosen")}:</strong> ${t(`bookingDetails.plans.${plan}`)}</li>`
-                        : `<li><strong>${t("bookingDetails.selectedServicesTitle")}:</strong></li>
-                       <ol>
-                         ${services
-                             .map(
-                                 (service: string) =>
-                                     `<li>${t(`bookingDetails.services.${service}`)}</li>`,
-                             )
-                             .join("")}
-                       </ol>`
+                  values.option === "subscription"
+                    ? `<li><strong>${t("bookingDetails.planChosen")}:</strong> ${t(`bookingDetails.plans.${plan}`)}</li>`
+                    : ""
                 }
+                <li><strong>${t("bookingDetails.selectedServicesTitle")}:</strong></li>
+                <ol>
+                  ${services
+                    .map(
+                      (service: string) =>
+                        `<li>${t(`bookingDetails.services.${service}`)}</li>`,
+                      )
+                      .join("")}
+                </ol>       
               </ul>
               <h3>${t("additionalInfoTitle")}</h3>
               <p><strong>${t("bookingId")}:</strong> ${id}</p>

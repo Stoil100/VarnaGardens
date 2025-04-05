@@ -72,15 +72,17 @@
                             "required": "Address is required."
                         },
                         "option": {
-                            "invalid": "Invalid option selected."
+                            "required": "You must select the option you need",
+                            "invalid": "An invalid option was selected."
                         },
                         "plan": {
-                            "invalid": "Invalid plan selected."
+                            "required": "You must select a plan type",
+                            "invalid": "An invalid plan was selected."
                         },
                         "services": {
                             "max": "You can select up to 3 services",
-                            "invalid": "Invalid service selected.",
-                            "required": "You must select at least one service."
+                            "required": "You must select at least one service.",
+                            "invalid": "An invalid service was selected."
                         }
                     }
                 }
@@ -414,109 +416,120 @@
                     },
                     "continue": "Continue"
                 },
-                "final": {
-                    "plans": {
-                        "title": "Choose your subscription plan",
-                        "description": "Your garden is always in perfect condition without needing to plan each visit. Adaptive plan.",
-                        "planCards": {
-                            "base": {
-                                "badge": {
-                                    "frequency": "1 month",
-                                    "info": "This service is performed once every month"
-                                },
-                                "title": "Basic",
-                                "description": "Essential maintenance for a tidy garden",
-                                "features": {
-                                    "0": "Regular lawn mowing for a fresh and even look",
-                                    "1": "Clearing fallen leaves, branches, and garden debris"
-                                },
-                                "target": "For those who want their garden to look clean and neat without extra effort.",
-                                "ideal": "Small yards, low-maintenance properties, or clients who take care of flowers and plants themselves"
+                "plans": {
+                    "title": "Choose your subscription plan",
+                    "description": "Your garden is always in perfect condition without needing to plan each visit. Adaptive plan.",
+                    "planCards": {
+                        "base": {
+                            "badge": {
+                                "frequency": "1 month",
+                                "info": "This plan is carried out once a month"
                             },
-                            "standard": {
-                                "badge": {
-                                    "frequency": "2 weeks",
-                                    "info": "This service is performed every two weeks"
-                                },
-                                "title": "Standard",
-                                "description": "A garden that is always well-maintained",
-                                "features": {
-                                    "0": "All services from the Basic plan",
-                                    "1": "Professional trimming of hedges and shrubs",
-                                    "2": "Clearing lawns of moss and weeds",
-                                    "3": "Fertilizing plants with appropriate nutrients"
-                                },
-                                "target": "For those who want more than basic care – a clean, organized, and fresh garden all year round.",
-                                "ideal": "Medium-sized yards, family homes, residential complexes with shared green areas"
+                            "title": "Basic",
+                            "description": "Essential care for a tidy garden",
+                            "features": {
+                                "0": "Seasonal newsletter with useful yard tips",
+                                "1": "Standard priority for extra service requests"
                             },
-                            "deluxe": {
-                                "badge": {
-                                    "frequency": "10 days",
-                                    "info": "This service is performed every ten days"
-                                },
-                                "title": "Deluxe",
-                                "description": "A flawless garden without compromises",
-                                "features": {
-                                    "0": "All services from the Standard plan",
-                                    "1": "Professional pruning of trees and ornamental plants",
-                                    "2": "Effective pest and disease treatment",
-                                    "3": "Care for seasonal plants"
-                                },
-                                "target": "For those who want a perfect garden – beautiful, green, and healthy.",
-                                "ideal": "Gardens with diverse plant life, houses with large green spaces, luxury properties"
+                            "target": "For those who want a neat garden without unnecessary effort.",
+                            "ideal": "Ideal for clients who mostly maintain their yard themselves but want expert oversight."
+                        },
+                        "standard": {
+                            "badge": {
+                                "frequency": "2 weeks",
+                                "info": "This plan is carried out every two weeks"
                             },
-                            "premium": {
-                                "badge": {
-                                    "frequency": "1 week",
-                                    "info": "This service is performed every week"
-                                },
-                                "title": "Premium",
-                                "description": "Exclusive garden care",
-                                "features": {
-                                    "0": "All services from the Deluxe plan",
-                                    "1": "Personalized fertilization plan based on plant types",
-                                    "2": "Special care for exotic and delicate plants",
-                                    "3": "Installation and maintenance of automatic irrigation systems",
-                                    "4": "Comprehensive monitoring of garden health with seasonal recommendations"
-                                },
-                                "target": "For those who want the best – a garden that always looks like it’s from a magazine.",
-                                "ideal": "Luxury properties, residences, corporate buildings, and hotels with high-standard gardens"
+                            "title": "Standard",
+                            "description": "A garden that always looks maintained",
+                            "features": {
+                                "0": "Electronic report with photos after each visit",
+                                "1": "Seasonal schedule with care recommendations",
+                                "2": "Increased priority for service changes or extra requests"
                             },
-                            "popularLabel": "Most Popular",
-                            "button": "Choose",
-                            "buttonSelected": "Chosen"
-                        }
-                    },
-                    "services": {
-                        "title": "Choose one or more services",
-                        "mowing": {
-                            "title": "Mowing and Lawn Shaping",
-                            "description": "Maintaining the grass through regular mowing and giving it a finished look."
+                            "target": "For those who want more than just basic care – a clean, fresh garden all year long.",
+                            "ideal": "Suitable for family homes and co-ops with moderate needs for attention and organization."
                         },
-                        "shaping": {
-                            "title": "Shaping and Trimming Hedges (Shrubs)",
-                            "description": "Trimming and shaping shrubs to maintain an aesthetic appearance."
+                        "deluxe": {
+                            "badge": {
+                                "frequency": "10 days",
+                                "info": "This plan is carried out every ten days"
+                            },
+                            "title": "Deluxe",
+                            "description": "A refined garden without compromise",
+                            "features": {
+                                "0": "Electronic report with photos after each visit",
+                                "1": "Free soil fertilization (up to 2 times per season)",
+                                "2": "High priority for service and urgent requests",
+                                "3": "Exclusive discounts on planting and landscaping"
+                            },
+                            "target": "For those who want a perfect garden – beautiful, green, and healthy.",
+                            "ideal": "Gardens with diverse vegetation, large yards, luxury properties"
                         },
-                        "pruning": {
-                            "title": "Pruning and Shaping Trees",
-                            "description": "Removing dry branches and shaping trees for healthy growth."
+                        "premium": {
+                            "badge": {
+                                "frequency": "1 week",
+                                "info": "This plan is carried out weekly"
+                            },
+                            "title": "Premium",
+                            "description": "Exclusive garden care",
+                            "features": {
+                                "0": "Electronic report with photos after each visit",
+                                "1": "Free soil fertilization (up to 4 times a year)",
+                                "2": "VIP priority – fastest response to any request",
+                                "3": "Exclusive discounts on planting and landscaping",
+                                "4": "Personal assistant for coordination and advice"
+                            },
+                            "target": "For those who want the very best – a garden that always looks like it's from a magazine.",
+                            "ideal": "Luxury properties, residences, prestigious buildings, and hotels with gardens requiring flawless appearance"
                         },
-                        "fertilizing": {
-                            "title": "Soil Enrichment with Suitable Fertilizers",
-                            "description": "Enhancing the soil with nutrients for better plant development."
-                        },
-                        "irrigation": {
-                            "title": "Foliar Fertilization for Optimal Plant Growth",
-                            "description": "Spraying plants with liquid fertilizers for rapid nutrient absorption."
-                        },
-                        "weeding": {
-                            "title": "Weeding - Removing Unwanted Weeds",
-                            "description": "Eliminating weeds to maintain a clean and healthy garden.",
-                            "tooltip": "The weeding service is only available in combination with another service"
-                        },
-                        "max": "You can select up to 3 services"
+                        "popularLabel": "Most Popular",
+                        "button": "Choose",
+                        "buttonSelected": "Selected"
                     },
                     "submit": "Finnish Reservation"
+                },
+                "services": {
+                    "title": "Choose one or more services",
+                    "mowing": {
+                        "title": "Mowing and Lawn Shaping",
+                        "description": "Maintaining the grass through regular mowing and giving it a finished look."
+                    },
+                    "shaping": {
+                        "title": "Shaping and Trimming Hedges (Shrubs)",
+                        "description": "Trimming and shaping shrubs to maintain an aesthetic appearance."
+                    },
+                    "pruning": {
+                        "title": "Pruning and Shaping Trees",
+                        "description": "Removing dry branches and shaping trees for healthy growth."
+                    },
+                    "fertilizing": {
+                        "title": "Soil Enrichment with Suitable Fertilizers",
+                        "description": "Enhancing the soil with nutrients for better plant development."
+                    },
+                    "irrigation": {
+                        "title": "Foliar Fertilization for Optimal Plant Growth",
+                        "description": "Spraying plants with liquid fertilizers for rapid nutrient absorption."
+                    },
+                    "weeding": {
+                        "title": "Weeding - Removing Unwanted Weeds",
+                        "description": "Eliminating weeds to maintain a clean and healthy garden.",
+                        "tooltip": "The weeding service is only available in combination with another service"
+                    },
+                    "trimming": {
+                        "title": "Tree trimming and pruning",
+                        "description": "Removing dry or unwanted branches for safety and healthy growth."
+                    },
+                    "lowering": {
+                        "title": "Tall grass mowing",
+                        "description": "Mowing overgrown areas with dense vegetation."
+                    },
+                    "mulching": {
+                        "title": "Tall grass mulching",
+                        "description": "Finely shredding grass for fertilization and moisture retention."
+                    },
+                    "max": "You can select up to 3 services",
+                    "submit": "Finnish Reservation",
+                    "continue": "Continue"
                 },
                 "errors": {
                     "name": {
@@ -536,14 +549,17 @@
                         "required": "Address is required."
                     },
                     "option": {
-                        "invalid": "Invalid option selected."
+                        "required": "You must select the option you need",
+                        "invalid": "An invalid option was selected."
                     },
                     "plan": {
-                        "invalid": "Invalid plan selected."
+                        "required": "You must select a plan type",
+                        "invalid": "An invalid plan was selected."
                     },
                     "services": {
                         "max": "You can select up to 3 services",
-                        "required": "You must select at least one service."
+                        "required": "You must select at least one service.",
+                        "invalid": "An invalid service was selected."
                     }
                 }
             },
@@ -743,16 +759,21 @@
                 "optionSubscription": "Subscription",
                 "optionService": "Service",
                 "options": {
+                    "title": "Selected option:",
                     "subscription": "Subscription",
                     "service": "Service"
                 },
                 "services": {
+                    "title": "Selected services:",
                     "mowing": "Mowing",
                     "shaping": "Shaping",
                     "pruning": "Pruning",
                     "fertilizing": "Fertilizing",
                     "irrigation": "Irrigation",
-                    "weeding": "Weeding"
+                    "weeding": "Weeding",
+                    "trimming": "Trimming",
+                    "lowering": "Mowing",
+                    "mulching": "Mulching"
                 },
                 "plans": {
                     "base": "Base",
@@ -805,6 +826,10 @@
                     "phone": "Telephone",
                     "address": "Address",
                     "bookingOption": "Booking Option",
+                    "option": {
+                        "service": "Services",
+                        "subscription": "Subscription"
+                    },
                     "planChosen": "Plan Chosen",
                     "plans": {
                         "base": "Base",
@@ -819,7 +844,10 @@
                         "pruning": "Pruning",
                         "fertilizing": "Fertilizing",
                         "irrigation": "Irrigation",
-                        "weeding": "Weeding"
+                        "weeding": "Weeding",
+                        "trimming": "Trimming",
+                        "lowering": "Mowing",
+                        "mulching": "Mulching"
                     }
                 },
                 "additionalInfoTitle": "Additional Information",

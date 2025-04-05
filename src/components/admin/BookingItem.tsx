@@ -139,20 +139,29 @@ export default function BookingItem({
 
                 <div className="space-y-1">
                     <p className="font-medium capitalize">
+                        {t("options.title")}
+                    </p>
+                    <p className="font-medium capitalize">
                         {t(`options.${booking.option}`)}
                     </p>
                     <div>
-                        {booking.option === "service" ? (
-                            booking.services!.map((service, index) => (
-                                <p key={index} className="text-sm">
-                                    {t(`services.${service}`)}
-                                </p>
-                            ))
-                        ) : (
+                        {booking.option === "subscription" && (
                             <p className="text-sm capitalize">
                                 {t(`plans.${booking.plan!.toLowerCase()}`)}
                             </p>
                         )}
+                    </div>
+                </div>
+                <div>
+                    <p className="font-medium capitalize">
+                        {t("services.title")}
+                    </p>
+                    <div>
+                        {booking.services?.map((service, index) => (
+                            <p key={index} className="text-sm">
+                                {t(`services.${service}`)}
+                            </p>
+                        ))}
                     </div>
                 </div>
 
