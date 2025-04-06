@@ -623,10 +623,7 @@ const PlanCard: React.FC<
             <ul className="space-y-2 text-sm text-gray-600 max-md:hidden">
                 {features.map((feature, index) => (
                     <li key={index} className="flex items-center gap-2">
-                        <span className="text-green">
-                            {index === 0 ? "✔" : "🎁"}
-                        </span>{" "}
-                        {feature}
+                        <span className="text-green">✔</span> {feature}
                     </li>
                 ))}
             </ul>
