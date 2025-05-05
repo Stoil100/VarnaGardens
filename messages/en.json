@@ -723,7 +723,8 @@
             },
             "noPermission": {
                 "message": "Sorry, you don't have permission to this section",
-                "goBack": "Go Back"
+                "goBack": "Go Back",
+                "logout": "Logout"
             },
             "inquiries": {
                 "notFound": "No inquiries found",

@@ -58,6 +58,7 @@ export default function Admin() {
             <NoPermissionView
                 t={(key) => t(`noPermission.${key}`)}
                 router={router}
+                logOut={logOut}
             />
         );
     }
