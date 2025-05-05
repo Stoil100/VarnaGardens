@@ -5,7 +5,6 @@ import { LogOut } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import ArticleUploadSection from "@/components/admin/ArticleUploadSection";
 import BookingsList from "@/components/admin/BookingsList";
 import ContactsList from "@/components/admin/InquiriesList";
 import NoPermissionView from "@/components/admin/NoPermission";
@@ -67,7 +66,7 @@ export default function Admin() {
         <main className="min-h-screen p-2 md:p-4">
             {loading && <LoadingOverlay />}
             <section className="space-y-8">
-                <ArticleUploadSection t={t} />
+                {/* <ArticleUploadSection t={t} /> */}
 
                 <ContactsList
                     t={(key) => t(`inquiries.${key}`)}

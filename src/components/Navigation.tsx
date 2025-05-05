@@ -46,7 +46,7 @@ export default function Navigation() {
                 { href: "#hero" },
                 { href: "#services" },
                 { href: "#gallery" },
-                { href: "/articles" },
+                // { href: "/articles" },
             ].map((link, index) => ({
                 ...link,
                 label: t(`navLinks.${index}.label`),
